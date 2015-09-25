@@ -14,7 +14,6 @@
   - Remise à zéro du tableau de scores
   - Enregistrement des scores en fin de partie "classement général"
   - Nettoyage de la grille
-  
 
 # Parties fonctionelles du client
 
