@@ -1,0 +1,174 @@
+// out: style.css, compress: false
+
+/*** Couleurs ***/
+@red: #db2828;
+@olive: #B5CC18;
+@teal: #00B5AD;
+@violet: #6435c9;
+@yellow: #FBBD08;
+
+/*** Correspondances joueur -> couleur ***/
+@c1: @red;
+@c2: @olive;
+@c3: @teal;
+@c4: @violet;
+@c5: @yellow;
+
+// Pour décoler les icons du texte (ajouter la classe space aux fa voulus)
+.fa.space {
+    padding-right: 6px;
+}
+
+// Hack Semantic pour centrer du texte (pas trouvé comment faire...)
+.ui.content.aligned.center {
+    text-align: center;
+}
+
+/*** PAGE LOGIN ***/
+body.login {
+    background-color: #DADADA;
+    > .grid {
+        height: 100%;
+    }
+    .column {
+        max-width: 450px;
+    }
+}
+
+/*** PAGE DU JEU ***/
+body.game {
+
+    background-color: #F1F1F1;
+
+    // Menu du haut
+    .ui.menu {
+        margin-top: 0;
+        .item img.logo {
+            margin-right: 1.5em;
+        }
+    }
+
+    // Nécessaire pour debugger les animations des modals, bizarre...
+    .ui.modal {
+        display: block;
+        margin-top: -5000px;
+    }
+
+    // Block principal (plateau + liste des joueurs)
+    .ui.container.main {
+
+        width: 1000px;
+        margin-top: 50px;
+
+        .grid {
+
+            background: white;
+            border-radius: 10px;
+
+            // Plateau de jeu (gauche)
+            .column.board {
+                background: #87B4C5;
+                min-width: 600px;
+                height: 600px;
+                border-radius: 10px 0 0 10px;
+                padding-left: 30px;
+            }
+
+            // Liste des joueurs (droite)
+            .column.players {
+
+                // Un joueur
+                .item.player {
+                    &.inactive {
+                    }
+                    .label {
+                        margin-top: 3px;
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+/*** BOARD ***/
+
+@spaceGrid: 56px; // Ecart entre 2 points
+@sizeDot: 16px; // Taille des points (et de barres inactives)
+@reducActiveLine: 6px; // Réduction de la taille des barres actives
+
+#board {
+    position: relative;
+
+    > div {
+        position: absolute;
+        transition-duration: .2s;
+        transition-timing-function: ease;
+    }
+
+    .dot {
+        background-color: #5A7E8C;
+        height: @sizeDot;
+        width: @sizeDot;
+        z-index: 3;
+        border-radius: 5px;
+    }
+
+    .line {
+        background-color: @c5;
+        z-index: 2;
+        transition-property: width, height, margin, background, margintop, marginleft;
+
+        &.inactive {
+            border-radius: 4px;
+            opacity: .1;
+            background-color: white;
+            cursor: pointer;
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        &.v {
+            height: (@spaceGrid - @sizeDot) + 2px; // Un peu plus longue pour aller sous les points
+            width: @sizeDot - @reducActiveLine;
+            margin-left: @reducActiveLine/2; // Pour centrer a cause de la largeur plus petite
+            margin-top: @sizeDot - 1px; // Petit décalage pour passer par dessous les points des deux cotes
+            &.inactive {
+                height: @spaceGrid - @sizeDot; // Longeure parfaite entre 2 points
+                width: @sizeDot; // Même largeur que les points
+                margin-left: 0;
+                margin-top: @sizeDot;
+            }
+        }
+
+        &.h {
+            width: (@spaceGrid - @sizeDot) + 2px;
+            height: @sizeDot - @reducActiveLine;
+            margin-top: @reducActiveLine/2;
+            margin-left: @sizeDot - 1px;
+            &.inactive {
+                width: @spaceGrid - @sizeDot;
+                height: @sizeDot;
+                margin-top: 0;
+                margin-left: @sizeDot;
+            }
+        }
+    }
+
+    .square {
+        width: @spaceGrid;
+        height: @spaceGrid;
+        margin-left: @sizeDot/2;
+        margin-top: @sizeDot/2;
+        background-color: @c5;
+        opacity: .5;
+        z-index: 1;
+        transition-property: background, opacity;
+        &.inactive {
+            opacity: 0;
+        }
+    }
+
+
+}

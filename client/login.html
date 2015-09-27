@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" class="ui" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.css">
+    <link rel="stylesheet" type="text/css" class="ui" href="assets/css/style.css">
+</head>
+
+<body class="login">
+
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui teal image header">
+                <!-- <img src="assets/images/logo.png" class="image"> -->
+                <div class="content">
+                    Bourbaki / Connexion
+                </div>
+            </h2>
+            <form class="ui large form">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="user" placeholder="Pseudo">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" placeholder="Mot de passe">
+                        </div>
+                    </div>
+                    <div class="ui fluid large teal submit button">Jouer</div>
+                </div>
+
+                <div class="ui error message">Mot de passe incorrect</div>
+
+            </form>
+
+            <div class="ui message">
+                Si vous n'avez pas de compte, il sera automatiquement créé.
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.js"></script>
+    <script type="text/javascript" src="assets/js/login.js"></script>
+</body>
+
+</html>

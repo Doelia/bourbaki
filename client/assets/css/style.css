@@ -1,0 +1,117 @@
+/*** Couleurs ***/
+/*** Correspondances joueur -> couleur ***/
+.fa.space {
+  padding-right: 6px;
+}
+.ui.content.aligned.center {
+  text-align: center;
+}
+/*** PAGE LOGIN ***/
+body.login {
+  background-color: #DADADA;
+}
+body.login > .grid {
+  height: 100%;
+}
+body.login .column {
+  max-width: 450px;
+}
+/*** PAGE DU JEU ***/
+body.game {
+  background-color: #F1F1F1;
+}
+body.game .ui.menu {
+  margin-top: 0;
+}
+body.game .ui.menu .item img.logo {
+  margin-right: 1.5em;
+}
+body.game .ui.modal {
+  display: block;
+  margin-top: -5000px;
+}
+body.game .ui.container.main {
+  width: 1000px;
+  margin-top: 50px;
+}
+body.game .ui.container.main .grid {
+  background: white;
+  border-radius: 10px;
+}
+body.game .ui.container.main .grid .column.board {
+  background: #87B4C5;
+  min-width: 600px;
+  height: 600px;
+  border-radius: 10px 0 0 10px;
+  padding-left: 30px;
+}
+body.game .ui.container.main .grid .column.players .item.player .label {
+  margin-top: 3px;
+}
+/*** BOARD ***/
+#board {
+  position: relative;
+}
+#board > div {
+  position: absolute;
+  transition-duration: .2s;
+  transition-timing-function: ease;
+}
+#board .dot {
+  background-color: #5A7E8C;
+  height: 16px;
+  width: 16px;
+  z-index: 3;
+  border-radius: 5px;
+}
+#board .line {
+  background-color: #FBBD08;
+  z-index: 2;
+  transition-property: width, height, margin, background, margintop, marginleft;
+}
+#board .line.inactive {
+  border-radius: 4px;
+  opacity: .1;
+  background-color: white;
+  cursor: pointer;
+}
+#board .line.inactive:hover {
+  opacity: 1;
+}
+#board .line.v {
+  height: 42px;
+  width: 10px;
+  margin-left: 3px;
+  margin-top: 15px;
+}
+#board .line.v.inactive {
+  height: 40px;
+  width: 16px;
+  margin-left: 0;
+  margin-top: 16px;
+}
+#board .line.h {
+  width: 42px;
+  height: 10px;
+  margin-top: 3px;
+  margin-left: 15px;
+}
+#board .line.h.inactive {
+  width: 40px;
+  height: 16px;
+  margin-top: 0;
+  margin-left: 16px;
+}
+#board .square {
+  width: 56px;
+  height: 56px;
+  margin-left: 8px;
+  margin-top: 8px;
+  background-color: #FBBD08;
+  opacity: .5;
+  z-index: 1;
+  transition-property: background, opacity;
+}
+#board .square.inactive {
+  opacity: 0;
+}
