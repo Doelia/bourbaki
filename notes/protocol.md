@@ -5,7 +5,7 @@
 
 # Serveur -> Client
 - DISPLAYLINE(x,y,o,c) : rajoute la barre x,y,o à la grille
-- DISPLAYBOX(x,y,c) : rajoute le carre à la grille
+- DISPLAYSQUARE(x,y,c) : rajoute le carre à la grille
 - UPDATEPLAYERS(json) : mise à jour du tableau des scores de la partie en jeu
   - user
   - score
