@@ -1,4 +1,4 @@
-// out: style.css, compress: false
+// out: style.css, compress: true
 
 /*** Couleurs ***/
 @red: #db2828;
@@ -13,6 +13,22 @@
 @c3: @teal;
 @c4: @violet;
 @c5: @yellow;
+
+// Couleur backgroud definer
+.cbg {
+    &[num="1"] {
+        background-color: @c1 !important;
+    }
+    &[num="2"] {
+        background-color: @c2 !important;
+    }
+    &[num="3"] {
+        background-color: @c3 !important;
+    }
+    &[num="4"] {
+        background-color: @c4 !important;
+    }
+}
 
 // Pour décoler les icons du texte (ajouter la classe space aux fa voulus)
 .fa.space {
@@ -67,7 +83,10 @@ body.game {
 
             // Plateau de jeu (gauche)
             .column.board {
-                background: #87B4C5;
+                transition-property: background;
+                transition-duration: .5s;
+                transition-timing-function: ease;
+                background: #9CBDC7;
                 min-width: 600px;
                 height: 600px;
                 border-radius: 10px 0 0 10px;
@@ -81,8 +100,16 @@ body.game {
                 .item.player {
                     &.inactive {
                     }
-                    .label {
+                    .label, .progress {
                         margin-top: 3px;
+                    }
+                    .progress {
+                        margin-bottom: 0;
+                        width: 120px;
+                        .bar {
+                            min-width: 0;
+                            transition-duration: 0ms;
+                        }
                     }
 
                 }
@@ -92,6 +119,11 @@ body.game {
 }
 
 /*** BOARD ***/
+
+/**
+ * Note: La classe "inactive" désigne les elements (carré ou lignes)
+ * qui ne sont pas encore colorés
+ */
 
 @spaceGrid: 56px; // Ecart entre 2 points
 @sizeDot: 16px; // Taille des points (et de barres inactives)
@@ -115,7 +147,7 @@ body.game {
     }
 
     .line {
-        background-color: @c5;
+        background-color: black; // Couleur par défaut, indéfinie
         z-index: 2;
         transition-property: width, height, margin, background, margintop, marginleft;
 
@@ -123,12 +155,9 @@ body.game {
             border-radius: 4px;
             opacity: .1;
             background-color: white;
-            cursor: pointer;
-            &:hover {
-                opacity: 1;
-            }
         }
 
+        // v comme vertical
         &.v {
             height: (@spaceGrid - @sizeDot) + 2px; // Un peu plus longue pour aller sous les points
             width: @sizeDot - @reducActiveLine;
@@ -142,6 +171,7 @@ body.game {
             }
         }
 
+        // h comme horizontal
         &.h {
             width: (@spaceGrid - @sizeDot) + 2px;
             height: @sizeDot - @reducActiveLine;
@@ -161,7 +191,7 @@ body.game {
         height: @spaceGrid;
         margin-left: @sizeDot/2;
         margin-top: @sizeDot/2;
-        background-color: @c5;
+        background-color: black; // Couleur par défaut, indéfinie
         opacity: .5;
         z-index: 1;
         transition-property: background, opacity;
@@ -170,5 +200,15 @@ body.game {
         }
     }
 
+}
 
+// Changement CSS quand c'est le tour du joueur (+ consolidation en JS)
+#board_container.myTurn {
+    background: #87B4C5;
+    .line.inactive {
+        cursor: pointer;
+        &:hover {
+            opacity: 1;
+        }
+    }
 }

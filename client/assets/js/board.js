@@ -1,76 +1,82 @@
-$(document).ready(function() {
+/**
+ * Classe représentant le plateau du jeu
+ * Regroupe toutes les fonctions qui permettent d'interagire avec celle-ci
+ * Notation "_" préfixée pour les attributs/méthodes privées
+ *
+ */
 
-    var gridSpace = 56; // Espace entre 2 points
+var Board = function() {
 
-    var _placeE = function(e, x, y) {
+    this._gridSpace = 56; // Espace entre 2 points en pixel (défini aussi dans le .lss)
+
+    /**
+     * Méthode générique pour créer un élément sur la grille (carré, ligne, point...)
+     */
+    this._placeE = function(e, x, y) {
         return e
-        .css({
-            top: x*gridSpace,
-            left: y*gridSpace
-        })
-        .attr('x', x)
-        .attr('y', y);
+            .css({
+                top: x*this._gridSpace,
+                left: y*this._gridSpace
+            })
+            .attr('x', x)
+            .attr('y', y);
     }
 
-    var _addDot = function(x, y) {
+    this._addDot = function(x, y) {
         $('#board').append(
             $('<div class="dot"></dot>')
         );
 
-        _placeE($('#board .dot:last'), x, y);
+        this._placeE($('#board .dot:last'), x, y);
     }
 
-    var _createInactiveLine = function(x, y, o) {
+    this._createInactiveLine = function(x, y, o) {
         $('#board').append(
             $('<div class="line '+o+'"></dot>')
         );
 
-        _placeE($('#board .line:last'), x, y)
-            .addClass('inactive');
+        this._placeE($('#board .line:last'), x, y)
+            .addClass('inactive')
+            .attr('o', o);
     }
 
-    var _createInactiveSquare = function(x, y) {
+    this._createInactiveSquare = function(x, y) {
         $('#board').append(
             $('<div class="square"></dot>')
         );
 
-        _placeE($('#board .square:last'), x, y)
+        this._placeE($('#board .square:last'), x, y)
             .addClass('inactive');
     }
 
-    var createGrid = function(size) {
+    this.createGrid = function(size) {
         for (var i = 0; i <= size; i++) {
             for (var j = 0; j <= size; j++) {
-                _addDot(i, j);
+                this._addDot(i, j);
                 if (i < size) {
-                    _createInactiveLine(i, j, 'v');
+                    this._createInactiveLine(i, j, 'v');
                 }
                 if (j < size) {
-                    _createInactiveLine(i, j, 'h');
+                    this._createInactiveLine(i, j, 'h');
                 }
                 if (i < size && j < size) {
-                    _createInactiveSquare(i, j);
+                    this._createInactiveSquare(i, j);
                 }
             }
         }
     }
 
-    var activeLine = function(x, y, o, c) {
-        $("line."+o+"[x='"+x+"'][y='"+y+"']")
+    this.activeLine = function(x, y, o, n) {
+        $(".line."+o+"[x='"+x+"'][y='"+y+"']")
             .removeClass('inactive')
             .addClass('cbg')
-            .attr('num', c);
+            .attr('num', n);
     }
 
-    createGrid(10);
-    activeLine(5,3,'v',3);
-
-    $('.line').click(function() {
-        $(this).removeClass('inactive');
-    });
-
-    $('.square').click(function() {
-        $(this).removeClass('inactive');
-    });
-
-});
+    this.activeSquare = function(x, y, n) {
+        $(".square[x='"+x+"'][y='"+y+"']")
+            .removeClass('inactive')
+            .addClass('cbg')
+            .attr('num', n);
+    }
+}

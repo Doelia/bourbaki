@@ -26,70 +26,13 @@
 
     <div class="ui container main">
         <div class="ui grid">
-            <div class="ten wide column board">
+            <div class="ten wide column board" id="board_container">
                 <div id="board">
                 </div>
             </div>
             <div class="six wide column players">
                 <div class="ui header"><i class="fa fa-users space"></i>Participants</div>
-                <div class="ui list celled">
-                    <div class="item player" num="1">
-                        <div class="right floated content">
-                            <div class="ui label blue">
-                                Points en attente...
-                            </div>
-                        </div>
-                        <div class="ui left floated red circular label"></div>
-                        <div class="content">
-                            <div class="header">Portrick</div>
-                            23 points
-                        </div>
-                    </div>
-                    <div class="item player" num="2">
-                        <div class="right floated content">
-                            <div class="ui label green">
-                                A son tour!
-                            </div>
-                        </div>
-                        <div class="ui left floated olive circular label"></div>
-                        <div class="content">
-                            <div class="header">Faewynn</div>
-                            178 points
-                        </div>
-                    </div>
-                    <div class="item player" num="3">
-                        <div class="right floated content">
-
-                        </div>
-                        <div class="ui left floated teal circular label"></div>
-                        <div class="content">
-                            <div class="header">Dourwood</div>
-                            85 points
-                        </div>
-                    </div>
-                    <div class="item player inactive" num="4">
-                        <div class="right floated content">
-                            <div class="ui label gray">
-                                Inactif
-                            </div>
-                        </div>
-                        <div class="ui left floated violet circular label"></div>
-                        <div class="content">
-                            <div class="header">Hurusarr</div>
-                            44 points
-                        </div>
-                    </div>
-                    <div class="item player" num="5">
-                        <div class="right floated content">
-
-                        </div>
-                        <div class="ui left floated yellow circular label"></div>
-                        <div class="content">
-                            <div class="header">Ailyrr</div>
-                            5 points
-                        </div>
-                    </div>
-                </div>
+                <div class="ui list celled" id="playersList"></div>
             </div>
         </div>
     </div>
@@ -113,12 +56,12 @@
             <p><i class="fa fa-circle-o-notch fa-spin fa-3x"></i></p>
             <p>La partie doit comporter un minimum de <strong>2 joueurs</strong> pour se dérouler.</p>
         </div>
-
     </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.js"></script>
     <script type="text/javascript" src="assets/js/board.js"></script>
+    <script type="text/javascript" src="assets/js/players.js"></script>
     <script type="text/javascript" src="assets/js/game.js"></script>
 
 </body>
