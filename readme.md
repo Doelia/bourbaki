@@ -23,13 +23,14 @@ Détail complet :  https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/bl
 ## Technologies
 
 - Serveur GO
+    - Envoi des ressources via HTTP
+    - Stockage en [Bolt](https://github.com/boltdb/bolt) (système clé/valeurs)
 - Client Web
     - Framework [Semantic-ui](http://semantic-ui.com/)
     - Librairie [jQuery](https://jquery.com/)
     - Bibliothèque d'icônes [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/)
     - Pré-processeur  [Less](http://lesscss.org/)
-- Communication via WebSockets
-- Envoi des ressources via HTTP depuis le serveur GO ?
-
+- Communication via WebSockets avec la librairie [Socket.io](http://socket.io/)
+    - Implémentation GO : https://github.com/googollee/go-socket.io
 
 *Le maximum du développement sera déporté sur le serveur, idéalement le client se tâchera de faire uniquement de l'affichage.*
