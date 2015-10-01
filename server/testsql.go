@@ -3,7 +3,6 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"github.com/mattn/go-sqlite3"
 )
 
 var DB_DRIVER string
