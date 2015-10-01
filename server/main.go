@@ -1,20 +1,42 @@
 package main
 
-import "fmt"
+import (
+	"flag"
+	"fmt"
+	"go-bourbaki/server/globals"
+	"go-bourbaki/server/network"
+)
 
-func main() {
+var test = flag.String("test", "main", "Selectionne la méthode de test à lancer")
+var port = flag.Int("port", 2000, "Modifie le port d'écoute (défaut 2000)")
 
+func marleneTest() {
 	Testsql()
+}
 
-	Ch = make(chan int, 1)
+func stephaneTest() {
+	globals.Ch = make(chan int, 1)
 
 	fmt.Println("=== BOURBAKI SERVEUR ===")
 
 	// Création serveur HTTP
-	go startWebServer(2000, getWebSocketHandler())
-	<-Ch // Wait handle HTTP
+	go network.StartWebServer(*port)
+	<-globals.Ch // Wait handle HTTP
 
-	fmt.Println("Next")
+	<-globals.Ch // Wait HTTP Server
+}
 
-	<-Ch // Wait HTTP Server
+func main() {
+
+	flag.Parse()
+
+	switch *test {
+	case "stephane":
+		stephaneTest()
+	case "marlene":
+		marleneTest()
+	case "main":
+		fmt.Println("Entrez une méthode de test.")
+	}
+
 }

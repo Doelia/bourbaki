@@ -1,3 +1,9 @@
+# Local generated files
 .DS_Store
+
+# Binary
 *.exe
+server/server
+
+# Storage files
 mysqlite_3

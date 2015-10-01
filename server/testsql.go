@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding"
 	"fmt"
 
 	"github.com/boltdb/bolt"
@@ -42,7 +41,7 @@ func OpenBucket() {
 
 // Ajoute a dans la db. Retourne vrai si ça a fonctionné, faux sinon
 func AddInDB(a Account) bool {
-	//il ne reste plus qu'à transformer le account en chaîne de carac
+	// il ne reste plus qu'à transformer le account en chaîne de carac
 	err4 := b.Put([]byte(a.Name), []byte(a))
 	if err4 != nil {
 		fmt.Println("Erreur put")
@@ -51,7 +50,7 @@ func AddInDB(a Account) bool {
 	return true
 }
 
-//Affiche
+// Affiche
 func getFromDB(cle string) Account {
 	v := br.Get([]byte(cle))
 	return v
@@ -61,5 +60,5 @@ func Testsql() {
 	OpenDB()
 	OpenTransaction()
 	CreateBucket()
-	//Il faut appeller AddInDB avec un account
+	// Il faut appeller AddInDB avec un account
 }
