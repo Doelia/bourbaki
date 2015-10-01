@@ -2,12 +2,11 @@ package main
 
 import (
 	"log"
-	"net/http"
 
 	"github.com/googollee/go-socket.io"
 )
 
-func startWebSocketServer() {
+func getWebSocketHandler() *socketio.Server {
 	server, err := socketio.NewServer(nil)
 	if err != nil {
 		log.Fatal(err)
@@ -27,8 +26,5 @@ func startWebSocketServer() {
 		log.Println("error:", err)
 	})
 
-	http.Handle("/socket.io/", server)
-	http.Handle("/", http.FileServer(http.Dir("./asset")))
-	log.Println("Serving at localhost:5000...")
-	log.Fatal(http.ListenAndServe(":5000", nil))
+	return server
 }
