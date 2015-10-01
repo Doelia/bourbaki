@@ -10,12 +10,11 @@ La Pipopipette ou « jeu des petits carrés » est un jeu de société au tour p
 
 Le jeu se joue généralement avec papier et crayon sur du papier quadrillé. À chaque tour, chaque joueur trace un petit trait suivant le quadrillage de la feuille. Le but du jeu est de former des carrés. Le gagnant est celui qui a fermé le plus de carrés.
 
-
 ## Fonctionnalités
 
 - Connexion / Inscription rapide
 - Une partie unique à laquelle des joueurs peuvent se connecter à tout moment
-- Gestion des connexions/déconnexions
+- Gestion des connexions / déconnexions
 - Calcul et affichage des scores en temps réél
 - Classement général avec cumul des points (ou parties gagnées ?)
 

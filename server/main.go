@@ -14,7 +14,7 @@ var Ch chan int
 var ErrLogger = log.New(os.Stderr, "Erreur: ", 0)
 
 func startHTTPServer(port int) {
-	fmt.Printf("Start htpp server on port %d...\n", port)
+	fmt.Printf("Start http server on port %d...\n", port)
 	http.Handle("/", http.FileServer(http.Dir("../client")))
 	Ch <- 1
 	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
@@ -32,9 +32,9 @@ func main() {
 
 	// Création serveur HTTP
 	go startHTTPServer(2000)
-	<-Ch
+	<-Ch // Wait handle HTTP
 
 	fmt.Println("Next")
 
-	<-Ch
+	<-Ch // Wait HTTP Server
 }
