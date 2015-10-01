@@ -1,16 +1,3 @@
-// Objets
-var board;
-var players;
-
-// Globales
-var myNum; // Numéro du joueur client
-
-// Provisoire (pour les tests sans serveur)
-var playersDemo = [
-    {"numPlayer":"1", "name": "Portrick", "score":"23", isActive: true},
-    {"numPlayer":"2", "name": "Faewynn", "score":"178", isActive: true},
-    {"numPlayer":"3", "name": "Pancake", "score":"87", isActive: false},
-];
 
 function pause() {
     $('#pause')
@@ -49,7 +36,7 @@ function sendAddLine(x,y,o,n) {
 
 /** INIT **/
 
-$(document).ready(function() {
+function init_game() {
 
     board = new Board();
     board.createGrid(10);
@@ -91,6 +78,4 @@ $(document).ready(function() {
         var n = myNum;
         board.activeSquare(x,y,n);
     });
-
-
-});
+}
