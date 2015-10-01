@@ -14,6 +14,7 @@ func getWebSocketHandler() *socketio.Server {
 	server.On("connection", func(so socketio.Socket) {
 		log.Println("on connection")
 		so.Join("chat")
+		so.Emit("test", "hey")
 		so.On("chat message", func(msg string) {
 			log.Println("emit:", so.Emit("chat message", msg))
 			so.BroadcastTo("chat", "chat message", msg)
