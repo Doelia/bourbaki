@@ -10,11 +10,11 @@ import (
 var test = flag.String("test", "main", "Selectionne la méthode de test à lancer")
 var port = flag.Int("port", 2000, "Modifie le port d'écoute (défaut 2000)")
 
-func marleneTest() {
+func dbTest() {
 	Testsql()
 }
 
-func stephaneTest() {
+func serverTest() {
 	globals.Ch = make(chan int, 1)
 
 	fmt.Println("=== BOURBAKI SERVEUR ===")
@@ -31,12 +31,10 @@ func main() {
 	flag.Parse()
 
 	switch *test {
-	case "stephane":
-		stephaneTest()
-	case "marlene":
-		marleneTest()
+	case "db":
+		dbTest()
 	case "main":
-		fmt.Println("Entrez une méthode de test (-test).")
+		serverTest()
 	}
 
 }
