@@ -1,10 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"go-bourbaki/server/accounts"
+)
 
 func main() {
 
-	Testsql()
+	accounts.Testsql()
 
 	Ch = make(chan int, 1)
 
