@@ -43,6 +43,21 @@ func getFromDB(cle string) (res Account) {
 	return
 }
 
+// Permet de savoir si un compte existe pour la clé name ou pas
+func exists() (Account, bool){
+var v []byte
+var res Account
+	db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte("Accounts"))
+		v := b.Get([]byte("cassoulet"))
+		json.Unmarshal(v, &res)
+		return nil
+	})
+	if v != nil{
+		return res,true
+	}else{ return res,false }
+}
+
 // Permet de faire un test complet de toutes les fonctions, ajout et suppression
 func Testsql() {
 	OpenDB()
@@ -52,5 +67,7 @@ func Testsql() {
 
 	var res Account
 	res = getFromDB("cheval")
-	fmt.Println(res.Name)
+	fmt.Println(res)
+	resultat, _ := exists()
+	fmt.Println(resultat)
 }
