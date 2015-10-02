@@ -36,7 +36,7 @@ func main() {
 	case "marlene":
 		marleneTest()
 	case "main":
-		fmt.Println("Entrez une méthode de test.")
+		fmt.Println("Entrez une méthode de test (-test).")
 	}
 
 }
