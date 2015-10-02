@@ -7,3 +7,4 @@ server/server
 
 # Storage files
 mysqlite_3
+bourbaki.db
