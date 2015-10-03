@@ -5,7 +5,7 @@ Décrit la liste des paquets et leurs parametres qui passent ente le client et l
 ## Envoyées par le client
 
 ### CONNEXION (user,pass)
-Paquet envoyé à la connexion. Mot de passe envoyé en md5.
+Paquet envoyé à la connexion. Mot de passe non crypté
 
 ### PUTLINE(x,y,o)
 Prévient le placement d'une ligne par le joueur.
@@ -24,14 +24,14 @@ Packet de retour acceptant ou non la demande de connexion du joueur.
 Tous les packets d'initialiastion du jeu suiveront ce packet
 
 ### DISPLAYLINE(x,y,o,n)
-Ajoute la barre x,y,o à la grille
+Ajoute la barre x,y,o,n à la grille
 
 - **x** : int, position X
 - **y** : int, position Y
 - **o** : string, orientation. 'v' pour vertical, 'h' pour horizontal
 - **n** : int, numéro identifiant du joueur (1 à N)
 
-### DISPLAYBOX(x,y,n)
+### DISPLAYSQUARE(x,y,n)
 Ajoute le carré à la grille
 
 - **x** : int, position X

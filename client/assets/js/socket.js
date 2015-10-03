@@ -13,6 +13,10 @@ function init_socket() {
         console.log(data);
     });
 
+    socket.on('CONNECTACCEPT', function(data) {
+        console.log(data[0].X);
+    });
+
     socket.emit("chat", "hey");
 
 

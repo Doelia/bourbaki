@@ -1,6 +1,7 @@
 package network
 
 import (
+	"fmt"
 	"go-bourbaki/server/globals"
 	"log"
 
@@ -9,6 +10,11 @@ import (
 
 var server *socketio.Server
 var err error
+
+func sentToAll(namePackage string, args ...interface{}) {
+	server.BroadcastTo("all", namePackage, args)
+	fmt.Println("Broadcast ", namePackage)
+}
 
 func createServerProtocle() {
 	server.On("connection", func(so socketio.Socket) {

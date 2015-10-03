@@ -1,11 +1,12 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"go-bourbaki/server/accounts"
-	"flag"
 	"go-bourbaki/server/globals"
 	"go-bourbaki/server/network"
+	"time"
 )
 
 var test = flag.String("test", "main", "Selectionne la méthode de test à lancer")
@@ -22,9 +23,14 @@ func serverTest() {
 
 	// Création serveur HTTP
 	go network.StartWebServer(*port)
-	<-globals.Ch // Wait handle HTTP
+	<-globals.Ch // Attente de l'handle
 
-	<-globals.Ch // Wait HTTP Server
+	for {
+		network.DisplayLine(3, 3, "v", 1)
+		time.Sleep(3 * time.Second)
+	}
+
+	<-globals.Ch // Attente fin serveur http (ne doit pas arriver)
 }
 
 func main() {

@@ -16,5 +16,7 @@ func StartWebServer(port int) {
 	if err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil); err != nil {
 		globals.ErrLogger.Println("Erreur à la création du serveur HTTP : ", err.Error())
 	}
+
 	globals.Ch <- 1
+
 }
