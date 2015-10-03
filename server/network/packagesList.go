@@ -1,5 +1,7 @@
 package network
 
+import "github.com/googollee/go-socket.io"
+
 /**
  *  Liste des fonctions pour envoyer des paquets au client
  *  Voir fichier notes/protocol.md pour le détail
@@ -23,13 +25,15 @@ type player struct {
 }
 
 // ConnectAccept Packet de retour acceptant ou non la demande de connexion du joueur.
-func ConnectAccept(code int, numPlayer int) {
-	sentToAll("CONNECTACCEPT", code, numPlayer)
+// param code: int, 0 si mot de passe incorrect, 1 si connexion OK, 2 si connexion OK + compte créé
+// param numPlayer: int, numéro du joueur dans la partie (entre 1 en n). 0 si le code vaut 0 (connexion refusée)
+func ConnectAccept(client socketio.Socket, code int, numPlayer int) {
+	sendToClient(client, "CONNECTACCEPT", code, numPlayer)
 }
 
 // DisplayLine Ajoute la barre x,y,o,n à la grille
 func DisplayLine(x int, y int, orientation string, numPlayer int) {
-	sentToAll("CONNECTACCEPT", linePacket{x, y, orientation, numPlayer})
+	sentToAll("DISPLAYLINE", linePacket{x, y, orientation, numPlayer})
 }
 
 // DisplaySquare Ajoute le carré à la grille

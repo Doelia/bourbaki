@@ -4,7 +4,7 @@ Décrit la liste des paquets et leurs parametres qui passent ente le client et l
 
 ## Envoyées par le client
 
-### CONNEXION (user,pass)
+### LOGIN(user,pass)
 Paquet envoyé à la connexion. Mot de passe non crypté
 
 ### PUTLINE(x,y,o)

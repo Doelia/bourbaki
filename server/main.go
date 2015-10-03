@@ -25,6 +25,7 @@ func serverTest() {
 	go network.StartWebServer(*port)
 	<-globals.Ch // Attente de l'handle
 
+	// Test d'envoi d'une ligne en boucle
 	for {
 		network.DisplayLine(3, 3, "v", 1)
 		time.Sleep(3 * time.Second)
