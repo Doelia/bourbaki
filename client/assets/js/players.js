@@ -17,7 +17,7 @@ var Players = function() {
      */
     this.getLastActivePlayer = function() {
         return (this.activePlayer-1 > 0) ? this.activePlayer-1 : this._nbrPlayers;
-    }
+    };
 
     /**
      *  Met à jour totalement la liste des joueurs (scores, lables) à partir d'un json
@@ -43,7 +43,7 @@ var Players = function() {
                     .append('<div class="ui label gray">Inactif</div>');
             }
         }
-    }
+    };
 
 
     /**
@@ -71,7 +71,7 @@ var Players = function() {
         } else {
             $('#board_container').removeClass('myTurn');
         }
-    }
+    };
 
 
     /**
@@ -102,9 +102,9 @@ var Players = function() {
                           showActivity: false
                         });
                     }
-                }
+                };
             }(percent, this._idTimer), timeStep*1000);
         }
-    }
+    };
 
-}
+};

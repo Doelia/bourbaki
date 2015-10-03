@@ -15,7 +15,7 @@ var playersDemo = [
 function loadLogin() {
     $.ajax({url: "/content/login.html", success: function(result) {
         $("body").html(result);
-        $("body").addClass('login')
+        $("body").addClass('login');
         init_login();
     }});
 }
@@ -23,8 +23,8 @@ function loadLogin() {
 function loadGame() {
     $.ajax({url: "/content/game.html", success: function(result) {
         $("body").html(result);
-        $("body").removeClass('login')
-        $("body").addClass('game')
+        $("body").removeClass('login');
+        $("body").addClass('game');
         init_game();
     }});
 }

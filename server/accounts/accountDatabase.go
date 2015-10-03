@@ -3,13 +3,14 @@ package accounts
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/boltdb/bolt"
 )
 
 var db *bolt.DB
 var err error
 
-// Permet l'ouverture de la base de données
+// OpenDB Permet l'ouverture de la base de données
 func OpenDB() {
 	db, err = bolt.Open("bourbaki.db", 0600, nil)
 	if err != nil {
@@ -44,21 +45,19 @@ func getFromDB(cle string) (res Account) {
 }
 
 // Permet de savoir si un compte existe pour la clé name ou pas
-func exists() (Account, bool){
-var v []byte
-var res Account
+func exists() (Account, bool) {
+	var v []byte
+	var res Account
 	db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("Accounts"))
 		v := b.Get([]byte("cassoulet"))
 		json.Unmarshal(v, &res)
 		return nil
 	})
-	if v != nil{
-		return res,true
-	}else{ return res,false }
+	return res, v != nil
 }
 
-// Permet de faire un test complet de toutes les fonctions, ajout et suppression
+// Testsql Permet de faire un test complet de toutes les fonctions, ajout et suppression
 func Testsql() {
 	OpenDB()
 	a := Account{"yeti", "desneiges", 12}

@@ -3,7 +3,7 @@
  *
  */
 
- var socket
+ var socket;
 
 function init_socket() {
 

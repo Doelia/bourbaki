@@ -34,3 +34,7 @@ Détail complet :  https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/bl
     - Implémentation GO : https://github.com/googollee/go-socket.io
 
 *Le maximum du développement sera déporté sur le serveur, idéalement le client se tâchera de faire uniquement de l'affichage.*
+
+## Documentation technique
+- [Protocole](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/protocol.md) (liste des paquets)
+- [Ébauche diagramme UML](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/raw/master/notes/UMLBourbaki.pdf)

@@ -5,6 +5,8 @@ package network
  *  Voir fichier notes/protocol.md pour le détail
  */
 
+// TODO étudier la visibilité des structures
+
 type linePacket struct {
 	X, Y int
 	O    string

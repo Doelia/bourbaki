@@ -69,7 +69,7 @@ function init_game() {
 
     myNum = 2;
 
-    onRecvActivePlayer(2)
+    onRecvActivePlayer(2);
     onRecvScore(playersDemo);
 
     $('.square').click(function() {

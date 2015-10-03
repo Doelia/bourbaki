@@ -20,7 +20,7 @@ var Board = function() {
             })
             .attr('x', x)
             .attr('y', y);
-    }
+    };
 
     this._addDot = function(x, y) {
         $('#board').append(
@@ -28,7 +28,7 @@ var Board = function() {
         );
 
         this._placeE($('#board .dot:last'), x, y);
-    }
+    };
 
     this._createInactiveLine = function(x, y, o) {
         $('#board').append(
@@ -38,7 +38,7 @@ var Board = function() {
         this._placeE($('#board .line:last'), x, y)
             .addClass('inactive')
             .attr('o', o);
-    }
+    };
 
     this._createInactiveSquare = function(x, y) {
         $('#board').append(
@@ -47,7 +47,7 @@ var Board = function() {
 
         this._placeE($('#board .square:last'), x, y)
             .addClass('inactive');
-    }
+    };
 
     this.createGrid = function(size) {
         for (var i = 0; i <= size; i++) {
@@ -64,19 +64,19 @@ var Board = function() {
                 }
             }
         }
-    }
+    };
 
     this.activeLine = function(x, y, o, n) {
         $(".line."+o+"[x='"+x+"'][y='"+y+"']")
             .removeClass('inactive')
             .addClass('cbg')
             .attr('num', n);
-    }
+    };
 
     this.activeSquare = function(x, y, n) {
         $(".square[x='"+x+"'][y='"+y+"']")
             .removeClass('inactive')
             .addClass('cbg')
             .attr('num', n);
-    }
-}
+    };
+};
