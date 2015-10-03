@@ -9,15 +9,19 @@ function init_socket() {
 
     socket = io();
 
-    socket.on('chat', function(data) {
-        console.log(data);
-    });
-
     socket.on('CONNECTACCEPT', function(data) {
-        console.log(data[0].X);
+        var code = data[0];
+        var numPlayer = data[1];
+        myNum = numPlayer;
+        console.log("Recv CONNECTACCEPT. code="+code+", numPlayer="+numPlayer);
+        loadGame();
     });
 
-    socket.emit("chat", "hey");
+    socket.on('DISPLAYLINE', function(data) {
+        var line = data[0];
+        console.log("Recv DISPLAYLINE. line="+line);
+        board.activeLine(line.X, line.Y, line.O, line.N);
+    });
 
 
 }

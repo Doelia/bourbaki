@@ -13,22 +13,25 @@ var err error
 
 func sentToAll(namePackage string, args ...interface{}) {
 	server.BroadcastTo("all", namePackage, args)
-	fmt.Println("Broadcast ", namePackage)
+	fmt.Println("Broadcast ", namePackage, args)
+}
+
+func sendToClient(client socketio.Socket, namePackage string, args ...interface{}) {
+	client.Emit(namePackage, args)
 }
 
 func createServerProtocle() {
 	server.On("connection", func(so socketio.Socket) {
 		log.Println("on connection")
-		so.Join("all")
-		so.Emit("test", "hey")
-
-		so.On("chat", func(msg string) {
-			log.Println("Reçu @ chat : ", msg)
-			server.BroadcastTo("all", "chat", "BroadcastTo server")
-		})
 
 		so.On("disconnection", func() {
 			log.Println("on disconnect")
+		})
+
+		so.On("LOGIN", func(user string, pass string) {
+			// TODO Code à isoler et login à implémenter
+			ConnectAccept(so, 1, 2)
+			so.Join("all") // Pour recevoir les broadcasts du gane
 		})
 	})
 	server.On("error", func(so socketio.Socket, err error) {

@@ -17,7 +17,7 @@ function isMyTurn() {
     return players.activePlayer == myNum;
 }
 
-/**** Fonctions simulatrices I/O ****/
+/**** Fonctions simulatrices I/O, provisoire ****/
 
 function onRecvScore(json) {
     players.updatePlayers(json);
@@ -66,8 +66,6 @@ function init_game() {
     });
 
     //// TESTS
-
-    myNum = 2;
 
     onRecvActivePlayer(2);
     onRecvScore(playersDemo);

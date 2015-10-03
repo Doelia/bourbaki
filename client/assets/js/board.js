@@ -67,6 +67,7 @@ var Board = function() {
     };
 
     this.activeLine = function(x, y, o, n) {
+        console.log("board.activeLine("+x+","+y+","+o+","+n+")");
         $(".line."+o+"[x='"+x+"'][y='"+y+"']")
             .removeClass('inactive')
             .addClass('cbg')
