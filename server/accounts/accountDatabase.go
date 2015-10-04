@@ -1,10 +1,10 @@
 package accounts
 
 import (
+	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	"github.com/boltdb/bolt"
-	"crypto/md5"
 )
 
 var db *bolt.DB
@@ -68,8 +68,8 @@ func exists(cle string) (Account, bool) {
 // CreateAccount Permet de créer une structure Account
 //@param n: name de l'account
 //@param p: mot de passe de l'account
-func CreateAccount(n string, p string) Account{
-	mdph := md5.Sum( []byte(p))
+func CreateAccount(n string, p string) Account {
+	mdph := md5.Sum([]byte(p))
 	ac := Account{n, mdph, 0}
 	return ac
 }
@@ -81,11 +81,13 @@ func Testsql() {
 	fonctionne := addInDB(a.Name, a)
 	fmt.Println(fonctionne)
 
+	// Test de getFromDB
 	var res Account
 	res = getFromDB("yeti")
 	fmt.Println(res)
-/*	res, b := exists("yeti")
-	fmt.Println(res)
-	fmt.Println(b)*/
-	//il faut tester exists et getFromDB
+
+	// Test de exists
+	resu, b := exists("yeti")
+	fmt.Println(resu)
+	fmt.Println(b)
 }
