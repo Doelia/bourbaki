@@ -2,7 +2,8 @@ package accounts
 
 // Account structure
 type Account struct {
-	Name, Pass string // TODO penser à md5 le mdp
+	Name string
+	Pass  [16]byte // TODO penser à md5 le mdp
 	Points     int
 }
 
