@@ -49,11 +49,11 @@ func getFromDB(cle string) (res Account) {
 	return
 }
 
-// Permet de savoir si un compte existe pour la clé ou pas
+// Exists Permet de savoir si un compte existe pour la clé ou pas
 //@param cle: Name de l'account recherché
 //@return Account: Le compte s'il existe
 //@return bool: Vrai si le compte existe, faux sinon
-func exists(cle string) (Account, bool) {
+func Exists(cle string) (Account, bool) {
 	var res Account
 	db.View(func(tx *bolt.Tx) error {
 		var v []byte
@@ -77,9 +77,13 @@ func CreateAccount(n string, p string) Account {
 // Testsql Permet de faire un test complet de toutes les fonctions, ajout et suppression
 func Testsql() {
 	OpenDB()
-	a := CreateAccount("yeti", "deseaux")
+	a := CreateAccount("anne", "motdepasseanne")
 	fonctionne := addInDB(a.Name, a)
 	fmt.Println(fonctionne)
+
+	a2 := CreateAccount("henri", "motdepassehenri")
+	fonctionne2 := addInDB(a2.Name, a2)
+	fmt.Println(fonctionne2)
 
 	// Test de getFromDB
 	var res Account
@@ -87,7 +91,14 @@ func Testsql() {
 	fmt.Println(res)
 
 	// Test de exists
-	resu, b := exists("yeti")
+	resu, b := Exists("yeti")
 	fmt.Println(resu)
 	fmt.Println(b)
+
+	_, r := Login("anne", "motdepasseanne")
+	fmt.Println(r) // doit retourner 1
+	_, r = Login("anne", "motdepassehenri")
+	fmt.Println(r) // doit retourner 0
+	_, r = Login("caly", "motdepassecaly")
+	fmt.Println(r) // doit retourner 2
 }
