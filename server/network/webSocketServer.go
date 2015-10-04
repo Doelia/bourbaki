@@ -1,9 +1,7 @@
 package network
 
 import (
-	"fmt"
 	"go-bourbaki/server/globals"
-	"log"
 
 	"github.com/googollee/go-socket.io"
 )
@@ -11,21 +9,21 @@ import (
 var server *socketio.Server
 var err error
 
-func sentToAll(namePackage string, args ...interface{}) {
-	server.BroadcastTo("all", namePackage, args)
-	fmt.Println("Broadcast ", namePackage, args)
+func createWebSocketHandler() *socketio.Server {
+	if server, err = socketio.NewServer(nil); err == nil {
+		createServerProtocle(server)
+		return server
+	}
+	globals.ErrLogger.Println("Erreur à la création du protocole : ", err)
+	return nil
 }
 
-func sendToClient(client socketio.Socket, namePackage string, args ...interface{}) {
-	client.Emit(namePackage, args)
-}
-
-func createServerProtocle() {
+func createServerProtocle(*socketio.Server) {
 	server.On("connection", func(so socketio.Socket) {
-		log.Println("on connection")
+		networkLogger.Println("Un client se connecte")
 
 		so.On("disconnection", func() {
-			log.Println("on disconnect")
+			networkLogger.Println("Un client se déconnecte")
 		})
 
 		so.On("LOGIN", func(user string, pass string) {
@@ -35,19 +33,16 @@ func createServerProtocle() {
 		})
 	})
 	server.On("error", func(so socketio.Socket, err error) {
-		log.Println("error:", err)
+		globals.ErrLogger.Println("Erreur sur un client : ", err)
 	})
 }
 
-func getWebSocketHandler() *socketio.Server {
+func sentToAll(namePackage string, args ...interface{}) {
+	server.BroadcastTo("all", namePackage, args)
+	networkLogger.Println("send@all: ", namePackage, args)
+}
 
-	if server, err = socketio.NewServer(nil); err == nil {
-		createServerProtocle()
-		return server
-	}
-
-	globals.ErrLogger.Println("Erreur à la création du protocole : ", err)
-
-	return nil
-
+func sendToClient(client socketio.Socket, namePackage string, args ...interface{}) {
+	client.Emit(namePackage, args)
+	networkLogger.Println("send@client: ", namePackage, args)
 }

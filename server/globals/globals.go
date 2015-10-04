@@ -9,4 +9,4 @@ import (
 var Ch chan int
 
 // Logger d'erreur principal
-var ErrLogger = log.New(os.Stderr, "Erreur: ", 0)
+var ErrLogger = log.New(os.Stderr, "[error] ", 0)

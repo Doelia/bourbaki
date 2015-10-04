@@ -80,4 +80,5 @@ var Board = function() {
             .addClass('cbg')
             .attr('num', n);
     };
+    
 };

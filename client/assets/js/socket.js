@@ -23,5 +23,4 @@ function init_socket() {
         board.activeLine(line.X, line.Y, line.O, line.N);
     });
 
-
 }

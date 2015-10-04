@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-var test = flag.String("test", "main", "Selectionne la méthode de test à lancer")
+var test = flag.String("test", "main", "Sélectionne la méthode de test à lancer (debug uniquement)")
 var port = flag.Int("port", 2000, "Modifie le port d'écoute (défaut 2000)")
 
 func dbTest() {

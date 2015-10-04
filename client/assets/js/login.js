@@ -16,7 +16,7 @@ function init_login() {
                 rules: [
                     {
                         type   : 'empty',
-                        prompt : 'Veillez entrer/choisir un mot de passe'
+                        prompt : 'Veillez entrer (ou choisir) un mot de passe'
                     },
                     {
                         type   : 'length[6]',

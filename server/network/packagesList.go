@@ -3,8 +3,8 @@ package network
 import "github.com/googollee/go-socket.io"
 
 /**
- *  Liste des fonctions pour envoyer des paquets au client
- *  Voir fichier notes/protocol.md pour le détail
+ *  Liste des fonctions pour envoyer des informations au client
+ *  Voir fichier notes/protocol.md pour le détail des paquets et de leurs paramètres
  */
 
 // TODO étudier la visibilité des structures
@@ -43,7 +43,7 @@ func DisplaySquare(x int, y int, numPlayer int) {
 	sentToAll("DISPLAYSQUARE", squarePacket{x, y, numPlayer})
 }
 
-// UpdatePlayers Met à jour du tableau des scores de la partie.
+// UpdatePlayers Met à jour du tableau des scores de la partie
 // Appelé autant de fois que necéssaire
 func UpdatePlayers(players []player) {
 	sentToAll("DISPLAYSQUARE", players)
@@ -51,6 +51,7 @@ func UpdatePlayers(players []player) {
 
 // SetActivePlayers Définit le joueur actif (celui qui est en train de joueur)
 // Envoyé a chaque changement de joueur
+// TODO Envoyer aussi le joueur précédent ?
 func SetActivePlayers(numPlayerActual int) {
 	sentToAll("SETACTIVEPLAYER", numPlayerActual)
 }

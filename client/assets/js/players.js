@@ -61,7 +61,7 @@ var Players = function() {
         $(".item.player[num='"+this.activePlayer+"'] .right")
             .append('<div class="ui progress green"><div class="bar"></div></div>');
 
-        // Pour mise à jour instantannée, évite le clignotement
+        // Pour mise à jour instantannée du timer, évite le clignotement
         $('.progress').progress({
           percent: this._actualPercent,
         });
