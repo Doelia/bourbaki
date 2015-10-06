@@ -3,30 +3,31 @@ package accounts
 // Account structure
 type Account struct {
 	Name   string
-	Pass   [16]byte // TODO penser à md5 le mdp
+	Pass   [16]byte //mot de passe crypté
 	Points int
 }
 
-//Fonction qui connecte l'utilisateur ou qui lui crée un compte s'il n'en a pas
+// Login Fonction qui connecte l'utilisateur ou qui lui crée un compte s'il n'en a pas
+//@param name: nom de l'account
+//@param pass: mot de passe non crypté
+//@return Account: le compte correspondant à l'utilisateur connecté
+//@return int, 0 si mot de passe incorrect, 1 si connexion OK, 2 si connexion OK + compte créé
 func Login(name string, pass string) (Account, int) {
 	//cas 1: bon name et pass
-	a := CreateAccount(name, pass)
-	res, b := Exists(name)
-	if b == true {
-		if res.Pass == a.Pass {
+	account := CreateAccount(name, pass)
+	accountexistant, isExist := Exists(name)
+	if isExist {
+		if account.Pass == accountexistant.Pass {
 			// le compte existe déjà, connexion réussie
-			return a, 1
-		} else {
-			// le compte existe déjà mais le mot de passe est éronné
-			return a, 0
+			return account, 1
 		}
+		// le compte existe déjà mais le mot de passe est éronné
+		return account, 0
 	} else {
 		// ajout du nouveau compte dans la bd, connexion réussie
-		fonctionne := addInDB(a.Name, a)
-		if fonctionne == true {
-			return a, 2
-		} else {
-			return a, 3 // erreur interne
+		if addInDB(account.Name, account) {
+			return account, 2
 		}
+		return account, 3 // erreur interne
 	}
 }

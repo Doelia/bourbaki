@@ -4,8 +4,8 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
-	"go-bourbaki/server/globals"
 	"github.com/boltdb/bolt"
+	"go-bourbaki/server/globals"
 )
 
 var db *bolt.DB
