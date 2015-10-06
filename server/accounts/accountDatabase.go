@@ -16,6 +16,10 @@ func OpenDB() {
 	if err != nil {
 		fmt.Print("Erreur à l'ouverture de la base de données")
 	}
+	db.Update(func(tx *bolt.Tx) error {
+		_, err := tx.CreateBucketIfNotExists([]byte("Accounts"))
+		return err
+	})
 }
 
 // Permet l'ajout de a dans la bd
@@ -25,7 +29,7 @@ func OpenDB() {
 func addInDB(cle string, a Account) bool {
 	astring, _ := json.Marshal(a)
 	db.Update(func(tx *bolt.Tx) error {
-		b, _ := tx.CreateBucketIfNotExists([]byte("Accounts"))
+		b := tx.Bucket([]byte("Accounts"))
 		err = b.Put([]byte(cle), []byte(astring))
 		return err
 	})
@@ -76,7 +80,6 @@ func CreateAccount(n string, p string) Account {
 
 // Testsql Permet de faire un test complet de toutes les fonctions, ajout et suppression
 func Testsql() {
-	OpenDB()
 	a := CreateAccount("anne", "motdepasseanne")
 	fonctionne := addInDB(a.Name, a)
 	fmt.Println(fonctionne)

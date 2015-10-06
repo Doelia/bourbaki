@@ -35,7 +35,7 @@ func serverTest() {
 }
 
 func main() {
-
+	accounts.OpenDB()
 	flag.Parse()
 
 	switch *test {

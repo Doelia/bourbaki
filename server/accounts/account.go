@@ -10,7 +10,6 @@ type Account struct {
 //Fonction qui connecte l'utilisateur ou qui lui crée un compte s'il n'en a pas
 func Login(name string, pass string) (Account, int) {
 	//cas 1: bon name et pass
-	OpenDB()
 	a := CreateAccount(name, pass)
 	res, b := Exists(name)
 	if b == true {
