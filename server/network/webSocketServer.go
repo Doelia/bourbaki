@@ -2,7 +2,7 @@ package network
 
 import (
 	"go-bourbaki/server/globals"
-
+	"go-bourbaki/server/accounts"
 	"github.com/googollee/go-socket.io"
 )
 
@@ -27,9 +27,16 @@ func createServerProtocle(*socketio.Server) {
 		})
 
 		so.On("LOGIN", func(user string, pass string) {
-			// TODO Code à isoler et login à implémenter
-			ConnectAccept(so, 1, 2)
-			so.Join("all") // Pour recevoir les broadcasts du gane
+			account, resultatIntLogin := accounts.Login(user,pass)
+			if resultatIntLogin == 1{
+				networkLogger.Println("Connexion réussie pour le client : ", account.Name, " (compte déjà existant)")
+			} else if resultatIntLogin == 2{
+				networkLogger.Println("Connexion réussie pour le client : ", account.Name, " (compte crée)")
+			} else if resultatIntLogin == 0{
+				networkLogger.Println("Tentative de connexion échouée pour le client : ", account.Name, " (mauvais mot de passe)")
+			}
+			ConnectAccept(so, resultatIntLogin, 2)
+			so.Join("all") // Pour recevoir les broadcasts du game
 		})
 	})
 	server.On("error", func(so socketio.Socket, err error) {
