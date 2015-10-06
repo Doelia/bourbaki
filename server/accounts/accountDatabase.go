@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
+	"go-bourbaki/server/globals"
 	"github.com/boltdb/bolt"
 )
 
@@ -14,7 +15,7 @@ var err error
 func OpenDB() {
 	db, err = bolt.Open("bourbaki.db", 0600, nil)
 	if err != nil {
-		fmt.Print("Erreur à l'ouverture de la base de données")
+		globals.ErrLogger.Println("Erreur à l'ouverture de la base de données")
 	}
 	db.Update(func(tx *bolt.Tx) error {
 		_, err := tx.CreateBucketIfNotExists([]byte("Accounts"))
@@ -26,15 +27,15 @@ func OpenDB() {
 //@param cle string: Name de l'account à ajouter
 //@param a Account : La structure account à ajouter
 //@return bool : Vrai si l'ajout a bien été fait, faux sinon
-func addInDB(cle string, a Account) bool {
-	astring, _ := json.Marshal(a)
+func addInDB(cle string, account Account) bool {
+	jsonaccount, _ := json.Marshal(account)
 	db.Update(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte("Accounts"))
-		err = b.Put([]byte(cle), []byte(astring))
+		bucket := tx.Bucket([]byte("Accounts"))
+		err = bucket.Put([]byte(cle), []byte(jsonaccount))
 		return err
 	})
 	if err != nil {
-		fmt.Println("Erreur update")
+		globals.ErrLogger.Println("Erreur update")
 		return false
 	}
 	return true
@@ -43,11 +44,11 @@ func addInDB(cle string, a Account) bool {
 // Récupère l'account ayant pour clé celle passée en paramètre
 //@param cle: Name de l'account à récupérer
 //@return Account: Le compte correspondant
-func getFromDB(cle string) (res Account) {
+func getFromDB(cle string) (account Account) {
 	db.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte("Accounts"))
-		v := b.Get([]byte(cle))
-		json.Unmarshal(v, &res)
+		bucket := tx.Bucket([]byte("Accounts"))
+		v := bucket.Get([]byte(cle))
+		json.Unmarshal(v, &account)
 		return nil
 	})
 	return
@@ -58,45 +59,42 @@ func getFromDB(cle string) (res Account) {
 //@return Account: Le compte s'il existe
 //@return bool: Vrai si le compte existe, faux sinon
 func Exists(cle string) (Account, bool) {
-	var res Account
+	var account Account
 	db.View(func(tx *bolt.Tx) error {
-		var v []byte
-		b := tx.Bucket([]byte("Accounts"))
-		v = b.Get([]byte(cle))
-		json.Unmarshal(v, &res)
+		bucket := tx.Bucket([]byte("Accounts"))
+		v := bucket.Get([]byte(cle))
+		json.Unmarshal(v, &account)
 		return nil
 	})
-	return res, res.Name != ""
+	return account, account.Name != ""
 }
 
 // CreateAccount Permet de créer une structure Account
 //@param n: name de l'account
 //@param p: mot de passe de l'account
-func CreateAccount(n string, p string) Account {
-	mdph := md5.Sum([]byte(p))
-	ac := Account{n, mdph, 0}
-	return ac
+func CreateAccount(name string, pass string) Account {
+	motdepassemd5 := md5.Sum([]byte(pass))
+	account := Account{name, motdepassemd5, 0}
+	return account
 }
 
 // Testsql Permet de faire un test complet de toutes les fonctions, ajout et suppression
 func Testsql() {
-	a := CreateAccount("anne", "motdepasseanne")
-	fonctionne := addInDB(a.Name, a)
-	fmt.Println(fonctionne)
+	testaccount1 := CreateAccount("anne", "motdepasseanne")
+	fmt.Println(addInDB(testaccount1.Name, testaccount1))
 
-	a2 := CreateAccount("henri", "motdepassehenri")
-	fonctionne2 := addInDB(a2.Name, a2)
-	fmt.Println(fonctionne2)
+	testaccount2 := CreateAccount("henri", "motdepassehenri")
+	fmt.Println(addInDB(testaccount2.Name, testaccount2))
 
 	// Test de getFromDB
-	var res Account
-	res = getFromDB("yeti")
-	fmt.Println(res)
+	var testaccountget Account
+	testaccountget = getFromDB("yeti")
+	fmt.Println(testaccountget)
 
 	// Test de exists
-	resu, b := Exists("yeti")
-	fmt.Println(resu)
-	fmt.Println(b)
+	testaccountexist, resultatboolexist := Exists("yeti")
+	fmt.Println(testaccountexist)
+	fmt.Println(resultatboolexist)
 
 	_, r := Login("anne", "motdepasseanne")
 	fmt.Println(r) // doit retourner 1
