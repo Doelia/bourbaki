@@ -2,7 +2,11 @@ package game
 
 import (
 	"go-bourbaki/server/globals"
+	"log"
+	"os"
 )
+
+var gameLogger = log.New(os.Stdout, "[game] ", 0)
 
 // Game structure définissant une partie
 type Game struct {
@@ -11,6 +15,9 @@ type Game struct {
 	playersList map[string]globals.Player
 }
 
+// MyGame variable globable de l'instance unique d'une partie
+var MyGame *Game
+
 // ConstructGame Construit et initialise un nouveau jeu
 func ConstructGame() *Game {
 	var game = &Game{}
@@ -18,11 +25,15 @@ func ConstructGame() *Game {
 	return game
 }
 
-var myGame *Game
+// StartNewGame Démarre une nouvelle partie en initialisant tous les structure associés
+func StartNewGame() {
+	gameLogger.Println("Création d'une nouvelle partie...")
+	MyGame = ConstructGame()
+	gameLogger.Println("Création OK")
+}
 
 // TestGame ..
 func TestGame() {
-	myGame = ConstructGame()
-	player := constructPlayer(myGame.getNewNumPlayer(), "Pancake")
-	myGame.addPlayer(player)
+	player := ConstructPlayer(MyGame.GetNewNumPlayer(), "Pancake")
+	MyGame.AddPlayer(player)
 }

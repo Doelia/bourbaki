@@ -21,6 +21,9 @@ func serverTest() {
 
 	fmt.Println("=== BOURBAKI SERVEUR ===")
 
+	// Création de gane
+	game.StartNewGame()
+
 	// Création serveur HTTP
 	go network.StartWebServer(*port)
 	<-globals.Ch // Attente de l'handle
