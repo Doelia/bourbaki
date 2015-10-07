@@ -42,8 +42,8 @@ func (g *Game) AddSquare(square globals.Square) {
 	g.squares[square.X][square.Y] = square.N
 }
 
-// IsActive Retourne vrai si la ligne est active dans le game, faux sinon
-func (g *Game) IsActive(x int, y int, o int) bool {
+// isActive Retourne vrai si la ligne est active dans le game, faux sinon
+func (g *Game) isActive(x int, y int, o int) bool {
 	return g.lines[x][y][o] > 0
 }
 
@@ -55,19 +55,20 @@ func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
 	x := lastLine.X
 	y := lastLine.Y
 	if lastLine.O == globals.HORIZONTAL {
-		if g.IsActive(x, y-1, 0) && g.IsActive(x+1, y-1, 1) && g.IsActive(x, y-1, 1) {
+		if g.isActive(x, y-1, 0) && g.isActive(x+1, y-1, 1) && g.isActive(x, y-1, 1) {
 			return true, globals.Square{x, y - 1, lastLine.N}
 		}
-		if g.IsActive(x, y+1, 0) && g.IsActive(x, y, 1) && g.IsActive(x+1, y, 1) {
+		if g.isActive(x, y+1, 0) && g.isActive(x, y, 1) && g.isActive(x+1, y, 1) {
 			return true, globals.Square{x, y, lastLine.N}
 		}
 	} else if lastLine.O == globals.VERTICAL {
-		if g.IsActive(x, y, 0) && g.IsActive(x+1, y, 1) && g.IsActive(x, y+1, 0) {
+		if g.isActive(x, y, 0) && g.isActive(x+1, y, 1) && g.isActive(x, y+1, 0) {
 			return true, globals.Square{x, y, lastLine.N}
 		}
-		if g.IsActive(x-1, y, 0) && g.IsActive(x-1, y, 1) && g.IsActive(x-1, y+1, 0) {
+		if g.isActive(x-1, y, 0) && g.isActive(x-1, y, 1) && g.isActive(x-1, y+1, 0) {
 			return true, globals.Square{x - 1, y, lastLine.N}
 		}
 	}
 	return false, globals.Square{}
+	//TODO calcul points
 }

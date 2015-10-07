@@ -11,7 +11,7 @@ Paquet envoyé à la connexion. Mot de passe non crypté
 Prévient le placement d'une ligne par le joueur.
 - **x** : int, position X
 - **y** : int, position Y
-- **o** : string, orientation. 'v' pour vertical, 'h' pour horizontal
+- **o** : int, orientation. '1' pour vertical, '0' pour horizontal
 
 ## Envoyées par le serveur
 

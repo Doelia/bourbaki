@@ -1,6 +1,9 @@
 package game
 
-import "go-bourbaki/server/globals"
+import (
+	"go-bourbaki/server/globals"
+	"errors"
+)
 
 // GetNewNumPlayer Retourne un numéro de joueur pour le joueur suivant
 func (g *Game) GetNewNumPlayer() int {
@@ -17,9 +20,9 @@ func (g *Game) AddPlayer(p globals.Player) {
 func (g *Game) GetPlayer(name string) (globals.Player, error) {
 	player, exists := g.playersList[name]
 	if !exists {
-		return globals.Player{}, Error("Joueur introuvable")
+		return globals.Player{}, errors.New("Joueur introuvable")
 	}
-	return player, _
+	return player, nil
 }
 
 // PlayerExists Retourne vrai si le joueur existe dans la partie
