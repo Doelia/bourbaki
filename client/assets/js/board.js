@@ -50,16 +50,16 @@ var Board = function() {
     };
 
     this.createGrid = function(size) {
-        for (var i = 0; i <= size; i++) {
-            for (var j = 0; j <= size; j++) {
+        for (var i = 0; i < size; i++) {
+            for (var j = 0; j < size; j++) {
                 this._addDot(i, j);
-                if (i < size) {
+                if (i < size-1) {
                     this._createInactiveLine(i, j, 'v');
                 }
-                if (j < size) {
+                if (j < size-1) {
                     this._createInactiveLine(i, j, 'h');
                 }
-                if (i < size && j < size) {
+                if (i < size-1 && j < size-1) {
                     this._createInactiveSquare(i, j);
                 }
             }
@@ -75,10 +75,11 @@ var Board = function() {
     };
 
     this.activeSquare = function(x, y, n) {
+        console.log("board.activeLine("+x+","+y+","+n+")");
         $(".square[x='"+x+"'][y='"+y+"']")
             .removeClass('inactive')
             .addClass('cbg')
             .attr('num', n);
     };
-    
+
 };

@@ -9,23 +9,6 @@ import "github.com/googollee/go-socket.io"
 
 // TODO étudier la visibilité des structures
 
-type linePacket struct {
-	X, Y int
-	O    string
-	N    int
-}
-
-type squarePacket struct {
-	X, Y, N int
-}
-
-type player struct {
-	NumPlayer int
-	Name      string
-	Score     int
-	IsActive  bool
-}
-
 // ConnectAccept Packet de retour acceptant ou non la demande de connexion du joueur.
 // param code: int, 0 si mot de passe incorrect, 1 si connexion OK, 2 si connexion OK + compte créé
 // param numPlayer: int, numéro du joueur dans la partie (entre 1 en n). 0 si le code vaut 0 (connexion refusée)
@@ -45,7 +28,7 @@ func DisplaySquare(x int, y int, numPlayer int) {
 
 // UpdatePlayers Met à jour du tableau des scores de la partie
 // Appelé autant de fois que necéssaire
-func UpdatePlayers(players []player) {
+func UpdatePlayers(players []Player) {
 	sentToAll("DISPLAYSQUARE", players)
 }
 

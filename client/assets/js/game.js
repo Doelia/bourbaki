@@ -39,7 +39,7 @@ function sendAddLine(x,y,o,n) {
 function init_game() {
 
     board = new Board();
-    board.createGrid(10);
+    board.createGrid(11);
 
     players = new Players();
 
