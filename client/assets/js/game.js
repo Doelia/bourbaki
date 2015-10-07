@@ -31,6 +31,7 @@ function onRecvActivePlayer(numPlayer) {
 }
 
 function sendAddLine(x,y,o,n) {
+    console.log("senAdLine x="+x+", y="+y+", o="+o+", n="+n);
     board.activeLine(x,y,o,n);
 }
 
@@ -61,7 +62,7 @@ function init_game() {
             var y = $(this).attr('y');
             var o = $(this).attr('o');
             var n = myNum;
-            sendAddLine(x,y,o,n);
+            sendAddLine(x,y,o==('v')?1:0,n);
         }
     });
 

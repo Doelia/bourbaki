@@ -1,10 +1,11 @@
 package network
 
 import (
-	"go-bourbaki/server/globals"
-	"go-bourbaki/server/accounts"
-	"github.com/googollee/go-socket.io"
 	"fmt"
+	"go-bourbaki/server/accounts"
+	"go-bourbaki/server/globals"
+
+	"github.com/googollee/go-socket.io"
 )
 
 var server *socketio.Server
@@ -28,12 +29,12 @@ func createServerProtocle(*socketio.Server) {
 		})
 
 		so.On("LOGIN", func(user string, pass string) {
-			account, resultatIntLogin := accounts.Login(user,pass)
-			if resultatIntLogin == 1{
+			account, resultatIntLogin := accounts.Login(user, pass)
+			if resultatIntLogin == 1 {
 				fmt.Println("Connexion réussie pour le client : ", account.Name, " (compte déjà existant)")
-			} else if resultatIntLogin == 2{
+			} else if resultatIntLogin == 2 {
 				fmt.Println("Connexion réussie pour le client : ", account.Name, " (compte crée)")
-			} else if resultatIntLogin == 0{
+			} else if resultatIntLogin == 0 {
 				fmt.Println("Tentative de connexion échouée pour le client : ", account.Name, " (mauvais mot de passe)")
 			}
 			ConnectAccept(so, resultatIntLogin, 2)

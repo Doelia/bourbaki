@@ -68,7 +68,8 @@ var Board = function() {
 
     this.activeLine = function(x, y, o, n) {
         console.log("board.activeLine("+x+","+y+","+o+","+n+")");
-        $(".line."+o+"[x='"+x+"'][y='"+y+"']")
+        var orientation = (o === 0) ? 'h' : 'v';
+        $(".line."+orientation+"[x='"+x+"'][y='"+y+"']")
             .removeClass('inactive')
             .addClass('cbg')
             .attr('num', n);
