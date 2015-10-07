@@ -1,8 +1,8 @@
 # Parties fonctionelles du serveur
-- Login user + mot de passe
-  - Gestion BD : user, mot de passe, score
-  - Si le compte existe pas déjà, il est crée
-  - Sinon, connexion
+- *Login user + mot de passe*
+  - *Gestion BD : user, mot de passe, score*
+  - *Si le compte existe pas déjà, il est crée*
+  - *Sinon, connexion*
 - Réception des actions des joueurs : poser une ligne
 - Calcul du score partie en fonction des actions
 - Test de validité du carré
@@ -17,13 +17,13 @@
 
 # Parties fonctionelles du client
 
-- Connexion (user/mot de passe)
-- Affichage dynamique :
-    - De la grille (barres, carrés)
-    - Des joueurs actifs/inactifs (pseudo, score)
-    - Timer
-    - Mode pause
+- *Connexion (user/mot de passe)*
+- *Affichage dynamique :*
+    - *De la grille (barres, carrés)*
+    - *Des joueurs actifs/inactifs (pseudo, score)*
+    - *Timer*
+    - *Mode pause*
 - Affichage statique :
     - Classement général
-- Actions :
-    - Poser une ligne
+- *Actions :*
+    - *Poser une ligne*
