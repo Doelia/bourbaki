@@ -33,5 +33,5 @@ $(document).ready(function() {
     init_socket();
     loadLogin();
 
-    socket.emit("LOGIN", 'Cassoulet', 'mot de passe');
+    //socket.emit("LOGIN", 'Cassoulet', 'mot de passe');
 });

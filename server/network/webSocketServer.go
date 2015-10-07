@@ -29,6 +29,16 @@ func createServerProtocle(*socketio.Server) {
 			networkLogger.Println("Un client se déconnecte")
 		})
 
+		so.On("PUTLINE", func (x int, y int, o int, n int){ //TODO num joueur déterminé côté serveur
+			l := globals.Line{x, y, o, n}
+			game.MyGame.AddLine(l)
+			DisplayLine(x, y, o, n)
+			isSquare, square := game.MyGame.TestSquare(l)
+			if isSquare{
+				DisplaySquare(square.X, square.Y, square.N)
+				}
+		})
+
 		so.On("LOGIN", func(user string, pass string) {
 			account, resultatIntLogin := accounts.Login(user, pass)
 			if resultatIntLogin == 1 {

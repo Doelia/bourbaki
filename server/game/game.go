@@ -38,7 +38,7 @@ func TestGame() {
 	MyGame.AddPlayer(player)
 }
 
-func (g *Game) addLine(line globals.Line){
+func (g *Game) AddLine(line globals.Line){
 	g.lines[line.X][line.Y][line.O] = line.N
 }
 
@@ -50,7 +50,7 @@ func (g *Game) addSquare(square globals.Square){
 //@param lastLine: dernière ligne ayant été jouée
 //@return bool: vrai si le joueur gagne un carré, faux sinon
 //@return square: le carré formé
-func (g *Game) testSquare(lastLine globals.Line) (bool, globals.Square){
+func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square){
 	x := lastLine.X
 	y := lastLine.Y
 	if lastLine.O == 0{	// ligne horizontale
@@ -69,6 +69,7 @@ func (g *Game) testSquare(lastLine globals.Line) (bool, globals.Square){
 		}
 	}
 	return false, globals.Square{}
+	//TODO calcul points
 }
 
 // fonction qui retourne vrai si la ligne est active dans g, faux sinon
