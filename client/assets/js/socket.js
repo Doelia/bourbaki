@@ -13,7 +13,6 @@ function init_socket() {
         var code = data[0]; // 0 incorrect, 1 login, 2 inscription
         var numPlayer = data[1];
         console.log("Recv CONNECTACCEPT. code="+code+", numPlayer="+numPlayer);
-        code = 2;
 
         if (code == 1 || code == 2) {
             myNum = numPlayer;
