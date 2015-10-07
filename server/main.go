@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"go-bourbaki/server/accounts"
+	"go-bourbaki/server/game"
 	"go-bourbaki/server/globals"
 	"go-bourbaki/server/network"
 )
@@ -34,6 +35,8 @@ func main() {
 	switch *test {
 	case "db":
 		dbTest()
+	case "game":
+		game.TestGame()
 	case "main":
 		serverTest()
 	}

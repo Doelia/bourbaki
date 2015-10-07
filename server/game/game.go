@@ -6,26 +6,23 @@ import (
 
 // Game structure définissant une partie
 type Game struct {
-	lines   [globals.GRIDSIZE][globals.GRIDSIZE][2]int
-	squares [globals.GRIDSIZE][globals.GRIDSIZE]int
+	lines       [globals.GRIDSIZE][globals.GRIDSIZE][2]int
+	squares     [globals.GRIDSIZE][globals.GRIDSIZE]int
+	playersList map[string]globals.Player
 }
 
-// Line ..
-type Line struct {
-	X, Y int
-	O    string
-	N    int
+// ConstructGame Construit et initialise un nouveau jeu
+func ConstructGame() *Game {
+	var game = &Game{}
+	game.playersList = make(map[string]globals.Player)
+	return game
 }
 
-// Square ..
-type Square struct {
-	X, Y, N int
-}
+var myGame *Game
 
-// Player structure définissant un joueur
-type Player struct {
-	NumPlayer int
-	Name      string
-	Score     int
-	IsActive  bool
+// TestGame ..
+func TestGame() {
+	myGame = ConstructGame()
+	player := constructPlayer(myGame.getNewNumPlayer(), "Pancake")
+	myGame.addPlayer(player)
 }
