@@ -1,8 +1,9 @@
 package network
 
 import (
-    "go-bourbaki/server/globals"
-    "github.com/googollee/go-socket.io"
+	"go-bourbaki/server/globals"
+
+	"github.com/googollee/go-socket.io"
 )
 
 /**
@@ -18,7 +19,7 @@ func ConnectAccept(client socketio.Socket, code int, numPlayer int) {
 }
 
 // DisplayLine Ajoute la barre x,y,o,n à la grille
-func DisplayLine(x int, y int, orientation string, numPlayer int) {
+func DisplayLine(x int, y int, orientation int, numPlayer int) {
 	sentToAll("DISPLAYLINE", globals.Line{x, y, orientation, numPlayer})
 }
 

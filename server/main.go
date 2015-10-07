@@ -13,15 +13,19 @@ var test = flag.String("test", "main", "Sélectionne la méthode de test à lanc
 var port = flag.Int("port", 2000, "Modifie le port d'écoute (défaut 2000)")
 
 func dbTest() {
+	accounts.OpenDB()
 	accounts.Testsql()
 }
 
-func serverTest() {
+func goMain() {
 	globals.Ch = make(chan int, 1)
 
 	fmt.Println("=== BOURBAKI SERVEUR ===")
 
-	// Création de gane
+	// Initialisation de la base de donnée
+	accounts.OpenDB()
+
+	// Création d'une partie
 	game.StartNewGame()
 
 	// Création serveur HTTP
@@ -32,16 +36,14 @@ func serverTest() {
 }
 
 func main() {
-	accounts.OpenDB()
+
 	flag.Parse()
 
 	switch *test {
 	case "db":
 		dbTest()
-	case "game":
-		game.TestGame()
 	case "main":
-		serverTest()
+		goMain()
 	}
 
 }

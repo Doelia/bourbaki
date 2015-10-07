@@ -40,8 +40,12 @@ func createServerProtocle(*socketio.Server) {
 			}
 
 			if resultatIntLogin > 0 {
-				player := game.ConstructPlayer(game.MyGame.GetNewNumPlayer(), user)
-				game.MyGame.AddPlayer(player)
+				if !game.MyGame.PlayerExists(user) {
+					player := game.ConstructPlayer(game.MyGame.GetNewNumPlayer(), user)
+					game.MyGame.AddPlayer(player)
+				} else {
+
+				}
 				ConnectAccept(so, resultatIntLogin, 2)
 			} else {
 				ConnectAccept(so, resultatIntLogin, 0)
