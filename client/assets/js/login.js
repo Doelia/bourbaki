@@ -1,6 +1,13 @@
+var isValid = false;
+
 function init_login() {
-    $('.ui.form')
-    .form({
+    $('.ui.form').form({
+        onSuccess: function() {
+            isValid = true;
+        },
+        onFailure: function() {
+            isValid = false;
+        },
         fields: {
             user: {
                 identifier  : 'user',
@@ -27,9 +34,14 @@ function init_login() {
         }
     });
 
-    $('.ui.form')
-        .submit(function(event) {
-            event.preventDefault();
-            socket.emit("LOGIN", "Doe", "John");
-        });
+    $('.ui.form').submit(function(event) {
+        event.preventDefault();
+        if (isValid) {
+            $('.ui.form').addClass('loading');
+            var login = $('.ui.form').form('get value', 'user');
+            var pass = $('.ui.form').form('get value', 'password');
+            console.log("Login with "+login+", "+pass);
+            socket.emit("LOGIN", login, pass);
+        }
+    });
 }

@@ -10,11 +10,21 @@ function init_socket() {
     socket = io();
 
     socket.on('CONNECTACCEPT', function(data) {
-        var code = data[0];
+        var code = data[0]; // 0 incorrect, 1 login, 2 inscription
         var numPlayer = data[1];
-        myNum = numPlayer;
         console.log("Recv CONNECTACCEPT. code="+code+", numPlayer="+numPlayer);
-        loadGame();
+        code = 2;
+
+        if (code == 1 || code == 2) {
+            myNum = numPlayer;
+            if (code == 2) {
+                $('#register_done').modal('show');
+            }
+            loadGame();
+        } else { // Erreur
+            $('.ui.form').removeClass('loading');
+            alert("[Message provisoire] Mot de passe incorect");
+        }
     });
 
     socket.on('DISPLAYLINE', function(data) {

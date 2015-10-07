@@ -40,78 +40,82 @@
     text-align: center;
 }
 
-/*** PAGE LOGIN ***/
-body.login {
-    background-color: #DADADA;
-    > .grid {
-        height: 100%;
-    }
-    .column {
-        max-width: 450px;
-    }
+// Hack Semantic pour debugger les animations des modals, bizarre...
+.ui.small.modal {
+    display: block;
+    margin-top: -5000px;
 }
 
-/*** PAGE DU JEU ***/
-body.game {
+#interface {
+    height: 100%;
 
-    background-color: #F1F1F1;
-
-    // Menu du haut
-    .ui.menu {
-        margin-top: 0;
-        .item img.logo {
-            margin-right: 1.5em;
+    /*** PAGE LOGIN ***/
+    &.login {
+        background-color: #DADADA;
+        > .grid {
+            height: 100%;
+        }
+        .column {
+            max-width: 450px;
         }
     }
 
-    // Nécessaire pour debugger les animations des modals, bizarre...
-    .ui.modal {
-        display: block;
-        margin-top: -5000px;
-    }
+    /*** PAGE DU JEU ***/
+    &.game {
 
-    // Block principal (plateau + liste des joueurs)
-    .ui.container.main {
+        background-color: #F1F1F1;
 
-        width: 1000px;
-        margin-top: 50px;
-
-        .grid {
-
-            background: white;
-            border-radius: 10px;
-
-            // Plateau de jeu (gauche)
-            .column.board {
-                transition-property: background;
-                transition-duration: .5s;
-                transition-timing-function: ease;
-                background: #9CBDC7;
-                min-width: 600px;
-                height: 600px;
-                border-radius: 10px 0 0 10px;
-                padding-left: 30px;
+        // Menu du haut
+        .ui.menu {
+            margin-top: 0;
+            .item img.logo {
+                margin-right: 1.5em;
             }
+        }
 
-            // Liste des joueurs (droite)
-            .column.players {
+        // Block principal (plateau + liste des joueurs)
+        .ui.container.main {
 
-                // Un joueur
-                .item.player {
-                    &.inactive {
-                    }
-                    .label, .progress {
-                        margin-top: 3px;
-                    }
-                    .progress {
-                        margin-bottom: 0;
-                        width: 120px;
-                        .bar {
-                            min-width: 0;
-                            transition-duration: 0ms;
+            width: 1000px;
+            margin-top: 50px;
+
+            .grid {
+
+                background: white;
+                border-radius: 10px;
+
+                // Plateau de jeu (gauche)
+                .column.board {
+                    transition-property: background;
+                    transition-duration: .5s;
+                    transition-timing-function: ease;
+                    background: #9CBDC7;
+                    min-width: 600px;
+                    height: 600px;
+                    border-radius: 10px 0 0 10px;
+                    padding-left: 30px;
+                }
+
+                // Liste des joueurs (droite)
+                .column.players {
+
+                    // Un joueur
+                    .item.player {
+                        &.inactive {
                         }
-                    }
+                        .label, .progress {
+                            margin-top: 3px;
+                        }
+                        .progress {
+                            margin-bottom: 0;
+                            width: 120px;
+                            .bar {
+                                min-width: 0;
+                                transition-duration: 0ms;
+                            }
+                        }
 
+                    }
                 }
             }
         }

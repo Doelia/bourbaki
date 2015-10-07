@@ -76,4 +76,5 @@ function init_game() {
         var n = myNum;
         board.activeSquare(x,y,n);
     });
+
 }

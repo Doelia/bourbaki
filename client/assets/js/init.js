@@ -14,17 +14,17 @@ var playersDemo = [
 
 function loadLogin() {
     $.ajax({url: "/content/login.html", success: function(result) {
-        $("body").html(result);
-        $("body").addClass('login');
+        $("#interface").html(result);
+        $("#interface").addClass('login');
         init_login();
     }});
 }
 
 function loadGame() {
     $.ajax({url: "/content/game.html", success: function(result) {
-        $("body").html(result);
-        $("body").removeClass('login');
-        $("body").addClass('game');
+        $("#interface").html(result);
+        $("#interface").removeClass('login');
+        $("#interface").addClass('game');
         init_game();
     }});
 }
