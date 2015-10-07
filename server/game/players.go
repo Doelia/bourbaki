@@ -2,24 +2,33 @@ package game
 
 import "go-bourbaki/server/globals"
 
-// GetNewNumPlayer ..
-func (game *Game) GetNewNumPlayer() int {
-	return len(game.playersList) + 1
+// GetNewNumPlayer Retourne un numéro de joueur pour le joueur suivant
+func (g *Game) GetNewNumPlayer() int {
+	return len(g.playersList) + 1
 }
 
-// AddPlayer ..
-func (game *Game) AddPlayer(p globals.Player) {
-	game.playersList[p.Name] = p
+// AddPlayer Ajoute un joueur au game
+func (g *Game) AddPlayer(p globals.Player) {
+	g.playersList[p.Name] = p
 	gameLogger.Println("Ajout du joueur " + p.Name + " à la partie")
 }
 
-// PlayerExists ..
-func (game *Game) PlayerExists(name string) bool {
-	_, ok := game.playersList[name]
+// GetPlayer Retourne une structure du player demandé
+func (g *Game) GetPlayer(name string) (globals.Player, error) {
+	player, exists := g.playersList[name]
+	if !exists {
+		return globals.Player{}, Error("Joueur introuvable")
+	}
+	return player, nil
+}
+
+// PlayerExists Retourne vrai si le joueur existe dans la partie
+func (g *Game) PlayerExists(name string) bool {
+	_, ok := g.playersList[name]
 	return ok
 }
 
-// ConstructPlayer ..
+// ConstructPlayer Construit un nouveau Player correctement initialisé
 func ConstructPlayer(numPlayer int, name string) globals.Player {
 	return globals.Player{numPlayer, name, 0, true}
 }
