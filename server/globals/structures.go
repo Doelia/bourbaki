@@ -3,7 +3,7 @@ package globals
 // Line ..
 type Line struct {
 	X, Y int
-	O    string
+	O    int
 	N    int
 }
 
