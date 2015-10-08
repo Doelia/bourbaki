@@ -45,6 +45,12 @@ func (g *Game) AddSquare(square globals.Square) {
 
 // isActive Retourne vrai si la ligne est active dans le game, faux sinon
 func (g *Game) isActive(x int, y int, o int) bool {
+	if x < 0 || x >= globals.GRIDSIZE{
+		return false
+	}
+	if y < 0 || y >= globals.GRIDSIZE{
+		return false
+	}
 	return g.lines[x][y][o] > 0
 }
 
@@ -57,21 +63,27 @@ func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
 	y := lastLine.Y
 	if lastLine.O == globals.HORIZONTAL {
 		if g.isActive(x, y-1, globals.HORIZONTAL) && g.isActive(x+1, y-1, globals.VERTICAL) && g.isActive(x, y-1, globals.VERTICAL) {
+			gameLogger.Println("Ajout square au dessus du trait")
 			return true, globals.Square{x, y - 1, lastLine.N}
 		}
 		if g.isActive(x, y+1, globals.HORIZONTAL) && g.isActive(x, y, globals.VERTICAL) && g.isActive(x+1, y, globals.VERTICAL) {
+			gameLogger.Println("Ajout square au dessous du trait")
 			return true, globals.Square{x, y, lastLine.N}
 		}
-	} else if lastLine.O == globals.VERTICAL {
-		if g.isActive(x, y, globals.HORIZONTAL) && g.isActive(x+1, y, globals.VERTICAL) && g.isActive(x, y+1, globals.HORIZONTAL) {
-			return true, globals.Square{x, y, lastLine.N}
-		}
-		if g.isActive(x-1, y, 0) && g.isActive(x-1, y, 1) && g.isActive(x-1, y+1, 0) {
-			return true, globals.Square{x - 1, y, lastLine.N}
+	} else {
+		if lastLine.O == globals.VERTICAL {
+			if g.isActive(x, y, globals.HORIZONTAL) && g.isActive(x+1, y, globals.VERTICAL) && g.isActive(x, y+1, globals.HORIZONTAL) {
+				gameLogger.Println("Ajout square à droite du trait")
+				return true, globals.Square{x, y, lastLine.N}
+			}
+			if g.isActive(x-1, y, 0) && g.isActive(x-1, y, 1) && g.isActive(x-1, y+1, 0) {
+				gameLogger.Println("Ajout square à gauche du trait")
+				return true, globals.Square{x - 1, y, lastLine.N}
+			}
 		}
 	}
+	gameLogger.Println("Pas de square")
 	return false, globals.Square{}
-	//TODO calcul points
 }
 
 // ChangeCurrentPlayer permet de changer le joueur courant, à appeller lors de la fin d'un tour
@@ -86,7 +98,7 @@ func (g *Game) ChangeCurrentPlayer() {
 	}
 	if newCurrentPlayer.IsActive {
 		g.CurrentPlayer = *newCurrentPlayer
-		gameLogger.Println("Nouveau joueur : ", g.CurrentPlayer.Name)
+		gameLogger.Println("Joueur courant : ", g.CurrentPlayer.Name)
 	} else {
 		g.ChangeCurrentPlayer()
 	}
