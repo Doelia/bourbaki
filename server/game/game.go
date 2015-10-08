@@ -77,10 +77,41 @@ func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
 // ChangeCurrentPlayer permet de changer le joueur courant, à appeller lors de la fin d'un tour
 func (g *Game) ChangeCurrentPlayer() {
 	numNewCurrentPlayer := g.currentPlayer.NumPlayer + 1
+	if numNewCurrentPlayer > len(g.playersList) {
+		numNewCurrentPlayer = 1
+	}
 	newCurrentPlayer, err := g.GetPlayerFromNumPlayer(numNewCurrentPlayer)
 	if err != nil {
 		gameLogger.Println("Changement joueur courant impossible")
 	}
-	g.currentPlayer = *newCurrentPlayer
-	gameLogger.Println("Nouveau joueur : ", g.currentPlayer.Name)
+	if newCurrentPlayer.IsActive {
+		g.currentPlayer = *newCurrentPlayer
+		gameLogger.Println("Nouveau joueur : ", g.currentPlayer.Name)
+	} else {
+		g.ChangeCurrentPlayer()
+	}
+}
+
+// IsPauseNecessary permet de savoir si une pause est nécessaire (nbJoueursActifs >= 2)
+func (g *Game) IsPauseNecessary() bool {
+	//on compte le nombre de joueurs actifs
+	compteur := 0
+	for _, playerStruct := range g.playersList {
+		if playerStruct.IsActive == true {
+			compteur++
+		}
+	}
+	return compteur >= 2
+}
+
+// IsEndGame permet de savoir si la partie est finie
+func (g *Game) IsEndGame() bool {
+	for i := 0; i < len(g.squares)-1; i++ {
+		for j := 0; j < len(g.squares)-1; j++ {
+			if g.squares[i][j] == 0 {
+				return false
+			}
+		}
+	}
+	return true
 }

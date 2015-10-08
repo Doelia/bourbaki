@@ -24,6 +24,9 @@ func createWebSocketHandler() *socketio.Server {
 func createServerProtocle(*socketio.Server) {
 	server.On("connection", func(so socketio.Socket) {
 		networkLogger.Println("Un client se connecte")
+		if !game.MyGame.IsPauseNecessary() {
+			Unpause()
+		}
 
 		so.On("disconnection", func() {
 			networkLogger.Println("Un client se déconnecte")
@@ -32,6 +35,9 @@ func createServerProtocle(*socketio.Server) {
 				player.IsActive = false
 			}
 			UpdatePlayers(game.MyGame.GetAllPlayers())
+			if game.MyGame.IsPauseNecessary() {
+				Pause()
+			}
 		})
 
 		so.On("PUTLINE", func(x int, y int, o int, n int) { //TODO num joueur déterminé côté serveur
@@ -41,7 +47,12 @@ func createServerProtocle(*socketio.Server) {
 			DisplayLine(x, y, o, n)
 			isSquare, square := game.MyGame.TestSquare(l)
 			if isSquare {
-				DisplaySquare(square.X, square.Y, square.N)
+				DisplaySquare(square.X, square.Y, square.N) //TODO il faut qu'il rejoue
+				if game.MyGame.IsEndGame() {
+					//TODO appeller gestionFinPartie
+				}
+			} else {
+				game.MyGame.ChangeCurrentPlayer()
 			}
 		})
 

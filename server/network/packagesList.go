@@ -37,6 +37,16 @@ func UpdatePlayers(players []globals.Player) {
 // SetActivePlayers Définit le joueur actif (celui qui est en train de joueur)
 // Envoyé a chaque changement de joueur
 // TODO Envoyer aussi le joueur précédent ?
-func SetActivePlayers(numPlayerActual int) {
-	sentToAll("SETACTIVEPLAYER", numPlayerActual)
+func SetActivePlayers(currentNumPlayer int) {
+	sentToAll("SETACTIVEPLAYER", currentNumPlayer)
+}
+
+// Pause Met la partie en pause si le nombre de joueurs actifs est inférieur à 2
+func Pause(){
+	sentToAll("PAUSE")
+}
+
+// Unpause Sors la partie de l'état de pause
+func Unpause(){
+	sentToAll("UNPAUSE")
 }
