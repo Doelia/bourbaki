@@ -31,6 +31,7 @@ func createServerProtocle(*socketio.Server) {
 
 		so.On("PUTLINE", func(x int, y int, o int, n int) { //TODO num joueur déterminé côté serveur
 			l := globals.Line{x, y, o, n}
+			networkLogger.Println("Un client joue en ", l)
 			game.MyGame.AddLine(l)
 			DisplayLine(x, y, o, n)
 			isSquare, square := game.MyGame.TestSquare(l)
@@ -56,7 +57,7 @@ func createServerProtocle(*socketio.Server) {
 				so.Join("all") // Pour recevoir les broadcasts du game
 
 				var numPlayer int
-				player, err := game.MyGame.GetPlayer(user)
+				player, err := game.MyGame.GetPlayerFromName(user)
 				if err != nil { // Pas encore dans la partie
 					numPlayer = game.MyGame.GetNewNumPlayer()
 					player = game.ConstructPlayer(numPlayer, user)

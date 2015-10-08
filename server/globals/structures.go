@@ -16,7 +16,7 @@ type Square struct {
 const HORIZONTAL = 0
 
 // VERTICAL code int pour les lignes verticales
-const VERTICAL = 0
+const VERTICAL = 1
 
 // Player structure définissant un joueur
 type Player struct {
