@@ -59,10 +59,10 @@ function init_game() {
 
     $('.line.inactive').click(function() {
         if (isMyTurn()) {
-            var x = $(this).attr('x');
-            var y = $(this).attr('y');
+            var x = parseInt($(this).attr('x'));
+            var y = parseInt($(this).attr('y'));
             var o = $(this).attr('o');
-            var n = myNum;
+            var n = parseInt(myNum);
             sendAddLine(x,y,o==('v')?1:0,n);
         }
     });
@@ -78,5 +78,7 @@ function init_game() {
         var n = myNum;
         board.activeSquare(x,y,n);
     });
+
+    socket.emit("READY");
 
 }

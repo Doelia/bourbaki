@@ -32,4 +32,11 @@ function init_socket() {
         board.activeLine(line.X, line.Y, line.O, line.N);
     });
 
+    socket.on('UPDATEPLAYERS', function(data) {
+        var json = data[0];
+        console.log("Recv UPDATEPLAYERS : ");
+        console.log(json);
+        players.updatePlayers(json);
+    });
+
 }

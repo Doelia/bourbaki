@@ -33,12 +33,12 @@ var Players = function() {
                 .append($('<div class="item player"></div>'));
 
             $('#playersList > div:last')
-                .attr('num', player.numPlayer)
+                .attr('num', player.NumPlayer)
                 .append('<div class="right floated content">')
-                .append('<div class="ui left floated cbg circular label" num="'+player.numPlayer+'"></div>')
-                .append('<div class="content"><div class="header">'+player.name+'</div>'+player.score+' points</div>');
+                .append('<div class="ui left floated cbg circular label" num="'+player.NumPlayer+'"></div>')
+                .append('<div class="content"><div class="header">'+player.Name+'</div>'+player.Score+' points</div>');
 
-            if (!player.isActive) {
+            if (!player.IsActive) {
                 $('#playersList > div:last .right')
                     .append('<div class="ui label gray">Inactif</div>');
             }
