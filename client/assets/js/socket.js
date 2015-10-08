@@ -45,4 +45,14 @@ function init_socket() {
         onRecvActivePlayer(nPlayer);
     });
 
+    socket.on('PAUSE', function() {
+        console.log("Recv pause");
+        pause();
+    });
+
+    socket.on('UNPAUSE', function() {
+        console.log("Recv unpause");
+        unpause();
+    });
+
 }
