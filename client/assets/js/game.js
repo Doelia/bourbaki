@@ -67,13 +67,6 @@ function init_game() {
         }
     });
 
-    $('.square').click(function() {
-        var x = $(this).attr('x');
-        var y = $(this).attr('y');
-        var n = myNum;
-        board.activeSquare(x,y,n);
-    });
-
     socket.emit("READY", "OK");
 
 }

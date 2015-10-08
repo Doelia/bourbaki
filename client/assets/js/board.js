@@ -76,7 +76,7 @@ var Board = function() {
     };
 
     this.activeSquare = function(x, y, n) {
-        console.log("board.activeLine("+x+","+y+","+n+")");
+        console.log("board.activeSquare("+x+","+y+","+n+")");
         $(".square[x='"+x+"'][y='"+y+"']")
             .removeClass('inactive')
             .addClass('cbg')
