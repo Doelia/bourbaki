@@ -24,9 +24,6 @@ func createWebSocketHandler() *socketio.Server {
 func createServerProtocle(*socketio.Server) {
 	server.On("connection", func(so socketio.Socket) {
 		networkLogger.Println("Un client se connecte")
-		if !game.MyGame.IsPauseNecessary() {
-			Unpause()
-		}
 
 		so.On("disconnection", func() {
 			networkLogger.Println("Un client se déconnecte")
@@ -101,6 +98,9 @@ func createServerProtocle(*socketio.Server) {
 		so.On("READY", func(i string) {
 			UpdatePlayers(game.MyGame.GetAllPlayers())
 			SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
+			if !game.MyGame.IsPauseNecessary() {
+				Unpause()
+			}
 		})
 
 	})
