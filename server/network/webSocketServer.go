@@ -100,6 +100,8 @@ func createServerProtocle(*socketio.Server) {
 			SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
 			if !game.MyGame.IsPauseNecessary() {
 				Unpause()
+			} else {
+				Pause()
 			}
 		})
 
