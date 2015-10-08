@@ -37,6 +37,8 @@ func createServerProtocle(*socketio.Server) {
 			isSquare, square := game.MyGame.TestSquare(l)
 			if isSquare {
 				DisplaySquare(square.X, square.Y, square.N)
+			} else {
+				game.MyGame.ChangeCurrentPlayer()
 			}
 		})
 
