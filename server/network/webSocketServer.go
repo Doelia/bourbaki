@@ -24,9 +24,15 @@ func createWebSocketHandler() *socketio.Server {
 func createServerProtocle(*socketio.Server) {
 	server.On("connection", func(so socketio.Socket) {
 		networkLogger.Println("Un client se connecte")
+		if !game.MyGame.IsPauseNecessary(){
+			Unpause()
+		}
 
 		so.On("disconnection", func() {
 			networkLogger.Println("Un client se déconnecte")
+			if game.MyGame.IsPauseNecessary(){
+				Pause()
+			}
 		})
 
 		so.On("PUTLINE", func(x int, y int, o int, n int) { //TODO num joueur déterminé côté serveur

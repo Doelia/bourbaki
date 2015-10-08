@@ -91,3 +91,15 @@ func (g *Game) ChangeCurrentPlayer(){
 		g.ChangeCurrentPlayer()
 	}
 }
+
+// IsPauseNecessary permet de savoir si une pause est nécessaire (nbJoueursActifs >= 2)
+func (g *Game) IsPauseNecessary() bool{
+	//on compte le nombre de joueurs actifs
+	compteur := 0
+	for _, playerStruct := range g.playersList {
+		if playerStruct.IsActive == true{
+			compteur++
+		}
+	}
+	return compteur >= 2
+}
