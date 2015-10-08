@@ -10,9 +10,9 @@ var gameLogger = log.New(os.Stdout, "[game] ", 0)
 
 // Game structure définissant une partie
 type Game struct {
-	lines       [globals.GRIDSIZE][globals.GRIDSIZE][2]int
-	squares     [globals.GRIDSIZE][globals.GRIDSIZE]int
-	playersList map[string]globals.Player
+	lines         [globals.GRIDSIZE][globals.GRIDSIZE][2]int
+	squares       [globals.GRIDSIZE][globals.GRIDSIZE]int
+	playersList   map[string]*globals.Player
 	currentPlayer globals.Player
 }
 
@@ -22,7 +22,7 @@ var MyGame *Game
 // ConstructGame Construit et initialise un nouveau jeu
 func ConstructGame() *Game {
 	var game = &Game{}
-	game.playersList = make(map[string]globals.Player)
+	game.playersList = make(map[string]*globals.Player)
 	return game
 }
 
@@ -77,15 +77,15 @@ func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
 // ChangeCurrentPlayer permet de changer le joueur courant, à appeller lors de la fin d'un tour
 func (g *Game) ChangeCurrentPlayer() {
 	numNewCurrentPlayer := g.currentPlayer.NumPlayer + 1
-	if numNewCurrentPlayer > len(g.playersList){
+	if numNewCurrentPlayer > len(g.playersList) {
 		numNewCurrentPlayer = 1
 	}
 	newCurrentPlayer, err := g.GetPlayerFromNumPlayer(numNewCurrentPlayer)
-	if err != nil{
+	if err != nil {
 		gameLogger.Println("Changement joueur courant impossible")
 	}
-	if newCurrentPlayer.IsActive{
-		g.currentPlayer = newCurrentPlayer
+	if newCurrentPlayer.IsActive {
+		g.currentPlayer = *newCurrentPlayer
 		gameLogger.Println("Nouveau joueur : ", g.currentPlayer.Name)
 	} else {
 		g.ChangeCurrentPlayer()
@@ -97,7 +97,7 @@ func (g *Game) IsPauseNecessary() bool {
 	//on compte le nombre de joueurs actifs
 	compteur := 0
 	for _, playerStruct := range g.playersList {
-		if playerStruct.IsActive == true{
+		if playerStruct.IsActive == true {
 			compteur++
 		}
 	}
@@ -107,9 +107,9 @@ func (g *Game) IsPauseNecessary() bool {
 // IsEndGame permet de savoir si la partie est finie
 // TODO EndGameManager
 func (g *Game) IsEndGame() bool {
-	for i := 0; i < len(g.squares) - 1; i++{
-		for j := 0; j < len(g.squares) - 1; j++{
-			if g.squares[i][j] == 0{
+	for i := 0; i < len(g.squares)-1; i++ {
+		for j := 0; j < len(g.squares)-1; j++ {
+			if g.squares[i][j] == 0 {
 				return false
 			}
 		}

@@ -79,6 +79,6 @@ function init_game() {
         board.activeSquare(x,y,n);
     });
 
-    socket.emit("READY");
+    socket.emit("READY", "OK");
 
 }

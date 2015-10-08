@@ -13,6 +13,9 @@ Prévient le placement d'une ligne par le joueur.
 - **y** : int, position Y
 - **o** : int, orientation. '1' pour vertical, '0' pour horizontal
 
+### READY
+Prévient le serveur que le client est prêt, connecté et a changé son JS pour recevoir les évènements
+
 ## Envoyées par le serveur
 
 ### CONNECT_ACCEPT(code, numPlayer)

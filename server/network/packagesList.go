@@ -42,11 +42,11 @@ func SetActivePlayers(currentNumPlayer int) {
 }
 
 // Pause Met la partie en pause si le nombre de joueurs actifs est inférieur à 2
-func Pause(){
+func Pause() {
 	sentToAll("PAUSE")
 }
 
 // Unpause Sors la partie de l'état de pause
-func Unpause(){
+func Unpause() {
 	sentToAll("UNPAUSE")
 }

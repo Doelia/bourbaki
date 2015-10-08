@@ -24,4 +24,5 @@ type Player struct {
 	Name      string
 	Score     int
 	IsActive  bool
+	IDSocket  string
 }
