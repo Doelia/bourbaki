@@ -13,6 +13,7 @@ type Game struct {
 	lines       [globals.GRIDSIZE][globals.GRIDSIZE][2]int
 	squares     [globals.GRIDSIZE][globals.GRIDSIZE]int
 	playersList map[string]globals.Player
+	currentPlayer globals.Player
 }
 
 // MyGame variable globable de l'instance unique d'une partie
@@ -55,14 +56,14 @@ func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
 	x := lastLine.X
 	y := lastLine.Y
 	if lastLine.O == globals.HORIZONTAL {
-		if g.isActive(x, y-1, 0) && g.isActive(x+1, y-1, 1) && g.isActive(x, y-1, 1) {
+		if g.isActive(x, y-1, globals.HORIZONTAL) && g.isActive(x+1, y-1, globals.VERTICAL) && g.isActive(x, y-1, globals.VERTICAL) {
 			return true, globals.Square{x, y - 1, lastLine.N}
 		}
-		if g.isActive(x, y+1, 0) && g.isActive(x, y, 1) && g.isActive(x+1, y, 1) {
+		if g.isActive(x, y+1, globals.HORIZONTAL) && g.isActive(x, y, globals.VERTICAL) && g.isActive(x+1, y, globals.VERTICAL) {
 			return true, globals.Square{x, y, lastLine.N}
 		}
 	} else if lastLine.O == globals.VERTICAL {
-		if g.isActive(x, y, 0) && g.isActive(x+1, y, 1) && g.isActive(x, y+1, 0) {
+		if g.isActive(x, y, globals.HORIZONTAL) && g.isActive(x+1, y, globals.VERTICAL) && g.isActive(x, y+1, globals.HORIZONTAL) {
 			return true, globals.Square{x, y, lastLine.N}
 		}
 		if g.isActive(x-1, y, 0) && g.isActive(x-1, y, 1) && g.isActive(x-1, y+1, 0) {
@@ -71,4 +72,15 @@ func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
 	}
 	return false, globals.Square{}
 	//TODO calcul points
+}
+
+// ChangeCurrentPlayer permet de changer le joueur courant, à appeller lors de la fin d'un tour
+func (g *Game) ChangeCurrentPlayer(){
+	numNewCurrentPlayer := g.currentPlayer.NumPlayer + 1
+	newCurrentPlayer, err := g.GetPlayerFromNumPlayer(numNewCurrentPlayer)
+	if err != nil{
+		gameLogger.Println("Changement joueur courant impossible")
+	}
+	g.currentPlayer = newCurrentPlayer
+	gameLogger.Println("Nouveau joueur : ", g.currentPlayer.Name)
 }

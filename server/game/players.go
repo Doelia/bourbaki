@@ -17,12 +17,21 @@ func (g *Game) AddPlayer(p globals.Player) {
 }
 
 // GetPlayer Retourne une structure du player demandé
-func (g *Game) GetPlayer(name string) (globals.Player, error) {
+func (g *Game) GetPlayerFromName(name string) (globals.Player, error) {
 	player, exists := g.playersList[name]
 	if !exists {
 		return globals.Player{}, errors.New("Joueur introuvable")
 	}
 	return player, nil
+}
+
+func (g *Game) GetPlayerFromNumPlayer(numPlayer int)(globals.Player, error){
+	for _, playerStruct := range g.playersList{
+		if playerStruct.NumPlayer == numPlayer{
+			return playerStruct, nil
+		}
+	}
+	return globals.Player{}, errors.New("Joueur introuvable")
 }
 
 // PlayerExists Retourne vrai si le joueur existe dans la partie
