@@ -53,6 +53,7 @@ func createServerProtocle(*socketio.Server) {
 				}
 			} else {
 				game.MyGame.ChangeCurrentPlayer()
+				SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
 			}
 		})
 
@@ -96,6 +97,7 @@ func createServerProtocle(*socketio.Server) {
 		// Le client est connecté et est pret a recevoir les informations
 		so.On("READY", func(i string) {
 			UpdatePlayers(game.MyGame.GetAllPlayers())
+			SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
 		})
 
 	})

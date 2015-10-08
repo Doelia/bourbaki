@@ -13,7 +13,7 @@ type Game struct {
 	lines         [globals.GRIDSIZE][globals.GRIDSIZE][2]int
 	squares       [globals.GRIDSIZE][globals.GRIDSIZE]int
 	playersList   map[string]*globals.Player
-	currentPlayer globals.Player
+	CurrentPlayer globals.Player
 }
 
 // MyGame variable globable de l'instance unique d'une partie
@@ -76,7 +76,7 @@ func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
 
 // ChangeCurrentPlayer permet de changer le joueur courant, à appeller lors de la fin d'un tour
 func (g *Game) ChangeCurrentPlayer() {
-	numNewCurrentPlayer := g.currentPlayer.NumPlayer + 1
+	numNewCurrentPlayer := g.CurrentPlayer.NumPlayer + 1
 	if numNewCurrentPlayer > len(g.playersList) {
 		numNewCurrentPlayer = 1
 	}
@@ -85,8 +85,8 @@ func (g *Game) ChangeCurrentPlayer() {
 		gameLogger.Println("Changement joueur courant impossible")
 	}
 	if newCurrentPlayer.IsActive {
-		g.currentPlayer = *newCurrentPlayer
-		gameLogger.Println("Nouveau joueur : ", g.currentPlayer.Name)
+		g.CurrentPlayer = *newCurrentPlayer
+		gameLogger.Println("Nouveau joueur : ", g.CurrentPlayer.Name)
 	} else {
 		g.ChangeCurrentPlayer()
 	}
