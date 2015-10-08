@@ -39,4 +39,9 @@ function init_socket() {
         players.updatePlayers(json);
     });
 
+    socket.on('SETACTIVEPLAYER', function(data) {
+        var nPlayer = data[0];
+        onRecvActivePlayer(nPlayer);
+    });
+
 }
