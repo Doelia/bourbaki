@@ -35,7 +35,9 @@ func StartNewGame() {
 
 // AddLine Active la ligne dans le game
 func (g *Game) AddLine(line globals.Line) {
-	g.lines[line.X][line.Y][line.O] = line.N
+	if (g.lines[line.X][line.Y][line.O] == 0){
+		g.lines[line.X][line.Y][line.O] = line.N
+	}
 }
 
 // AddSquare Active le carré dans le game
