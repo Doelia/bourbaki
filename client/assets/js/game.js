@@ -32,7 +32,7 @@ function onRecvActivePlayer(numPlayer) {
 
 function sendAddLine(x,y,o,n) {
     console.log("sendAddLine x="+x+", y="+y+", o="+o+", n="+n);
-    socket.emit('PUTLINE', x+"", y+"", o+"", n+"");
+    socket.emit('PUTLINE', x, y, o, n);
     //board.activeLine(x,y,o,n);
 }
 

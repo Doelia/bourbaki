@@ -80,7 +80,7 @@ func createServerProtocle(*socketio.Server) {
 				} else { // Déjà dans la partie
 					numPlayer = player.NumPlayer
 				}
-				if game.MyGame.CurrentPlayer.NumPlayer == 0{
+				if game.MyGame.CurrentPlayer.NumPlayer == 0 {
 					game.MyGame.CurrentPlayer = *player
 				}
 				player.IsActive = true

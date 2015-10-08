@@ -41,6 +41,7 @@ function init_socket() {
 
     socket.on('SETACTIVEPLAYER', function(data) {
         var nPlayer = data[0];
+        console.log("Recv: SETACTIVEPLAYER : "+nPlayer);
         onRecvActivePlayer(nPlayer);
     });
 
