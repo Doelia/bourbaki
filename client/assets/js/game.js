@@ -59,11 +59,13 @@ function init_game() {
 
     $('.line.inactive').click(function() {
         if (isMyTurn()) {
-            var x = parseInt($(this).attr('x'));
-            var y = parseInt($(this).attr('y'));
-            var o = $(this).attr('o');
-            var n = parseInt(myNum);
-            sendAddLine(x,y,o==('v')?1:0,n);
+            if ($(this).hasClass('inactive')) {
+                var x = parseInt($(this).attr('x'));
+                var y = parseInt($(this).attr('y'));
+                var o = $(this).attr('o');
+                var n = parseInt(myNum);
+                sendAddLine(x,y,o==('v')?1:0,n);
+            }
         }
     });
 
