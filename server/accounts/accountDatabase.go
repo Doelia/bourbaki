@@ -3,7 +3,6 @@ package accounts
 import (
 	"crypto/md5"
 	"encoding/json"
-	"fmt"
 	"github.com/boltdb/bolt"
 	"go-bourbaki/server/globals"
 )
@@ -54,6 +53,16 @@ func getFromDB(cle string) (account Account) {
 	return
 }
 
+// Supprime l'account ayant pour cle celle passée en paramètre
+//@param cle: Name de l'account à supprimer
+func deleteFromDB(cle string) {
+	db.Update(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("Accounts"))
+		bucket.Delete([]byte(cle))
+		return nil
+	})
+}
+
 // Exists Permet de savoir si un compte existe pour la clé ou pas
 //@param cle: Name de l'account recherché
 //@return Account: Le compte s'il existe
@@ -76,30 +85,4 @@ func CreateAccount(name string, pass string) Account {
 	motdepassemd5 := md5.Sum([]byte(pass))
 	account := Account{name, motdepassemd5, 0}
 	return account
-}
-
-// Testsql Permet de faire un test complet de toutes les fonctions, ajout et suppression
-func Testsql() {
-	testaccount1 := CreateAccount("anne", "motdepasseanne")
-	fmt.Println(addInDB(testaccount1.Name, testaccount1))
-
-	testaccount2 := CreateAccount("henri", "motdepassehenri")
-	fmt.Println(addInDB(testaccount2.Name, testaccount2))
-
-	// Test de getFromDB
-	var testaccountget Account
-	testaccountget = getFromDB("yeti")
-	fmt.Println(testaccountget)
-
-	// Test de exists
-	testaccountexist, resultatboolexist := Exists("yeti")
-	fmt.Println(testaccountexist)
-	fmt.Println(resultatboolexist)
-
-	_, r := Login("anne", "motdepasseanne")
-	fmt.Println(r) // doit retourner 1
-	_, r = Login("anne", "motdepassehenri")
-	fmt.Println(r) // doit retourner 0
-	_, r = Login("caly", "motdepassecaly")
-	fmt.Println(r) // doit retourner 2
 }
