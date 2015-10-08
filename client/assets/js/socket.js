@@ -32,6 +32,12 @@ function init_socket() {
         board.activeLine(line.X, line.Y, line.O, line.N);
     });
 
+    socket.on('DISPLAYSQUARE', function(data) {
+        var square = data[0];
+        console.log("Recv DISPLAYSQUARE. square="+square);
+        board.activeSquare(square.X, square.Y, square.N);
+    });
+
     socket.on('UPDATEPLAYERS', function(data) {
         var json = data[0];
         console.log("Recv UPDATEPLAYERS : ");

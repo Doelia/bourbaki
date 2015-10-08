@@ -15,8 +15,8 @@ var Board = function() {
     this._placeE = function(e, x, y) {
         return e
             .css({
-                top: x*this._gridSpace,
-                left: y*this._gridSpace
+                left: x*this._gridSpace,
+                top: y*this._gridSpace
             })
             .attr('x', x)
             .attr('y', y);
@@ -53,10 +53,10 @@ var Board = function() {
         for (var i = 0; i < size; i++) {
             for (var j = 0; j < size; j++) {
                 this._addDot(i, j);
-                if (i < size-1) {
+                if (j < size-1) {
                     this._createInactiveLine(i, j, 'v');
                 }
-                if (j < size-1) {
+                if (i < size-1) {
                     this._createInactiveLine(i, j, 'h');
                 }
                 if (i < size-1 && j < size-1) {

@@ -5,13 +5,6 @@ var players;
 // Globales
 var myNum; // Numéro du joueur client
 
-// Provisoire (pour les tests sans serveur)
-var playersDemo = [
-    {"numPlayer":"1", "name": "Portrick", "score":"23", isActive: true},
-    {"numPlayer":"2", "name": "Faewynn", "score":"178", isActive: true},
-    {"numPlayer":"3", "name": "Pancake", "score":"87", isActive: false},
-];
-
 function loadLogin() {
     $.ajax({url: "/content/login.html", success: function(result) {
         $("#interface").html(result);
@@ -32,6 +25,5 @@ function loadGame() {
 $(document).ready(function() {
     init_socket();
     loadLogin();
-
     //socket.emit("LOGIN", 'Cassoulet', 'mot de passe');
 });
