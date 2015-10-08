@@ -103,3 +103,15 @@ func (g *Game) IsPauseNecessary() bool{
 	}
 	return compteur >= 2
 }
+
+// IsEndGame permet de savoir si la partie est finie
+func (g *Game) IsEndGame() bool{
+	for i := 0; i < len(g.squares) - 1; i++{
+		for j := 0; j < len(g.squares) - 1; j++{
+			if g.squares[i][j] == 0{
+				return false
+			}
+		}
+	}
+	return true
+}

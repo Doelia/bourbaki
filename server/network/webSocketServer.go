@@ -42,7 +42,10 @@ func createServerProtocle(*socketio.Server) {
 			DisplayLine(x, y, o, n)
 			isSquare, square := game.MyGame.TestSquare(l)
 			if isSquare {
-				DisplaySquare(square.X, square.Y, square.N)
+				DisplaySquare(square.X, square.Y, square.N) //TODO il faut qu'il rejoue
+				if game.MyGame.IsEndGame(){
+					//TODO appeller gestionFinPartie
+				}
 			} else {
 				game.MyGame.ChangeCurrentPlayer()
 			}
