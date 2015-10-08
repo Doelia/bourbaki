@@ -67,11 +67,6 @@ function init_game() {
         }
     });
 
-    //// TESTS
-
-    onRecvActivePlayer(2);
-    onRecvScore(playersDemo);
-
     $('.square').click(function() {
         var x = $(this).attr('x');
         var y = $(this).attr('y');
