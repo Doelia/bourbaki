@@ -12,11 +12,6 @@ import (
 var test = flag.String("test", "main", "Sélectionne la méthode de test à lancer (debug uniquement)")
 var port = flag.Int("port", 2000, "Modifie le port d'écoute (défaut 2000)")
 
-func dbTest() {
-	accounts.OpenDB()
-	accounts.Testsql()
-}
-
 func goMain() {
 	globals.Ch = make(chan int, 1)
 
@@ -40,8 +35,6 @@ func main() {
 	flag.Parse()
 
 	switch *test {
-	case "db":
-		dbTest()
 	case "main":
 		goMain()
 	}
