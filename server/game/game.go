@@ -101,7 +101,7 @@ func (g *Game) IsPauseNecessary() bool {
 			compteur++
 		}
 	}
-	return compteur >= 2
+	return compteur < 2
 }
 
 // IsEndGame permet de savoir si la partie est finie

@@ -104,7 +104,6 @@ func createServerProtocle(*socketio.Server) {
 				Pause()
 			}
 		})
-
 	})
 	server.On("error", func(so socketio.Socket, err error) {
 		globals.ErrLogger.Println("Erreur sur un client : ", err)
