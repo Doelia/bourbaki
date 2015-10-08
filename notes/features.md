@@ -3,7 +3,7 @@
   - *Gestion BD : user, mot de passe, score*
   - *Si le compte existe pas déjà, il est crée*
   - *Sinon, connexion*
-- Réception des actions des joueurs : poser une ligne
+- *Réception des actions des joueurs : poser une ligne*
 - Calcul du score partie en fonction des actions
 - *Test de validité du carré* **A tester**
 - Mise en pause de la partie si moins de 2 joueurs

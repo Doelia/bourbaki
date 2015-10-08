@@ -10,9 +10,9 @@ var gameLogger = log.New(os.Stdout, "[game] ", 0)
 
 // Game structure définissant une partie
 type Game struct {
-	lines       [globals.GRIDSIZE][globals.GRIDSIZE][2]int
-	squares     [globals.GRIDSIZE][globals.GRIDSIZE]int
-	playersList map[string]globals.Player
+	lines         [globals.GRIDSIZE][globals.GRIDSIZE][2]int
+	squares       [globals.GRIDSIZE][globals.GRIDSIZE]int
+	playersList   map[string]*globals.Player
 	currentPlayer globals.Player
 }
 
@@ -22,7 +22,7 @@ var MyGame *Game
 // ConstructGame Construit et initialise un nouveau jeu
 func ConstructGame() *Game {
 	var game = &Game{}
-	game.playersList = make(map[string]globals.Player)
+	game.playersList = make(map[string]*globals.Player)
 	return game
 }
 
@@ -75,12 +75,12 @@ func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
 }
 
 // ChangeCurrentPlayer permet de changer le joueur courant, à appeller lors de la fin d'un tour
-func (g *Game) ChangeCurrentPlayer(){
+func (g *Game) ChangeCurrentPlayer() {
 	numNewCurrentPlayer := g.currentPlayer.NumPlayer + 1
 	newCurrentPlayer, err := g.GetPlayerFromNumPlayer(numNewCurrentPlayer)
-	if err != nil{
+	if err != nil {
 		gameLogger.Println("Changement joueur courant impossible")
 	}
-	g.currentPlayer = newCurrentPlayer
+	g.currentPlayer = *newCurrentPlayer
 	gameLogger.Println("Nouveau joueur : ", g.currentPlayer.Name)
 }

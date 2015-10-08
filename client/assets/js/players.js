@@ -25,6 +25,9 @@ var Players = function() {
      */
     this.updatePlayers = function(json) {
         $('#playersList').html('');
+        if (json === null) {
+            return;
+        }
         this._nbrPlayers = json.length;
         for (var i in json) {
             var player = json[i];

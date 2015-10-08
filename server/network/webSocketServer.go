@@ -27,6 +27,11 @@ func createServerProtocle(*socketio.Server) {
 
 		so.On("disconnection", func() {
 			networkLogger.Println("Un client se déconnecte")
+			player, err := game.MyGame.GetPlayerFromIDSocket(so.Id())
+			if err == nil {
+				player.IsActive = false
+			}
+			UpdatePlayers(game.MyGame.GetAllPlayers())
 		})
 
 		so.On("PUTLINE", func(x int, y int, o int, n int) { //TODO num joueur déterminé côté serveur
@@ -54,14 +59,15 @@ func createServerProtocle(*socketio.Server) {
 
 			// Entrée dans la partie
 			if resultatIntLogin > 0 {
-				so.Join("all") // Pour recevoir les broadcasts du game
+				so.Join("all") // Pour recevoir les broadcasts du gam<e
 
 				var numPlayer int
 				player, err := game.MyGame.GetPlayerFromName(user)
 				if err != nil { // Pas encore dans la partie
 					numPlayer = game.MyGame.GetNewNumPlayer()
-					player = game.ConstructPlayer(numPlayer, user)
-					game.MyGame.AddPlayer(player)
+					newPlayer := game.ConstructPlayer(numPlayer, user, so.Id())
+					game.MyGame.AddPlayer(newPlayer)
+					player, _ = game.MyGame.GetPlayerFromName(user)
 				} else { // Déjà dans la partie
 					numPlayer = player.NumPlayer
 				}
@@ -77,10 +83,10 @@ func createServerProtocle(*socketio.Server) {
 		})
 
 		// Le client est connecté et est pret a recevoir les informations
-		so.On("READY", func() {
-			// Update de la liste des joueurs pour tout le monde
+		so.On("READY", func(i string) {
 			UpdatePlayers(game.MyGame.GetAllPlayers())
 		})
+
 	})
 	server.On("error", func(so socketio.Socket, err error) {
 		globals.ErrLogger.Println("Erreur sur un client : ", err)
