@@ -38,7 +38,7 @@ func createServerProtocle(*socketio.Server) {
 		})
 
 		so.On("PUTLINE", func(x int, y int, o int, n int) { //TODO num joueur déterminé côté serveur
-			game.MyGame.PlayLine(x,y,o,n)
+			PlayLine(x,y,o,n)
 		})
 
 		so.On("LOGIN", func(user string, pass string) {
