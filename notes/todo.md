@@ -1,5 +1,8 @@
 # TODO
 
+- Écrire les instructions de compilation dans le readme
+- Revoir le système de package -> normal d'avoir le nom du projet partout ?
+
 ## Serveur
 - Empêcher l'injection HTML dans les pseudos (+client?)
 
