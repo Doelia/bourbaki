@@ -78,10 +78,10 @@ func (g *Game) IsEndGame() bool {
 
 // GetPreviousPlayer permet de récupérer le joueur précédent
 func (g *Game) GetPreviousPlayer() (*globals.Player, error) {
-	if g.CurrentPlayer.NumPlayer == len(g.playersList) {
-		return g.GetPlayerFromNumPlayer(1)
+	if g.CurrentPlayer.NumPlayer ==  1{
+		return g.GetPlayerFromNumPlayer(len(g.playersList))
 	}
-	return g.GetPlayerFromNumPlayer(g.CurrentPlayer.NumPlayer + 1)
+	return g.GetPlayerFromNumPlayer(g.CurrentPlayer.NumPlayer - 1)
 }
 
 // TODO recherche random
