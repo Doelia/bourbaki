@@ -88,10 +88,3 @@ Exemple :
     ],
 }
 ```
-
-## Pas encore traité
-
-Traitements pas encore intégrés au protocole :
-
-- Envoi des fichiers html et assets (Apache séparé ? http intégré au GO ?)
-- Affichage du classement (websockets ou ajax ?)

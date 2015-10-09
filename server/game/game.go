@@ -35,7 +35,7 @@ func StartNewGame() {
 
 // AddLine Active la ligne dans le game
 func (g *Game) AddLine(line globals.Line) {
-	if (g.lines[line.X][line.Y][line.O] == 0){
+	if g.lines[line.X][line.Y][line.O] == 0 {
 		g.lines[line.X][line.Y][line.O] = line.N
 	}
 }
@@ -47,10 +47,10 @@ func (g *Game) AddSquare(square globals.Square) {
 
 // isActive Retourne vrai si la ligne est active dans le game, faux sinon
 func (g *Game) isActive(x int, y int, o int) bool {
-	if x < 0 || x >= globals.GRIDSIZE{
+	if x < 0 || x >= globals.GRIDSIZE {
 		return false
 	}
-	if y < 0 || y >= globals.GRIDSIZE{
+	if y < 0 || y >= globals.GRIDSIZE {
 		return false
 	}
 	return g.lines[x][y][o] > 0
