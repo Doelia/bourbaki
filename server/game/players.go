@@ -17,7 +17,8 @@ func (g *Game) AddPlayer(p globals.Player) {
 	gameLogger.Println("Ajout du joueur " + p.Name + " à la partie")
 }
 
-// GetAllPlayers TODO Spec
+// GetAllPlayers Retoure un tableau des joueurs de la partie triés par leur numéro de joueur
+// Utile pour envoyer un json
 func (g *Game) GetAllPlayers() []globals.Player {
 	var list []globals.Player
 	for _, p := range g.playersList {

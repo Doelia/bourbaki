@@ -2,7 +2,6 @@
 
 ## Serveur
 - Empêcher l'injection HTML dans les pseudos (+client?)
-- Trier les joueurs par numéro de joueur
 
 ## Client
 - Mettre en surbrillance le dernier coup joué sur l'interface

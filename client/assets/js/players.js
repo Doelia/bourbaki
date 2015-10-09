@@ -28,6 +28,11 @@ var Players = function() {
         if (json === null) {
             return;
         }
+
+        json.sort(function(a, b) {
+            return parseFloat(a.NumPlayer) - parseFloat(b.NumPlayer);
+        });
+
         this._nbrPlayers = json.length;
         for (var i in json) {
             var player = json[i];
