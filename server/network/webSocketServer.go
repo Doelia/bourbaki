@@ -44,10 +44,16 @@ func createServerProtocle(*socketio.Server) {
 			DisplayLine(x, y, o, n)
 			isSquare, square := game.MyGame.TestSquare(l)
 			if isSquare {
-				DisplaySquare(square.X, square.Y, square.N) //TODO il faut qu'il rejoue
+				DisplaySquare(square.X, square.Y, square.N)
 				if game.MyGame.IsEndGame() {
 					//TODO appeller gestionFinPartie
 				}
+				lastPlayer, _ := game.MyGame.GetPreviousPlayer()
+				lastPlayer.Score = lastPlayer.Score - 1
+				currentPlayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
+				currentPlayer.Score = currentPlayer.Score + 1
+				fmt.Println("Attribution de points")
+				UpdatePlayers(game.MyGame.GetAllPlayers())
 			} else {
 				game.MyGame.ChangeCurrentPlayer()
 				SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
