@@ -30,9 +30,9 @@ function onRecvActivePlayer(numPlayer) {
     players.startTimer();
 }
 
-function sendAddLine(x,y,o,n) {
-    console.log("sendAddLine x="+x+", y="+y+", o="+o+", n="+n);
-    socket.emit('PUTLINE', x, y, o, n);
+function sendAddLine(x,y,o) {
+    console.log("sendAddLine x="+x+", y="+y+", o="+o+"");
+    socket.emit('PUTLINE', x, y, o);
     //board.activeLine(x,y,o,n);
 }
 
@@ -63,8 +63,7 @@ function init_game() {
                 var x = parseInt($(this).attr('x'));
                 var y = parseInt($(this).attr('y'));
                 var o = $(this).attr('o');
-                var n = parseInt(myNum);
-                sendAddLine(x,y,o==('v')?1:0,n);
+                sendAddLine(x,y,o==('v')?1:0);
             }
         }
     });
