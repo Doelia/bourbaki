@@ -54,6 +54,7 @@ func createServerProtocle(*socketio.Server) {
 				currentPlayer.Score = currentPlayer.Score + 1
 				fmt.Println("Attribution de points")
 				UpdatePlayers(game.MyGame.GetAllPlayers())
+				SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
 			} else {
 				game.MyGame.ChangeCurrentPlayer()
 				SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
