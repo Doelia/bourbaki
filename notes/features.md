@@ -4,9 +4,9 @@
   - *Si le compte existe pas déjà, il est crée*
   - *Sinon, connexion*
 - *Réception des actions des joueurs : poser une ligne*
-- Calcul du score partie en fonction des actions
+- *Calcul du score partie en fonction des actions*
 - *Test de validité du carré* **A tester**
-- *Mise en pause de la partie si moins de 2 joueurs* 
+- *Mise en pause de la partie si moins de 2 joueurs*
 - Gestion des connexions/déconnexions
   - Lors de la déconnexion, le score du joueur visible dans le tableau "score partie" passe en grisé et le serveur joue à sa place
   - S'il se reconnecte, il repasse en coloration normale et récupère son score

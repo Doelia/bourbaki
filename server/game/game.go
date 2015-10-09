@@ -83,3 +83,16 @@ func (g *Game) GetPreviousPlayer() (*globals.Player, error) {
 	}
 	return g.GetPlayerFromNumPlayer(g.CurrentPlayer.NumPlayer + 1)
 }
+
+// TODO recherche random
+func (g *Game) RandomLine() (int, int, int){
+	for i := 0; i < len(g.lines); i++{
+		for j := 0; j < len(g.lines); j++{
+			for k := 0; k < 2; k++{
+				if g.lines[i][j][k] == 0{
+					return i,j,k
+				}
+			}
+		}
+	}
+}
