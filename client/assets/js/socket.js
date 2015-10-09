@@ -38,6 +38,19 @@ function init_socket() {
         board.activeSquare(square.X, square.Y, square.N);
     });
 
+    socket.on('GRID', function(data) {
+        var lines = data[0];
+        var squares = data[1];
+        for (var l in lines) {
+            var line = lines[l];
+            board.activeLine(line.X, line.Y, line.O, line.N);
+        }
+        for (var s in squares) {
+            var square = square[s];
+            board.activeSquare(square.X, square.Y, square.N);
+        }
+    });
+
     socket.on('UPDATEPLAYERS', function(data) {
         var json = data[0];
         console.log("Recv UPDATEPLAYERS : ");

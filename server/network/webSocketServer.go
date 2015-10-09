@@ -103,6 +103,7 @@ func createServerProtocle(*socketio.Server) {
 
 		// Le client est connecté et est pret a recevoir les informations
 		so.On("READY", func(i string) {
+			Grid(so, game.MyGame.GetActivesLinesList(), game.MyGame.GetActivesSquaresList())
 			UpdatePlayers(game.MyGame.GetAllPlayers())
 			SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
 			if !game.MyGame.IsPauseNecessary() {

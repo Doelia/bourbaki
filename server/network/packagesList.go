@@ -18,6 +18,12 @@ func ConnectAccept(client socketio.Socket, code int, numPlayer int) {
 	sendToClient(client, "CONNECTACCEPT", code, numPlayer)
 }
 
+// Grid Envoi toute la grille à un joueur
+// A envoyer quand il se connecte
+func Grid(client socketio.Socket, lines []globals.Line, squares []globals.Square) {
+	sendToClient(client, "GRID", lines, squares)
+}
+
 // DisplayLine Ajoute la barre x,y,o,n à la grille
 func DisplayLine(x int, y int, orientation int, numPlayer int) {
 	sentToAll("DISPLAYLINE", globals.Line{x, y, orientation, numPlayer})

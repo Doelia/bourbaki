@@ -33,61 +33,6 @@ func StartNewGame() {
 	gameLogger.Println("Création OK")
 }
 
-// AddLine Active la ligne dans le game
-func (g *Game) AddLine(line globals.Line) {
-	if g.lines[line.X][line.Y][line.O] == 0 {
-		g.lines[line.X][line.Y][line.O] = line.N
-	}
-}
-
-// AddSquare Active le carré dans le game
-func (g *Game) AddSquare(square globals.Square) {
-	g.squares[square.X][square.Y] = square.N
-}
-
-// isActive Retourne vrai si la ligne est active dans le game, faux sinon
-func (g *Game) isActive(x int, y int, o int) bool {
-	if x < 0 || x >= globals.GRIDSIZE {
-		return false
-	}
-	if y < 0 || y >= globals.GRIDSIZE {
-		return false
-	}
-	return g.lines[x][y][o] > 0
-}
-
-// TestSquare permet de savoir si la ligne qui vient d'être jouée forme un carré
-// @param lastLine: dernière ligne ayant été jouée
-// @return bool: vrai si le joueur gagne un carré, faux sinon
-// @return square: le carré formé
-func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
-	x := lastLine.X
-	y := lastLine.Y
-	if lastLine.O == globals.HORIZONTAL {
-		if g.isActive(x, y-1, globals.HORIZONTAL) && g.isActive(x+1, y-1, globals.VERTICAL) && g.isActive(x, y-1, globals.VERTICAL) {
-			gameLogger.Println("Ajout square au dessus du trait")
-			return true, globals.Square{x, y - 1, lastLine.N}
-		}
-		if g.isActive(x, y+1, globals.HORIZONTAL) && g.isActive(x, y, globals.VERTICAL) && g.isActive(x+1, y, globals.VERTICAL) {
-			gameLogger.Println("Ajout square au dessous du trait")
-			return true, globals.Square{x, y, lastLine.N}
-		}
-	} else {
-		if lastLine.O == globals.VERTICAL {
-			if g.isActive(x, y, globals.HORIZONTAL) && g.isActive(x+1, y, globals.VERTICAL) && g.isActive(x, y+1, globals.HORIZONTAL) {
-				gameLogger.Println("Ajout square à droite du trait")
-				return true, globals.Square{x, y, lastLine.N}
-			}
-			if g.isActive(x-1, y, 0) && g.isActive(x-1, y, 1) && g.isActive(x-1, y+1, 0) {
-				gameLogger.Println("Ajout square à gauche du trait")
-				return true, globals.Square{x - 1, y, lastLine.N}
-			}
-		}
-	}
-	gameLogger.Println("Pas de square")
-	return false, globals.Square{}
-}
-
 // ChangeCurrentPlayer permet de changer le joueur courant, à appeller lors de la fin d'un tour
 func (g *Game) ChangeCurrentPlayer() {
 	numNewCurrentPlayer := g.CurrentPlayer.NumPlayer + 1
@@ -133,7 +78,7 @@ func (g *Game) IsEndGame() bool {
 
 // GetPreviousPlayer permet de récupérer le joueur précédent
 func (g *Game) GetPreviousPlayer() (*globals.Player, error) {
-	if g.CurrentPlayer.NumPlayer == len(g.playersList){
+	if g.CurrentPlayer.NumPlayer == len(g.playersList) {
 		return g.GetPlayerFromNumPlayer(1)
 	}
 	return g.GetPlayerFromNumPlayer(g.CurrentPlayer.NumPlayer + 1)
