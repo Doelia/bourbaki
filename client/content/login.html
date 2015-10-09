@@ -21,6 +21,9 @@
                     </div>
                 </div>
                 <div class="ui fluid large teal submit button">Jouer</div>
+                <div class="ui red button" onclick="socket.emit('LOGIN', 'Joueur 1', 'blabla')">Joueur 1</div>
+                <div class="ui olive button" onclick="socket.emit('LOGIN', 'Joueur 2', 'blabla')">Joueur 2</div>
+                <div class="ui teal button" onclick="socket.emit('LOGIN', 'Joueur 3', 'blabla')">Joueur 3</div>
             </div>
 
             <div class="ui error message">Mot de passe incorrect</div>

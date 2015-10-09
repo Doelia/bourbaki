@@ -2,6 +2,7 @@
 
 ## Serveur
 - Empêcher l'injection HTML dans les pseudos (+client?)
+- Trier les joueurs par numéro de joueur
 
 ## Client
 - Mettre en surbrillance le dernier coup joué sur l'interface
@@ -10,3 +11,4 @@
 
 ## Avant MEP
 - Remettre la popup de première connexion (socket.js -> on CONNECTACCEPT)
+- Retirer les boutons de login colorés
