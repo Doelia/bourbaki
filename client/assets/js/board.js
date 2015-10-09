@@ -69,10 +69,16 @@ var Board = function() {
     this.activeLine = function(x, y, o, n) {
         console.log("board.activeLine("+x+","+y+","+o+","+n+")");
         var orientation = (o === 0) ? 'h' : 'v';
+
+        $(".line")
+            .removeClass('last');
+
         $(".line."+orientation+"[x='"+x+"'][y='"+y+"']")
             .removeClass('inactive')
             .addClass('cbg')
+            .addClass('last')
             .attr('num', n);
+
     };
 
     this.activeSquare = function(x, y, n) {
