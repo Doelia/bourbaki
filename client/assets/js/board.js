@@ -8,6 +8,7 @@
 var Board = function() {
 
     this._gridSpace = 56; // Espace entre 2 points en pixel (défini aussi dans le .lss)
+    this.enableLastLineColoration = true;
 
     /**
      * Méthode générique pour créer un élément sur la grille (carré, ligne, point...)
@@ -76,8 +77,12 @@ var Board = function() {
         $(".line."+orientation+"[x='"+x+"'][y='"+y+"']")
             .removeClass('inactive')
             .addClass('cbg')
-            .addClass('last')
             .attr('num', n);
+
+        if (this.enableLastLineColoration) {
+            $(".line."+orientation+"[x='"+x+"'][y='"+y+"']")
+                .addClass('last');
+        }
 
     };
 

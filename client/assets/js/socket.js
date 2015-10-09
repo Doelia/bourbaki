@@ -39,6 +39,7 @@ function init_socket() {
     });
 
     socket.on('GRID', function(data) {
+        board.enableLastLineColoration = false;
         var lines = data[0];
         var squares = data[1];
         for (var l in lines) {
@@ -49,6 +50,7 @@ function init_socket() {
             var square = square[s];
             board.activeSquare(square.X, square.Y, square.N);
         }
+        board.enableLastLineColoration = true;
     });
 
     socket.on('UPDATEPLAYERS', function(data) {
