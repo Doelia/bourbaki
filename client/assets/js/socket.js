@@ -17,7 +17,7 @@ function init_socket() {
         if (code == 1 || code == 2) {
             myNum = numPlayer;
             if (code == 2) {
-                $('#register_done').modal('show');
+                //$('#register_done').modal('show');
             }
             loadGame();
         } else { // Erreur
