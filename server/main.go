@@ -37,6 +37,10 @@ func main() {
 	switch *test {
 	case "main":
 		goMain()
+	case "db":
+		// Initialisation de la base de donnée
+		accounts.OpenDB()
+		accounts.Testdb()
 	}
 
 }

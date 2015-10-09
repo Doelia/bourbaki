@@ -4,7 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"go-bourbaki/server/globals"
-
+	"fmt"
 	"github.com/boltdb/bolt"
 )
 
@@ -64,6 +64,23 @@ func deleteFromDB(cle string) {
 	})
 }
 
+// UpdateAccount Met à jour l'account passé en parametre dans la BD
+// @param updatedAccount: le compte à insérer dans la BD
+// @return bool: vaut vrai si l'update a fonctionné, faux sinon
+func UpdateAccount(updatedAccount Account) bool{
+	jsonaccount, _ := json.Marshal(updatedAccount)
+	db.Update(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("Accounts"))
+		err = bucket.Put([]byte(updatedAccount.Name), []byte(jsonaccount))
+		return err
+	})
+	if err != nil {
+		globals.ErrLogger.Println("Erreur update")
+		return false
+	}
+	return true
+}
+
 // Exists Permet de savoir si un compte existe pour la clé ou pas
 // @param cle: Name de l'account recherché
 // @return Account: Le compte s'il existe
@@ -86,4 +103,15 @@ func CreateAccount(name string, pass string) Account {
 	motdepassemd5 := md5.Sum([]byte(pass))
 	account := Account{name, motdepassemd5, 0, 0, 0}
 	return account
+}
+
+func Testdb(){
+	test := CreateAccount("cheval", "blanc")
+	addInDB("cheval", test)
+	nveautest := Account{"cheval", md5.Sum([]byte("blanc")), 100, 0, 0}
+	UpdateAccount(nveautest)
+
+	result := getFromDB("cheval")
+	fmt.Println(result.Name)
+	fmt.Println(result.Points)
 }
