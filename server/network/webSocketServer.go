@@ -28,13 +28,20 @@ func createServerProtocle(*socketio.Server) {
 		so.On("disconnection", func() {
 			networkLogger.Println("Un client se déconnecte")
 			player, err := game.MyGame.GetPlayerFromIDSocket(so.Id())
+			fmt.Println("id=" + so.Id())
 			if err == nil {
+				networkLogger.Println("err == nil")
+				UpdatePlayers(game.MyGame.GetAllPlayers())
+				if game.MyGame.IsPauseNecessary() {
+					Pause()
+				}
 				player.IsActive = false
-			}
-			UpdatePlayers(game.MyGame.GetAllPlayers())
-			if game.MyGame.IsPauseNecessary() {
-				Pause()
-			}
+				if player.NumPlayer == game.MyGame.CurrentPlayer.NumPlayer{
+					AI()
+				}
+			} else {
+				networkLogger.Println("Err != nil")
+				}
 		})
 
 		so.On("PUTLINE", func(x int, y int, o int) {

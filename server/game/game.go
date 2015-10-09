@@ -43,12 +43,7 @@ func (g *Game) ChangeCurrentPlayer() {
 	if err != nil {
 		gameLogger.Println("Changement joueur courant impossible")
 	}
-	if newCurrentPlayer.IsActive {
-		g.CurrentPlayer = *newCurrentPlayer
-		gameLogger.Println("Joueur courant : ", g.CurrentPlayer.Name)
-	} else {
-		g.ChangeCurrentPlayer()
-	}
+	g.CurrentPlayer = *newCurrentPlayer
 }
 
 // IsPauseNecessary permet de savoir si une pause est nécessaire (nbJoueursActifs >= 2)
