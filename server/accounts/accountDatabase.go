@@ -84,6 +84,6 @@ func Exists(cle string) (Account, bool) {
 // @param p: mot de passe de l'account
 func CreateAccount(name string, pass string) Account {
 	motdepassemd5 := md5.Sum([]byte(pass))
-	account := Account{name, motdepassemd5, 0}
+	account := Account{name, motdepassemd5, 0, 0, 0}
 	return account
 }
