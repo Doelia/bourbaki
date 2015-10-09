@@ -37,8 +37,11 @@ func createServerProtocle(*socketio.Server) {
 			}
 		})
 
-		so.On("PUTLINE", func(x int, y int, o int, n int) { //TODO num joueur déterminé côté serveur
-			PlayLine(x,y,o,n)
+		so.On("PUTLINE", func(x int, y int, o int) { //TODO num joueur déterminé côté serveur
+			player, err := game.MyGame.GetPlayerFromIDSocket(so.Id())
+			if err == nil {
+				PlayLine(x, y, o, player.NumPlayer)
+			}
 		})
 
 		so.On("LOGIN", func(user string, pass string) {
@@ -83,13 +86,16 @@ func createServerProtocle(*socketio.Server) {
 
 		// Le client est connecté et est pret a recevoir les informations
 		so.On("READY", func(i string) {
-			Grid(so, game.MyGame.GetActivesLinesList(), game.MyGame.GetActivesSquaresList())
-			UpdatePlayers(game.MyGame.GetAllPlayers())
-			SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
-			if !game.MyGame.IsPauseNecessary() {
-				Unpause()
-			} else {
-				Pause()
+			_, err := game.MyGame.GetPlayerFromIDSocket(so.Id())
+			if err == nil {
+				Grid(so, game.MyGame.GetActivesLinesList(), game.MyGame.GetActivesSquaresList())
+				UpdatePlayers(game.MyGame.GetAllPlayers())
+				SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
+				if !game.MyGame.IsPauseNecessary() {
+					Unpause()
+				} else {
+					Pause()
+				}
 			}
 		})
 	})
