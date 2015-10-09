@@ -130,3 +130,11 @@ func (g *Game) IsEndGame() bool {
 	}
 	return true
 }
+
+// GetPreviousPlayer permet de récupérer le joueur précédent
+func (g *Game) GetPreviousPlayer() (*globals.Player, error) {
+	if g.CurrentPlayer.NumPlayer == len(g.playersList){
+		return g.GetPlayerFromNumPlayer(1)
+	}
+	return g.GetPlayerFromNumPlayer(g.CurrentPlayer.NumPlayer + 1)
+}
