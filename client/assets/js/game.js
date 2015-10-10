@@ -17,8 +17,6 @@ function isMyTurn() {
     return players.activePlayer == myNum;
 }
 
-/**** Fonctions simulatrices I/O, provisoire ****/
-
 function onRecvScore(json) {
     players.updatePlayers(json);
     players.updateActivePlayer();
@@ -33,7 +31,6 @@ function onRecvActivePlayer(numPlayer) {
 function sendAddLine(x,y,o) {
     console.log("sendAddLine x="+x+", y="+y+", o="+o+"");
     socket.emit('PUTLINE', x, y, o);
-    //board.activeLine(x,y,o,n);
 }
 
 /** INIT **/
