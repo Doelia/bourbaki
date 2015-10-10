@@ -13,7 +13,7 @@ type Game struct {
 	lines         [globals.GRIDSIZE][globals.GRIDSIZE][2]int
 	squares       [globals.GRIDSIZE][globals.GRIDSIZE]int
 	playersList   map[string]*globals.Player
-	CurrentPlayer globals.Player
+	CurrentPlayer *globals.Player
 }
 
 // MyGame variable globable de l'instance unique d'une partie
@@ -43,7 +43,7 @@ func (g *Game) ChangeCurrentPlayer() {
 	if err != nil {
 		gameLogger.Println("Changement joueur courant impossible")
 	}
-	g.CurrentPlayer = *newCurrentPlayer
+	g.CurrentPlayer = newCurrentPlayer
 }
 
 // IsPauseNecessary permet de savoir si une pause est nécessaire (nbJoueursActifs >= 2)
@@ -73,19 +73,19 @@ func (g *Game) IsEndGame() bool {
 
 // GetPreviousPlayer permet de récupérer le joueur précédent
 func (g *Game) GetPreviousPlayer() (*globals.Player, error) {
-	if g.CurrentPlayer.NumPlayer ==  1{
+	if g.CurrentPlayer.NumPlayer == 1 {
 		return g.GetPlayerFromNumPlayer(len(g.playersList))
 	}
 	return g.GetPlayerFromNumPlayer(g.CurrentPlayer.NumPlayer - 1)
 }
 
-// TODO recherche random
-func (g *Game) RandomLine() (int, int, int){
-	for i := 0; i < len(g.lines); i++{
-		for j := 0; j < len(g.lines); j++{
-			for k := 0; k < 2; k++{
-				if g.lines[i][j][k] == 0{
-					return i,j,k
+// RandomLine TODO recherche random
+func (g *Game) RandomLine() (int, int, int) {
+	for i := 0; i < len(g.lines); i++ {
+		for j := 0; j < len(g.lines); j++ {
+			for k := 0; k < 2; k++ {
+				if g.lines[i][j][k] == 0 {
+					return i, j, k
 				}
 			}
 		}

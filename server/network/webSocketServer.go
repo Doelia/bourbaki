@@ -28,26 +28,15 @@ func createServerProtocle(*socketio.Server) {
 		so.On("disconnection", func() {
 			networkLogger.Println("Un client se déconnecte")
 			player, err := game.MyGame.GetPlayerFromIDSocket(so.Id())
-			fmt.Println("id=" + so.Id())
 			if err == nil {
-				networkLogger.Println("err == nil")
-				UpdatePlayers(game.MyGame.GetAllPlayers())
-				if game.MyGame.IsPauseNecessary() {
-					Pause()
-				}
-				player.IsActive = false
-				if player.NumPlayer == game.MyGame.CurrentPlayer.NumPlayer{
-					AI()
-				}
-			} else {
-				networkLogger.Println("Err != nil")
-				}
+				onLeft(player)
+			}
 		})
 
 		so.On("PUTLINE", func(x int, y int, o int) {
 			player, err := game.MyGame.GetPlayerFromIDSocket(so.Id())
 			if err == nil {
-				PlayLine(x, y, o, player.NumPlayer)
+				onPlayerPlayLine(x, y, o, player.NumPlayer)
 			}
 		})
 
@@ -66,25 +55,7 @@ func createServerProtocle(*socketio.Server) {
 			// Entrée dans la partie
 			if resultatIntLogin > 0 {
 				so.Join("all") // Pour recevoir les broadcasts du gam<e
-
-				var numPlayer int
-				player, err := game.MyGame.GetPlayerFromName(user)
-				if err != nil { // Pas encore dans la partie
-					numPlayer = game.MyGame.GetNewNumPlayer()
-					newPlayer := game.ConstructPlayer(numPlayer, user, so.Id())
-					game.MyGame.AddPlayer(newPlayer)
-					player, _ = game.MyGame.GetPlayerFromName(user)
-				} else { // Déjà dans la partie
-					numPlayer = player.NumPlayer
-				}
-				if game.MyGame.CurrentPlayer.NumPlayer == 0 {
-					game.MyGame.CurrentPlayer = *player
-				}
-				player.IsActive = true
-				ConnectAccept(so, resultatIntLogin, numPlayer)
-
-				// On attends le "READY" du joueur pour tout lui envoyer
-
+				onPlayerJoin(so, user, resultatIntLogin)
 			} else {
 				ConnectAccept(so, resultatIntLogin, 0)
 			}
@@ -95,14 +66,7 @@ func createServerProtocle(*socketio.Server) {
 		so.On("READY", func(i string) {
 			_, err := game.MyGame.GetPlayerFromIDSocket(so.Id())
 			if err == nil {
-				Grid(so, game.MyGame.GetActivesLinesList(), game.MyGame.GetActivesSquaresList())
-				UpdatePlayers(game.MyGame.GetAllPlayers())
-				SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
-				if !game.MyGame.IsPauseNecessary() {
-					Unpause()
-				} else {
-					Pause()
-				}
+				onReady(so)
 			}
 		})
 	})

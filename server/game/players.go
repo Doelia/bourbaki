@@ -2,7 +2,6 @@ package game
 
 import (
 	"errors"
-	"fmt"
 	"go-bourbaki/server/globals"
 )
 
@@ -22,7 +21,6 @@ func (g *Game) AddPlayer(p globals.Player) {
 func (g *Game) GetAllPlayers() []globals.Player {
 	var list []globals.Player
 	for _, p := range g.playersList {
-		fmt.Println("Loop player " + p.Name)
 		list = append(list, *p)
 	}
 	return list
