@@ -21,17 +21,17 @@
                     </div>
                 </div>
                 <div class="ui fluid large teal submit button">Jouer</div>
-                <div class="ui red button" onclick="socket.emit('LOGIN', 'Joueur 1', 'blabla')">Joueur 1</div>
-                <div class="ui olive button" onclick="socket.emit('LOGIN', 'Joueur 2', 'blabla')">Joueur 2</div>
-                <div class="ui teal button" onclick="socket.emit('LOGIN', 'Joueur 3', 'blabla')">Joueur 3</div>
             </div>
-
             <div class="ui error message">Mot de passe incorrect</div>
-
         </form>
-
         <div class="ui message">
             Si vous n'avez pas de compte, il sera créé automatiquement.
+        </div>
+        <div class="ui message">
+            <p>[DEV] Connexion rapide</p>
+            <div class="ui red button tiny" onclick="socket.emit('LOGIN', 'Pancake', 'blabla')">Pancake</div>
+            <div class="ui olive button tiny" onclick="socket.emit('LOGIN', 'Gold', 'blabla')">Gold</div>
+            <div class="ui teal button tiny" onclick="socket.emit('LOGIN', 'Bourbaki', 'blabla')">Bourbaki</div>
         </div>
     </div>
 </div>

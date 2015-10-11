@@ -13,13 +13,13 @@ var controllerLogger = log.New(os.Stdout, "[event] ", 0)
 
 func onResume() {
 	controllerLogger.Println("onResume()")
-	Unpause()
+	SendUnpause()
 	onNewTurn()
 }
 
 func onPause() {
 	controllerLogger.Println("onPause()")
-	Pause()
+	SendPause()
 }
 
 func onPlayerJoin(so socketio.Socket, user string, resultatIntLogin int) {
@@ -34,12 +34,13 @@ func onPlayerJoin(so socketio.Socket, user string, resultatIntLogin int) {
 		player, _ = game.MyGame.GetPlayerFromName(user)
 	} else { // Déjà dans la partie
 		numPlayer = player.NumPlayer
+		player.IDSocket = so.Id()
 	}
 	if game.MyGame.CurrentPlayer == nil {
 		game.MyGame.CurrentPlayer = player
 	}
 	player.IsActive = true
-	ConnectAccept(so, resultatIntLogin, numPlayer)
+	SendConnectAccept(so, resultatIntLogin, numPlayer)
 
 	// Suivera d'un onReady()
 }
@@ -47,9 +48,9 @@ func onPlayerJoin(so socketio.Socket, user string, resultatIntLogin int) {
 func onReady(so socketio.Socket) {
 	controllerLogger.Println("onReady")
 
-	Grid(so, game.MyGame.GetActivesLinesList(), game.MyGame.GetActivesSquaresList())
-	UpdatePlayers(game.MyGame.GetAllPlayers())
-	SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
+	SendGrid(so, game.MyGame.GetActivesLinesList(), game.MyGame.GetActivesSquaresList())
+	SendUpdatePlayers(game.MyGame.GetAllPlayers())
+	SendSetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
 
 	if !game.MyGame.IsPauseNecessary() {
 		onResume()
@@ -62,7 +63,7 @@ func onLeft(player *globals.Player) {
 	controllerLogger.Println("onLeft: ", player.Name)
 
 	player.IsActive = false
-	UpdatePlayers(game.MyGame.GetAllPlayers())
+	SendUpdatePlayers(game.MyGame.GetAllPlayers())
 
 	if game.MyGame.IsPauseNecessary() {
 		onPause()
@@ -77,7 +78,8 @@ func onLeft(player *globals.Player) {
 func onSquareDone(square globals.Square) {
 	controllerLogger.Println("onSquareDone: ", square)
 
-	DisplaySquare(square.X, square.Y, square.N)
+	game.MyGame.AddSquare(square)
+	SendDisplaySquare(square.X, square.Y, square.N)
 
 	// Gestion des scores
 	lastPlayer, _ := game.MyGame.GetPreviousPlayer()
@@ -85,18 +87,16 @@ func onSquareDone(square globals.Square) {
 	currentPlayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
 	currentPlayer.Score = currentPlayer.Score + 1
 
-	UpdatePlayers(game.MyGame.GetAllPlayers())
+	SendUpdatePlayers(game.MyGame.GetAllPlayers())
 }
 
 func onNewTurn() {
 	controllerLogger.Println("onNewTurn: ", game.MyGame.CurrentPlayer)
 
-	controllerLogger.Println(game.MyGame.GetAllPlayers())
-
 	if !game.MyGame.CurrentPlayer.IsActive {
 		AI()
 	} else {
-		SetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
+		SendSetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
 	}
 }
 
@@ -110,7 +110,7 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 	controllerLogger.Println("onPlayerPlayLine: ", game.MyGame.CurrentPlayer.Name, l)
 
 	game.MyGame.AddLine(l)
-	DisplayLine(x, y, o, n)
+	SendDisplayLine(x, y, o, n)
 
 	isSquare, square := game.MyGame.TestSquare(l)
 	if isSquare {

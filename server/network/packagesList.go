@@ -11,48 +11,47 @@ import (
  *  Voir fichier notes/protocol.md pour le détail des paquets et de leurs paramètres
  */
 
-// ConnectAccept Packet de retour acceptant ou non la demande de connexion du joueur.
+// SendConnectAccept Packet de retour acceptant ou non la demande de connexion du joueur.
 // param code: int, 0 si mot de passe incorrect, 1 si connexion OK, 2 si connexion OK + compte créé
 // param numPlayer: int, numéro du joueur dans la partie (entre 1 en n). 0 si le code vaut 0 (connexion refusée)
-func ConnectAccept(client socketio.Socket, code int, numPlayer int) {
+func SendConnectAccept(client socketio.Socket, code int, numPlayer int) {
 	sendToClient(client, "CONNECTACCEPT", code, numPlayer)
 }
 
-// Grid Envoi toute la grille à un joueur
+// SendGrid Envoi toute la grille à un joueur (lignes et carrés)
 // A envoyer quand il se connecte
-func Grid(client socketio.Socket, lines []globals.Line, squares []globals.Square) {
+func SendGrid(client socketio.Socket, lines []globals.Line, squares []globals.Square) {
 	sendToClient(client, "GRID", lines, squares)
 }
 
-// DisplayLine Ajoute la barre x,y,o,n à la grille
-func DisplayLine(x int, y int, orientation int, numPlayer int) {
+// SendDisplayLine Ajoute la barre x,y,o,n à la grille
+func SendDisplayLine(x int, y int, orientation int, numPlayer int) {
 	sentToAll("DISPLAYLINE", globals.Line{x, y, orientation, numPlayer})
 }
 
-// DisplaySquare Ajoute le carré à la grille
-func DisplaySquare(x int, y int, numPlayer int) {
+// SendDisplaySquare Ajoute le carré à la grille
+func SendDisplaySquare(x int, y int, numPlayer int) {
 	sentToAll("DISPLAYSQUARE", globals.Square{x, y, numPlayer})
 }
 
-// UpdatePlayers Met à jour du tableau des scores de la partie
+// SendUpdatePlayers Met à jour du tableau des scores de la partie
 // Appelé autant de fois que necéssaire
-func UpdatePlayers(players []globals.Player) {
+func SendUpdatePlayers(players []globals.Player) {
 	sentToAll("UPDATEPLAYERS", players)
 }
 
-// SetActivePlayers Définit le joueur actif (celui qui est en train de joueur)
+// SendSetActivePlayers Définit le joueur actif (celui qui est en train de joueur)
 // Envoyé a chaque changement de joueur
-// TODO Envoyer aussi le joueur précédent ?
-func SetActivePlayers(currentNumPlayer int) {
+func SendSetActivePlayers(currentNumPlayer int) {
 	sentToAll("SETACTIVEPLAYER", currentNumPlayer)
 }
 
-// Pause Met la partie en pause si le nombre de joueurs actifs est inférieur à 2
-func Pause() {
+// SendPause Passe la partie en pause si le nombre de joueurs actifs est inférieur à 2
+func SendPause() {
 	sentToAll("PAUSE")
 }
 
-// Unpause Sors la partie de l'état de pause
-func Unpause() {
+// SendUnpause Sort la partie de l'état de pause
+func SendUnpause() {
 	sentToAll("UNPAUSE")
 }

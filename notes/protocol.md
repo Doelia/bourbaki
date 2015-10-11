@@ -2,7 +2,7 @@
 
 Décrit la liste des paquets et leurs parametres qui passent ente le client et le serveur.
 
-## Envoyées par le client
+## Envoyés par le client
 
 ### LOGIN(user,pass)
 Paquet envoyé à la connexion. Mot de passe non crypté
@@ -14,9 +14,9 @@ Prévient le placement d'une ligne par le joueur.
 - **o** : int, orientation. '1' pour vertical, '0' pour horizontal
 
 ### READY
-Prévient le serveur que le client est prêt, connecté et a changé son JS pour recevoir les évènements
+Prévient le serveur que le client est prêt, connecté et a chargé son JS pour recevoir les évènements
 
-## Envoyées par le serveur
+## Envoyés par le serveur
 
 ### CONNECT_ACCEPT(code, numPlayer)
 Packet de retour acceptant ou non la demande de connexion du joueur.
@@ -56,7 +56,6 @@ Exemple :
 
 ### SETACTIVEPLAYER(numPlayer)
 Définit le joueur actif (celui qui est en train de joueur). Envoyé a chaque changement de joueur
-
 
 ### PAUSE()
 Place le jeu en pause (si pas assez de joueurs)

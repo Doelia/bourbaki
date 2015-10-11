@@ -76,7 +76,7 @@
         // Block principal (plateau + liste des joueurs)
         .ui.container.main {
 
-            width: 1000px;
+            width: 950px;
             margin-top: 50px;
 
             .grid {
@@ -90,10 +90,7 @@
                     transition-duration: .5s;
                     transition-timing-function: ease;
                     background: #9CBDC7;
-                    min-width: 600px;
-                    height: 600px;
                     border-radius: 10px 0 0 10px;
-                    padding-left: 30px;
                 }
 
                 // Liste des joueurs (droite)
@@ -132,9 +129,18 @@
 @spaceGrid: 56px; // Ecart entre 2 points
 @sizeDot: 16px; // Taille des points (et de barres inactives)
 @reducActiveLine: 6px; // Réduction de la taille des barres actives
+@sizeGrid: 10; // Nombre de points sur la grille
+
+@sizeGridPx: @spaceGrid * (@sizeGrid - 1) + @sizeDot;
 
 #board {
     position: relative;
+    width: @sizeGridPx;
+    height: @sizeGridPx;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 
     > div {
         position: absolute;

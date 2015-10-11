@@ -35,7 +35,7 @@ func (g *Game) GetPlayerFromName(name string) (*globals.Player, error) {
 	return g.playersList[name], nil
 }
 
-// GetPlayerFromNumPlayer TODO spec
+// GetPlayerFromNumPlayer Retourne un joueur à partir de son numéro dans la partie
 func (g *Game) GetPlayerFromNumPlayer(numPlayer int) (*globals.Player, error) {
 	for _, playerStruct := range g.playersList {
 		if playerStruct.NumPlayer == numPlayer {
@@ -45,7 +45,7 @@ func (g *Game) GetPlayerFromNumPlayer(numPlayer int) (*globals.Player, error) {
 	return nil, errors.New("Joueur introuvable")
 }
 
-// GetPlayerFromIDSocket TODO spec
+// GetPlayerFromIDSocket Retourne un joueur à partir de son id de socket
 func (g *Game) GetPlayerFromIDSocket(idSocket string) (*globals.Player, error) {
 	for _, playerStruct := range g.playersList {
 		if playerStruct.IDSocket == idSocket {

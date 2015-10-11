@@ -48,7 +48,7 @@ var Players = function() {
 
             if (!player.IsActive) {
                 $('#playersList > div:last .right')
-                    .append('<div class="ui label gray">Inactif</div>');
+                    .append('<div class="ui label gray">Hors-ligne</div>');
             }
         }
     };

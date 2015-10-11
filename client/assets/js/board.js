@@ -8,6 +8,7 @@
 var Board = function() {
 
     this._gridSpace = 56; // Espace entre 2 points en pixel (défini aussi dans le .lss)
+    this.SIZE = 10; // Taille de la grille
     this.enableLastLineColoration = true;
 
     /**
@@ -50,7 +51,8 @@ var Board = function() {
             .addClass('inactive');
     };
 
-    this.createGrid = function(size) {
+    this.createGrid = function() {
+        size = this.SIZE;
         for (var i = 0; i < size; i++) {
             for (var j = 0; j < size; j++) {
                 this._addDot(i, j);

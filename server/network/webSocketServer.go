@@ -54,15 +54,15 @@ func createServerProtocle(*socketio.Server) {
 
 			// Entrée dans la partie
 			if resultatIntLogin > 0 {
-				so.Join("all") // Pour recevoir les broadcasts du gam<e
+				so.Join("all")
 				onPlayerJoin(so, user, resultatIntLogin)
 			} else {
-				ConnectAccept(so, resultatIntLogin, 0)
+				SendConnectAccept(so, resultatIntLogin, 0)
 			}
 
 		})
 
-		// Le client est connecté et est pret a recevoir les informations
+		// Le client est connecté et est prêt a recevoir les informations
 		so.On("READY", func(i string) {
 			_, err := game.MyGame.GetPlayerFromIDSocket(so.Id())
 			if err == nil {

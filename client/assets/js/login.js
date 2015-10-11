@@ -40,8 +40,8 @@ function init_login() {
             $('.ui.form').addClass('loading');
             var login = $('.ui.form').form('get value', 'user');
             var pass = $('.ui.form').form('get value', 'password');
-            console.log("Login with "+login+", "+pass);
             socket.emit("LOGIN", login, pass);
         }
     });
+
 }

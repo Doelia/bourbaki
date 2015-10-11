@@ -3,8 +3,9 @@ package accounts
 import (
 	"crypto/md5"
 	"encoding/json"
-	"go-bourbaki/server/globals"
 	"fmt"
+	"go-bourbaki/server/globals"
+
 	"github.com/boltdb/bolt"
 )
 
@@ -67,7 +68,7 @@ func deleteFromDB(cle string) {
 // UpdateAccount Met à jour l'account passé en parametre dans la BD
 // @param updatedAccount: le compte à insérer dans la BD
 // @return bool: vaut vrai si l'update a fonctionné, faux sinon
-func UpdateAccount(updatedAccount Account) bool{
+func UpdateAccount(updatedAccount Account) bool {
 	jsonaccount, _ := json.Marshal(updatedAccount)
 	db.Update(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("Accounts"))
@@ -105,7 +106,8 @@ func CreateAccount(name string, pass string) Account {
 	return account
 }
 
-func Testdb(){
+// Testdb ..
+func Testdb() {
 	test := CreateAccount("cheval", "blanc")
 	addInDB("cheval", test)
 	nveautest := Account{"cheval", md5.Sum([]byte("blanc")), 100, 0, 0}

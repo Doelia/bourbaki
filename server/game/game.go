@@ -8,7 +8,7 @@ import (
 
 var gameLogger = log.New(os.Stdout, "[game] ", 0)
 
-// Game structure définissant une partie
+// Game classe définissant une partie
 type Game struct {
 	lines         [globals.GRIDSIZE][globals.GRIDSIZE][2]int
 	squares       [globals.GRIDSIZE][globals.GRIDSIZE]int
@@ -30,7 +30,7 @@ func ConstructGame() *Game {
 func StartNewGame() {
 	gameLogger.Println("Création d'une nouvelle partie...")
 	MyGame = ConstructGame()
-	gameLogger.Println("Création OK")
+	gameLogger.Println("Création OK. En attente de joueurs.")
 }
 
 // ChangeCurrentPlayer permet de changer le joueur courant, à appeller lors de la fin d'un tour

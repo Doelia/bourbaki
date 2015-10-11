@@ -22,8 +22,19 @@ function loadGame() {
     }});
 }
 
+function stopAll() {
+    $('#break')
+        .modal({
+            blurring: true,
+        })
+        .modal('setting', 'closable', false)
+        .modal('show');
+    socket.close();
+}
+
 $(document).ready(function() {
     init_socket();
     loadLogin();
-    //socket.emit("LOGIN", 'Cassoulet', 'mot de passe');
+    // socket.emit('LOGIN', 'tata', 'tututu');
+    // init_game();
 });

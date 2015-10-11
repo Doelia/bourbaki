@@ -12,4 +12,5 @@ var Ch chan int
 var ErrLogger = log.New(os.Stderr, "[error] ", 0)
 
 // Taille de la grille de jeu (nombre de points)
-const GRIDSIZE = 11
+// Note: Modifier aussi dans les fichiers JS du client
+const GRIDSIZE = 10

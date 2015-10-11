@@ -33,12 +33,10 @@ function sendAddLine(x,y,o) {
     socket.emit('PUTLINE', x, y, o);
 }
 
-/** INIT **/
-
 function init_game() {
 
     board = new Board();
-    board.createGrid(11);
+    board.createGrid();
 
     players = new Players();
 
@@ -65,6 +63,7 @@ function init_game() {
         }
     });
 
+    console.log("send ready");
     socket.emit("READY", "OK");
 
 }

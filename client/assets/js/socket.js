@@ -17,7 +17,7 @@ function init_socket() {
         if (code == 1 || code == 2) {
             myNum = numPlayer;
             if (code == 2) {
-                //$('#register_done').modal('show');
+                //$('#register_done').modal('show'); // Désactivé pour le dev
             }
             loadGame();
         } else { // Erreur
@@ -47,7 +47,7 @@ function init_socket() {
             board.activeLine(line.X, line.Y, line.O, line.N);
         }
         for (var s in squares) {
-            var square = square[s];
+            var square = squares[s];
             board.activeSquare(square.X, square.Y, square.N);
         }
         board.enableLastLineColoration = true;
@@ -75,5 +75,9 @@ function init_socket() {
         console.log("Recv unpause");
         unpause();
     });
+
+	socket.on('disconnect', function() {
+		stopAll();
+	});
 
 }
