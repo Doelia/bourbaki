@@ -22,7 +22,11 @@ function init_socket() {
             loadGame();
         } else { // Erreur
             $('.ui.form').removeClass('loading');
-            alert("[Message provisoire] Mot de passe incorrect");
+            if (code == -1) {
+                alert("[Message provisoire] Nom de compte invalide. Trop long ? Caractères spéciaux ?");
+            } else {
+                alert("[Message provisoire] Mot de passe incorrect");
+            }
         }
     });
 

@@ -42,6 +42,11 @@ func createServerProtocle(*socketio.Server) {
 
 		so.On("LOGIN", func(user string, pass string) {
 
+			if !accounts.IsValidUsername(user) {
+				SendConnectAccept(so, -1, 0) // Refus de la connexion
+				return
+			}
+
 			// Login (user/pass)
 			account, resultatIntLogin := accounts.Login(user, pass)
 			if resultatIntLogin == 1 {

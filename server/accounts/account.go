@@ -1,5 +1,10 @@
 package accounts
 
+import (
+	"go-bourbaki/server/globals"
+	"regexp"
+)
+
 // Account structure
 type Account struct {
 	Name     string   // Nom du joueur
@@ -27,4 +32,14 @@ func Login(name string, pass string) (Account, int) {
 		return account, 2
 	}
 	return account, 3 // erreur interne
+}
+
+// IsValidUsername Retourne true si le pseudo choisi est correct (longuere, caractères spéciaux...)
+func IsValidUsername(name string) bool {
+	matched, _ := regexp.MatchString("^[a-zA-Z0-9-_]{3,15}$", name)
+	if err != nil {
+		globals.ErrLogger.Println("Erreur sur la regex sur " + name)
+		return false
+	}
+	return matched
 }

@@ -22,7 +22,7 @@ Prévient le serveur que le client est prêt, connecté et a chargé son JS pour
 Packet de retour acceptant ou non la demande de connexion du joueur.
 
 - **code** : int, 0 si mot de passe incorrect, 1 si connexion OK, 2 si connexion OK + compte créé
-- **numPlayer** : int, numéro du joueur dans la partie (entre 1 en n). 0 si le code vaut 0 (connexion refusée)
+- **numPlayer** : int, numéro du joueur dans la partie (entre 1 en n). 0 si le code vaut 0 (connexion refusée), -1 si le pseudo est invalide
 
 Tous les packets d'initialiastion du jeu suiveront ce packet
 

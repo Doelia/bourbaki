@@ -23,3 +23,4 @@ Ces cas doivent être bloqués par le serveur :
 ## Avant MEP
 - Remettre la popup de première connexion (socket.js -> on CONNECTACCEPT)
 - Retirer les boutons de login colorés
+- Retirer le changement de title

@@ -15,6 +15,10 @@ function init_login() {
                     {
                         type   : 'empty',
                         prompt : 'Entrez votre pseudo'
+                    },
+                    {
+                        type   : 'regExp[/^[a-zA-Z0-9-_]{3,15}$/]',
+                        prompt : 'Pseudo invalide. Trop long ? Caractères spéciaux ?'
                     }
                 ]
             },
@@ -40,6 +44,7 @@ function init_login() {
             $('.ui.form').addClass('loading');
             var login = $('.ui.form').form('get value', 'user');
             var pass = $('.ui.form').form('get value', 'password');
+            document.title = login;
             socket.emit("LOGIN", login, pass);
         }
     });
