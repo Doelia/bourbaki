@@ -75,17 +75,16 @@ func onLeft(player *globals.Player) {
 
 }
 
-func onSquareDone(square globals.Square) {
-	controllerLogger.Println("onSquareDone: ", square)
+func onSquareDone(squareStruct globals.Square) {
+		controllerLogger.Println("onSquareDone: ", squareStruct)
+		game.MyGame.AddSquare(squareStruct)
+		SendDisplaySquare(squareStruct.X, squareStruct.Y, squareStruct.N)
 
-	game.MyGame.AddSquare(square)
-	SendDisplaySquare(square.X, square.Y, square.N)
-
-	// Gestion des scores
-	lastPlayer, _ := game.MyGame.GetPreviousPlayer()
-	lastPlayer.Score = lastPlayer.Score - 1
-	currentPlayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
-	currentPlayer.Score = currentPlayer.Score + 1
+		// Gestion des scores
+		lastPlayer, _ := game.MyGame.GetPreviousPlayer()
+		lastPlayer.Score = lastPlayer.Score - 1
+		currentPlayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
+		currentPlayer.Score = currentPlayer.Score + 1
 
 	SendUpdatePlayers(game.MyGame.GetAllPlayers())
 }
@@ -112,9 +111,11 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 	game.MyGame.AddLine(l)
 	SendDisplayLine(x, y, o, n)
 
-	isSquare, square := game.MyGame.TestSquare(l)
+	isSquare, squares := game.MyGame.TestSquare(l)
 	if isSquare {
-		onSquareDone(square)
+		for _, squareStruct := range squares{
+				onSquareDone(squareStruct)
+		}
 	} else {
 		game.MyGame.ChangeCurrentPlayer()
 	}

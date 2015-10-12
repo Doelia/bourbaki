@@ -29,32 +29,37 @@ func (g *Game) isActive(x int, y int, o int) bool {
 // @param lastLine: dernière ligne ayant été jouée
 // @return bool: vrai si le joueur gagne un carré, faux sinon
 // @return square: le carré formé
-func (g *Game) TestSquare(lastLine globals.Line) (bool, globals.Square) {
+func (g *Game) TestSquare(lastLine globals.Line) (isSquare bool, list []globals.Square) {
 	x := lastLine.X
 	y := lastLine.Y
+	isSquare = false
 	if lastLine.O == globals.HORIZONTAL {
 		if g.isActive(x, y-1, globals.HORIZONTAL) && g.isActive(x+1, y-1, globals.VERTICAL) && g.isActive(x, y-1, globals.VERTICAL) {
 			gameLogger.Println("Ajout square au dessus du trait")
-			return true, globals.Square{x, y - 1, lastLine.N}
+			isSquare = true
+		  list = append(list,globals.Square{x, y - 1, lastLine.N})
 		}
 		if g.isActive(x, y+1, globals.HORIZONTAL) && g.isActive(x, y, globals.VERTICAL) && g.isActive(x+1, y, globals.VERTICAL) {
 			gameLogger.Println("Ajout square au dessous du trait")
-			return true, globals.Square{x, y, lastLine.N}
+			isSquare = true
+		  list = append(list,globals.Square{x, y, lastLine.N})
 		}
 	} else {
 		if lastLine.O == globals.VERTICAL {
 			if g.isActive(x, y, globals.HORIZONTAL) && g.isActive(x+1, y, globals.VERTICAL) && g.isActive(x, y+1, globals.HORIZONTAL) {
 				gameLogger.Println("Ajout square à droite du trait")
-				return true, globals.Square{x, y, lastLine.N}
+				isSquare = true
+				list = append(list,globals.Square{x, y, lastLine.N})
 			}
 			if g.isActive(x-1, y, 0) && g.isActive(x-1, y, 1) && g.isActive(x-1, y+1, 0) {
 				gameLogger.Println("Ajout square à gauche du trait")
-				return true, globals.Square{x - 1, y, lastLine.N}
+				isSquare = true
+				list = append(list, globals.Square{x - 1, y, lastLine.N})
 			}
 		}
 	}
 	gameLogger.Println("Pas de square")
-	return false, globals.Square{}
+	return
 }
 
 // GetActivesLinesList Retourne une liste de toutes les lignes actives (déjà posées)
