@@ -17,7 +17,6 @@
   - Nettoyage de la grille
 
 # Parties fonctionelles du client
-
 - *Connexion (user/mot de passe)*
 - *Affichage dynamique :*
     - *De la grille (barres, carrés)*

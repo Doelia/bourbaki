@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"go-bourbaki/server/globals"
+	"log"
+	"os"
 
 	"github.com/boltdb/bolt"
 )
@@ -12,9 +14,13 @@ import (
 var db *bolt.DB
 var err error
 
+var accountLogger = log.New(os.Stdout, "[BD] ", 0)
+
 // OpenDB Permet l'ouverture de la base de données
 func OpenDB() {
+	accountLogger.Println("Ouverture de la base de donnée...")
 	db, err = bolt.Open("bourbaki.db", 0600, nil)
+	accountLogger.Println("Base de donnée prête.")
 	if err != nil {
 		globals.ErrLogger.Println("Erreur à l'ouverture de la base de données")
 	}

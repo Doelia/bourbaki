@@ -12,7 +12,7 @@ var networkLogger = log.New(os.Stdout, "[network] ", 0)
 
 // StartWebServer démarre le serveur web (http + websockets)
 func StartWebServer(port int) {
-	networkLogger.Printf("Démarrage du serveur web sur le port %d...\n", port)
+	networkLogger.Printf("Serveur web en écoute sur le port %d.\n", port)
 	http.Handle("/", http.FileServer(http.Dir("../client")))
 	http.Handle("/socket.io/", createWebSocketHandler())
 	globals.Ch <- 1

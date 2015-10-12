@@ -23,8 +23,3 @@ Ces cas doivent être bloqués par le serveur :
 ## Avant MEP
 - Remettre la popup de première connexion (socket.js -> on CONNECTACCEPT)
 - Retirer les boutons de login colorés
-
-# Difficultés
-- Problèmes avec socket.io de GO sur certains paquets bloquants
-- Les nombreux évenements modifiants le déroulement du jeu, crééant souvent des conflits entre eux (déconnexion d'un joueur -> jouer à sa place et démarrage de pause , timers...). Il est courant de tomber dans des appels récursifs ou dans un bloquage total de la partie sans une étude rigoureuse.
--
