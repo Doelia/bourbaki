@@ -3,6 +3,7 @@ package game
 import (
 	"go-bourbaki/server/globals"
 	"log"
+	"math/rand"
 	"os"
 )
 
@@ -79,16 +80,14 @@ func (g *Game) GetPreviousPlayer() (*globals.Player, error) {
 	return g.GetPlayerFromNumPlayer(g.CurrentPlayer.NumPlayer - 1)
 }
 
-// RandomLine TODO recherche random
+// RandomLine ..
 func (g *Game) RandomLine() (int, int, int) {
-	for i := 0; i < len(g.lines); i++ {
-		for j := 0; j < len(g.lines); j++ {
-			for k := 0; k < 2; k++ {
-				if g.lines[i][j][k] == 0 {
-					return i, j, k
-				}
-			}
+	for {
+		i := rand.Intn(globals.GRIDSIZE)
+		j := rand.Intn(globals.GRIDSIZE)
+		k := rand.Intn(2)
+		if g.lines[i][j][k] == 0 {
+			return i, j, k
 		}
 	}
-	return 0, 0, 0
 }
