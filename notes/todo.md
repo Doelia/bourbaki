@@ -6,9 +6,6 @@
 - Revoir la structure pour ne pas devoir compiler dans /server/
 
 ## Serveur
-- Empêcher l'injection HTML dans les pseudos (+client?)
-- Gérer les coups qui générent 2 carrés d'un coup
-- Faire l'IA en ramdom
 
 ## Client
 - Ajouter un logo
