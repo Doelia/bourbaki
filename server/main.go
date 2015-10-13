@@ -7,12 +7,15 @@ import (
 	"go-bourbaki/server/game"
 	"go-bourbaki/server/globals"
 	"go-bourbaki/server/network"
+	"math/rand"
+	"time"
 )
 
 var test = flag.String("test", "main", "Sélectionne la méthode de test à lancer (debug uniquement)")
 var port = flag.Int("port", 2000, "Modifie le port d'écoute (défaut 2000)")
 
 func goMain() {
+	rand.Seed(time.Now().Unix())
 	globals.Ch = make(chan int, 1)
 
 	fmt.Println("=== BOURBAKI SERVEUR ===")
