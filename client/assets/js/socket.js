@@ -3,13 +3,15 @@
  *
  */
 
- var socket;
+var socket;
+var stopRecv = false;
 
 function init_socket() {
 
     socket = io();
 
     socket.on('CONNECTACCEPT', function(data) {
+        stopRecv = false;
         var code = data[0]; // 0 incorrect, 1 login, 2 inscription
         var numPlayer = data[1];
         console.log("Recv CONNECTACCEPT. code="+code+", numPlayer="+numPlayer);
@@ -31,18 +33,21 @@ function init_socket() {
     });
 
     socket.on('DISPLAYLINE', function(data) {
+        if (stopRecv) return;
         var line = data[0];
         console.log("Recv DISPLAYLINE. line="+line);
         board.activeLine(line.X, line.Y, line.O, line.N);
     });
 
     socket.on('DISPLAYSQUARE', function(data) {
+        if (stopRecv) return;
         var square = data[0];
         console.log("Recv DISPLAYSQUARE. square="+square);
         board.activeSquare(square.X, square.Y, square.N);
     });
 
     socket.on('GRID', function(data) {
+        if (stopRecv) return;
         board.enableLastLineColoration = false;
         var lines = data[0];
         var squares = data[1];
@@ -58,6 +63,7 @@ function init_socket() {
     });
 
     socket.on('UPDATEPLAYERS', function(data) {
+        if (stopRecv) return;
         var json = data[0];
         console.log("Recv UPDATEPLAYERS : ");
         console.log(json);
@@ -65,12 +71,16 @@ function init_socket() {
     });
 
     socket.on('SETACTIVEPLAYER', function(data) {
+        if (stopRecv) return;
         var nPlayer = data[0];
         console.log("Recv: SETACTIVEPLAYER : "+nPlayer);
         onRecvActivePlayer(nPlayer);
     });
 
     socket.on('ENDGAME', function(data) {
+
+        stopRecv = true;
+
         var json = data[0];
 
         for (var i in json) {
@@ -86,10 +96,10 @@ function init_socket() {
             var tr = $('#endGame tbody tr:last');
 
             tr.append('<td>'+classement+'.</td>');
-            tr.append('<h4 class="ui image header">'
-                +'<div class="ui left floated cbg circular label" num="'+numPlayer+'"></div>'
-                +'<div class="content">'+name+'</div>'
-                +'</h4>');
+            tr.append('<h4 class="ui image header">'+
+                '<div class="ui left floated cbg circular label" num="'+numPlayer+'"></div>'+
+                '<div class="content">'+name+'</div>'+
+                '</h4>');
             tr.append('<td>'+score+' points</td>');
 
             if (numPlayer == myNum) {
@@ -99,17 +109,19 @@ function init_socket() {
         }
 
         $('#replay').onclick(function(event) {
-            // TODO
+            socket.emit('GOAGAIN', myName);
         });
 
     });
 
     socket.on('PAUSE', function() {
+        if (stopRecv) return;
         console.log("Recv pause");
         pause();
     });
 
     socket.on('UNPAUSE', function() {
+        if (stopRecv) return;
         console.log("Recv unpause");
         unpause();
     });

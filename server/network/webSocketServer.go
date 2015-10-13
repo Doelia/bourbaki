@@ -67,6 +67,11 @@ func createServerProtocle(*socketio.Server) {
 
 		})
 
+		so.On("GOAGAIN", func(user string) {
+			fmt.Println(user + " veut rejouer")
+			onPlayerJoin(so, user, 1)
+		})
+
 		// Le client est connecté et est prêt a recevoir les informations
 		so.On("READY", func(i string) {
 			_, err := game.MyGame.GetPlayerFromIDSocket(so.Id())

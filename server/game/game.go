@@ -80,7 +80,7 @@ func (g *Game) GetPreviousPlayer() (*globals.Player, error) {
 	return g.GetPlayerFromNumPlayer(g.CurrentPlayer.NumPlayer - 1)
 }
 
-// RandomLine ..
+// RandomLine Retoune une ligne aléatoire du plateau pas encore jouée
 func (g *Game) RandomLine() (int, int, int) {
 	for {
 		i := rand.Intn(globals.GRIDSIZE)
