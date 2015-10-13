@@ -108,9 +108,13 @@ function init_socket() {
             }
         }
 
-        $('#replay').onclick(function(event) {
+        $('#replay').click(function(event) {
             socket.emit('GOAGAIN', myName);
         });
+
+        $('#endGame')
+            .modal('setting', 'closable', false)
+            .modal('show');
 
     });
 
