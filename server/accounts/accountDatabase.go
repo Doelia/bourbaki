@@ -51,7 +51,7 @@ func addInDB(cle string, account Account) bool {
 // Récupère l'account ayant pour clé celle passée en paramètre
 // @param cle: Name de l'account à récupérer
 // @return Account: Le compte correspondant
-func getFromDB(cle string) (account Account) {
+func GetFromDB(cle string) (account Account) {
 	db.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("Accounts"))
 		v := bucket.Get([]byte(cle))
@@ -119,7 +119,7 @@ func Testdb() {
 	nveautest := Account{"cheval", md5.Sum([]byte("blanc")), 100, 0, 0}
 	UpdateAccount(nveautest)
 
-	result := getFromDB("cheval")
+	result := GetFromDB("cheval")
 	fmt.Println(result.Name)
 	fmt.Println(result.Points)
 }

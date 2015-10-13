@@ -2,6 +2,7 @@ package game
 
 import (
 	"go-bourbaki/server/globals"
+	"go-bourbaki/server/accounts"
 	"log"
 	"math/rand"
 	"os"
@@ -89,5 +90,14 @@ func (g *Game) RandomLine() (int, int, int) {
 		if g.lines[i][j][k] == 0 {
 			return i, j, k
 		}
+	}
+}
+
+func (g *Game) SaveScores() {
+	for _, player := range g.playersList{
+		account := accounts.GetFromDB(player.Name)
+		account.Points += player.Score
+		accounts.UpdateAccount(account)
+		gameLogger.Println(player.Name, " gagne ", account.Points, " points")
 	}
 }

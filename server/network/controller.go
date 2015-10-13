@@ -119,8 +119,11 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 	} else {
 		game.MyGame.ChangeCurrentPlayer()
 	}
-
+	if game.MyGame.IsEndGame(){
+		onEndGame()
+	} else {
 	onNewTurn()
+	}
 
 }
 
@@ -130,4 +133,11 @@ func AI() {
 
 	x, y, o := game.MyGame.RandomLine()
 	onPlayerPlayLine(x, y, o, game.MyGame.CurrentPlayer.NumPlayer)
+}
+
+func onEndGame(){
+	controllerLogger.Println("Fin de la partie")
+
+	//Enregistrement des scores
+	game.MyGame.SaveScores()
 }
