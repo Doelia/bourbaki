@@ -37,4 +37,5 @@ $(document).ready(function() {
     loadLogin();
     // socket.emit('LOGIN', 'tata', 'tututu');
     // init_game();
+    //$('#endGame').modal('show');
 });

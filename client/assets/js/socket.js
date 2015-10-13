@@ -70,6 +70,40 @@ function init_socket() {
         onRecvActivePlayer(nPlayer);
     });
 
+    socket.on('ENDGAME', function(data) {
+        var json = data[0];
+
+        for (var i in json) {
+            var p = json[i];
+
+            var classement = p.classement;
+            var numPlayer = p.numPlayer;
+            var name = p.name;
+            var score = p.score;
+
+            $('#endGame tbody').append('<tr></tr>');
+
+            var tr = $('#endGame tbody tr:last');
+
+            tr.append('<td>'+classement+'.</td>');
+            tr.append('<h4 class="ui image header">'
+                +'<div class="ui left floated cbg circular label" num="'+numPlayer+'"></div>'
+                +'<div class="content">'+name+'</div>'
+                +'</h4>');
+            tr.append('<td>'+score+' points</td>');
+
+            if (numPlayer == myNum) {
+                $('#myScore').html(score);
+                $('#myClassement').html(classement + (classement == 1 ? 'er' : 'ème') );
+            }
+        }
+
+        $('#replay').onclick(function(event) {
+            // TODO
+        });
+
+    });
+
     socket.on('PAUSE', function() {
         console.log("Recv pause");
         pause();
