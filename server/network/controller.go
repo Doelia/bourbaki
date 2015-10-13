@@ -76,15 +76,15 @@ func onLeft(player *globals.Player) {
 }
 
 func onSquareDone(squareStruct globals.Square) {
-		controllerLogger.Println("onSquareDone: ", squareStruct)
-		game.MyGame.AddSquare(squareStruct)
-		SendDisplaySquare(squareStruct.X, squareStruct.Y, squareStruct.N)
+	controllerLogger.Println("onSquareDone: ", squareStruct)
+	game.MyGame.AddSquare(squareStruct)
+	SendDisplaySquare(squareStruct.X, squareStruct.Y, squareStruct.N)
 
-		// Gestion des scores
-		lastPlayer, _ := game.MyGame.GetPreviousPlayer()
-		lastPlayer.Score = lastPlayer.Score - 1
-		currentPlayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
-		currentPlayer.Score = currentPlayer.Score + 1
+	// Gestion des scores
+	lastPlayer, _ := game.MyGame.GetPreviousPlayer()
+	lastPlayer.Score = lastPlayer.Score - 1
+	currentPlayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
+	currentPlayer.Score = currentPlayer.Score + 1
 
 	SendUpdatePlayers(game.MyGame.GetAllPlayers())
 }
@@ -113,16 +113,17 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 
 	isSquare, squares := game.MyGame.TestSquare(l)
 	if isSquare {
-		for _, squareStruct := range squares{
-				onSquareDone(squareStruct)
+		for _, squareStruct := range squares {
+			onSquareDone(squareStruct)
 		}
 	} else {
 		game.MyGame.ChangeCurrentPlayer()
 	}
-	if game.MyGame.IsEndGame(){
+	game.MyGame.GetLadder()
+	if game.MyGame.IsEndGame() {
 		onEndGame()
 	} else {
-	onNewTurn()
+		onNewTurn()
 	}
 
 }
@@ -135,9 +136,13 @@ func AI() {
 	onPlayerPlayLine(x, y, o, game.MyGame.CurrentPlayer.NumPlayer)
 }
 
-func onEndGame(){
+func onEndGame() {
 	controllerLogger.Println("Fin de la partie")
 
-	//Enregistrement des scores
+	// Enregistrement des scores
 	game.MyGame.SaveScores()
+
+	// Structure Classement
+	game.MyGame.GetLadder()
+
 }

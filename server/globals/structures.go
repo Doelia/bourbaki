@@ -24,3 +24,10 @@ type Player struct {
 	IsActive  bool
 	IDSocket  string
 }
+
+type PlayerClassement struct {
+	Classement int
+	NumPlayer int
+	Name       string
+	Score      int
+}

@@ -34,7 +34,7 @@ func Login(name string, pass string) (Account, int) {
 	return account, 3 // erreur interne
 }
 
-// IsValidUsername Retourne true si le pseudo choisi est correct (longuere, caractères spéciaux...)
+// IsValidUsername Retourne true si le pseudo choisi est correct (longueur, caractères spéciaux...)
 func IsValidUsername(name string) bool {
 	matched, _ := regexp.MatchString("^[a-zA-Z0-9-_]{3,15}$", name)
 	if err != nil {
