@@ -133,6 +133,41 @@ function init_socket() {
         unpause();
     });
 
+    socket.on('LADDER', function(data) {
+        var json = data[0];
+        console.log('Recv ladder. Json:');
+        console.log(json);
+
+        $('#ladder tbody').html('');
+
+        for (var i in json) {
+            var p = json[i];
+
+            var classement = p.Classement;
+            var name = p.Name;
+            var nbrGames = p.NbrGames;
+            var nbrWins = p.NbrWins;
+            var score = p.Score;
+
+            $('#ladder tbody').append('<tr></tr>');
+
+            var tr = $('#ladder tbody tr:last');
+
+            tr.append('<td># '+classement+'</td>');
+            tr.append('<td><strong>'+name+'</strong></td>');
+            tr.append('<td>'+nbrGames+' partie jouées</td>');
+            tr.append('<td>'+nbrWins+' partie gagnées</td>');
+            tr.append('<td><strong>'+score+' points</strong></td>');
+
+            if (name == myName) {
+                // TODO mettre en avant soi même
+            }
+        }
+
+        $('#ladder')
+            .modal('show');
+    });
+
 	socket.on('disconnect', function() {
 		stopAll();
 	});

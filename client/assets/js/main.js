@@ -4,6 +4,7 @@ var players;
 
 // Globales
 var myNum; // Numéro du joueur client
+var myName = "undefined";
 
 function loadLogin() {
     $.ajax({url: "/content/login.html", success: function(result) {
@@ -32,10 +33,11 @@ function stopAll() {
     socket.close();
 }
 
+
 $(document).ready(function() {
     init_socket();
     loadLogin();
     // socket.emit('LOGIN', 'tata', 'tututu');
     // init_game();
-    //$('#endGame').modal('show');
+    // $('#endGame').modal('show');
 });

@@ -14,7 +14,7 @@ var controllerLogger = log.New(os.Stdout, "[event] ", 0)
 // Timer ..
 var MyTimer *Timer
 
-// OnCreateGame TODO commentaire
+// OnCreateGame Executé quand une nouvelle partie
 func OnCreateGame() {
 	MyTimer = createTimer()
 }
@@ -138,7 +138,7 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 	}
 }
 
-// AI ...
+// AI Joue à la place du joueur courant
 func AI() {
 	controllerLogger.Println("AI pour " + game.MyGame.CurrentPlayer.Name)
 
@@ -160,4 +160,5 @@ func onEndGame() {
 
 	//Nouvelle instance de game
 	game.StartNewGame()
+	OnCreateGame()
 }
