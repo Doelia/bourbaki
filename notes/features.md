@@ -5,16 +5,17 @@
   - *Sinon, connexion*
 - *Réception des actions des joueurs : poser une ligne*
 - *Calcul du score partie en fonction des actions*
-- Test de validité du carré
+- *Test de validité du carré*
 - *Mise en pause de la partie si moins de 2 joueurs*
 - *Temps limité pour jouer*
-- Gestion des connexions/déconnexions
+- *Gestion des connexions/déconnexions*
   - *Lors de la déconnexion, le score du joueur visible dans le tableau "score partie" passe en grisé et le serveur joue à sa place*
   - *S'il se reconnecte, il repasse en coloration normale et récupère son score*
-- Gestion de la fin de la partie
-  - Remise à zéro du tableau de scores
-  - Enregistrement des scores en fin de partie "classement général"
-  - Nettoyage de la grille
+- *Gestion de la fin de la partie*
+  - *Remise à zéro du tableau de scores*
+  - *Enregistrement des scores en fin de partie "classement général"*
+  - *Nettoyage de la grille*
+- Envoi du classement général
 
 # Parties fonctionelles du client
 - *Connexion (user/mot de passe)*

@@ -16,6 +16,9 @@ Prévient le placement d'une ligne par le joueur.
 ### READY
 Prévient le serveur que le client est prêt, connecté et a chargé son JS pour recevoir les évènements
 
+### GOAGAIN
+Quand une partie est finie, prévient le serveur que le client veut s'inscrire à la nouvelle partie
+
 ## Envoyés par le serveur
 
 ### CONNECT_ACCEPT(code, numPlayer)
@@ -94,7 +97,9 @@ Envoi le classement à la fin de la partie
 
 Exemple:
 ```
-{
-  
-}
+[
+    {"numPlayer":"1", "name": "Portrick", "score":"23", isActive: true, "classement": 1},
+    {"numPlayer":"2", "name": "Faewynn", "score":"178", isActive: true, "classement": 2},
+    {"numPlayer":"3", "name": "Pancake", "score":"87", isActive: false, "classement": 3},
+]
 ```
