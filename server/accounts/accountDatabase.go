@@ -75,6 +75,7 @@ func GetAllAccounts() (list globals.Classement){
 	db.View(func(tx *bolt.Tx) error {
 	    bucket := tx.Bucket([]byte("Accounts"))
 	    bucket.ForEach(func(name, account []byte) error {
+				fmt.Println("loop")
 					var accountStruct Account
 					json.Unmarshal(account, &accountStruct)
 					newPlayer := globals.PlayerClassement{0, 0, accountStruct.Name, accountStruct.Points, accountStruct.NbrGames, accountStruct.NbrWins}

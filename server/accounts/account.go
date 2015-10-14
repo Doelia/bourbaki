@@ -47,21 +47,22 @@ func IsValidUsername(name string) bool {
 
 // GetGeneralLadder ..
 func GetGeneralLadder() globals.Classement{
-	var classementtb globals.Classement = GetAllAccounts()
+	var classementaccount globals.Classement = GetAllAccounts()
+	var classementplayer globals.Classement
 	// 1e étape: récupération du classement
-	for _, player := range classementtb {
+	for _, player := range classementaccount {
 		p := globals.PlayerClassement{0, player.NumPlayer, player.Name, player.Score, player.NbrGames, player.NbrWins}
-		classementtb = append(classementtb, p)
+		classementplayer = append(classementplayer, p)
 	}
 
 	// 2e étape: tri par Score
-	sort.Sort(globals.ByScore{classementtb})
+	sort.Sort(globals.ByScore{classementplayer})
 
 	// 3e étape: ajout de l'attribut Classement
-	for i := 1; i <= len(classementtb); i++ {
-		classementtb[i-1].Classement = i
+	for i := 1; i <= len(classementplayer); i++ {
+		classementplayer[i-1].Classement = i
 	}
-	accountLogger.Println("Classement: ", classementtb)
+	accountLogger.Println("Classement: ", classementplayer)
 
-	return classementtb
+	return classementplayer
 }
