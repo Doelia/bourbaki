@@ -71,6 +71,21 @@ func deleteFromDB(cle string) {
 	})
 }
 
+func GetAllAccounts() (list globals.Classement){
+	db.View(func(tx *bolt.Tx) error {
+	    bucket := tx.Bucket([]byte("Accounts"))
+	    bucket.ForEach(func(name, account []byte) error {
+					var accountStruct Account
+					json.Unmarshal(account, &accountStruct)
+					newPlayer := globals.PlayerClassement{0, 0, accountStruct.Name, accountStruct.Points, accountStruct.NbrGames, accountStruct.NbrWins}
+					list = append(list, newPlayer)
+	        return nil
+	    })
+	    return nil
+	})
+	return
+}
+
 // UpdateAccount Met à jour l'account passé en parametre dans la BD
 // @param updatedAccount: le compte à insérer dans la BD
 // @return bool: vaut vrai si l'update a fonctionné, faux sinon
@@ -122,4 +137,5 @@ func Testdb() {
 	result := GetFromDB("cheval")
 	fmt.Println(result.Name)
 	fmt.Println(result.Points)
+	GetAllAccounts()
 }

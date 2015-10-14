@@ -31,6 +31,6 @@ type PlayerClassement struct {
 	NumPlayer  int
 	Name       string
 	Score      int
-	NbrGames int
-	NbrWins int
+	NbrGames   int
+	NbrWins    int
 }

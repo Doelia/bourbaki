@@ -22,8 +22,9 @@ func createTimer() *Timer {
 	return t
 }
 
-// LuanchNewTimer Démarre un nouveau timer (et annule le précédent)
-func (t *Timer) LuanchNewTimer() {
+
+// LaunchNewTimer Démarre un nouveau timer (et annule le précédent)
+func (t *Timer) LaunchNewTimer() {
 	t.autoIncrement++
 	t.curentID = t.autoIncrement
 	timerLog.Println("LuanchNewTimer, curentID = ", t.curentID)

@@ -3,6 +3,7 @@ package accounts
 import (
 	"go-bourbaki/server/globals"
 	"regexp"
+	"sort"
 )
 
 // Account structure
@@ -42,4 +43,25 @@ func IsValidUsername(name string) bool {
 		return false
 	}
 	return matched
+}
+
+// GetGeneralLadder ..
+func GetGeneralLadder() globals.Classement{
+	var classementtb globals.Classement = GetAllAccounts()
+	// 1e étape: récupération du classement
+	for _, player := range classementtb {
+		p := globals.PlayerClassement{0, player.NumPlayer, player.Name, player.Score, player.NbrGames, player.NbrWins}
+		classementtb = append(classementtb, p)
+	}
+
+	// 2e étape: tri par Score
+	sort.Sort(globals.ByScore{classementtb})
+
+	// 3e étape: ajout de l'attribut Classement
+	for i := 1; i <= len(classementtb); i++ {
+		classementtb[i-1].Classement = i
+	}
+	accountLogger.Println("Classement: ", classementtb)
+
+	return classementtb
 }
