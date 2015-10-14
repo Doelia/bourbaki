@@ -9,7 +9,7 @@ import (
 var timerLog = log.New(os.Stdout, "[timer] ", 0)
 
 // TIMEPERTURN Temps pour jouer, en secondes
-const TIMEPERTURN = 1
+const TIMEPERTURN = 15
 
 // Timer TODO
 type Timer struct {
@@ -38,7 +38,7 @@ func (t *Timer) Cancel() {
 
 func (t *Timer) endTimer(id int) {
 	timerLog.Println("wait end timer ", id)
-	time.Sleep(300 * time.Millisecond)
+	time.Sleep(TIMEPERTURN * time.Second)
 	timerLog.Println("endTimer ? ", id, " vs ", t.curentID)
 	if t.curentID == id {
 		AI()
