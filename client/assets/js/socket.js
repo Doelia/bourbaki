@@ -83,13 +83,14 @@ function init_socket() {
 
         var json = data[0];
 
+        console.log(json);
         for (var i in json) {
             var p = json[i];
 
-            var classement = p.classement;
-            var numPlayer = p.numPlayer;
-            var name = p.name;
-            var score = p.score;
+            var classement = p.Classement;
+            var numPlayer = p.NumPlayer;
+            var name = p.Name;
+            var score = p.Score;
 
             $('#endGame tbody').append('<tr></tr>');
 
