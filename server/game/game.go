@@ -109,7 +109,7 @@ func (g *Game) GetLadder() classement {
 	var classementtb classement
 	// 1e étape: récupération du classement
 	for _, player := range g.playersList {
-		p := globals.PlayerClassement{0, player.NumPlayer, player.Name, player.Score}
+		p := globals.PlayerClassement{0, player.NumPlayer, player.Name, player.Score, 0, 0}
 		classementtb = append(classementtb, p)
 	}
 
