@@ -83,6 +83,8 @@ function init_socket() {
 
         var json = data[0];
 
+        $('#endGame tbody').html('');
+
         console.log(json);
         for (var i in json) {
             var p = json[i];
@@ -104,8 +106,8 @@ function init_socket() {
             tr.append('<td>'+score+' points</td>');
 
             if (numPlayer == myNum) {
-                $('#myScore').html(score);
-                $('#myClassement').html(classement + (classement == 1 ? 'er' : 'ème') );
+                $('#myScore').html(score+' points');
+                $('#myClassement').html(classement + (classement == 1 ? 'er' : 'ème'));
             }
         }
 
