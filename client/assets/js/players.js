@@ -10,7 +10,7 @@ var Players = function() {
     this._nbrPlayers = 0; // Nombre de joueurs dans la partie
     this._actualPercent = 100; // Pour réaffichage du timer au refresh des scores
 
-    this._TIMETURN = 15; // Temps en seconde pour faire une action. Se coordoner avec le serveur.
+    this._TIMETURN = 8; // Temps en seconde pour faire une action. Se coordoner avec le serveur.
 
     /**
      * Retourne le numéro du joueur précedent le joueur actif

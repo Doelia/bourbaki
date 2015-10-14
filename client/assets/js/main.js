@@ -33,10 +33,11 @@ function stopAll() {
     socket.close();
 }
 
+
 $(document).ready(function() {
     init_socket();
     loadLogin();
     // socket.emit('LOGIN', 'tata', 'tututu');
     // init_game();
-    //$('#endGame').modal('show');
+    // $('#endGame').modal('show');
 });

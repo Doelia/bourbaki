@@ -63,6 +63,10 @@ function init_game() {
         }
     });
 
+    $('#ladderBtn').click(function() {
+        socket.emit("ASKLADDER", "");
+    });
+
     console.log("send ready");
     socket.emit("READY", "OK");
 

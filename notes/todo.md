@@ -7,7 +7,7 @@
 - Faire un diagramme d'état pour les évenements ?
 
 ## Serveur
-- Gameplay : Equilibrer le don de point
+- Gameplay : Equilibrer le don de points
 
 ## Client
 - Ajouter un logo

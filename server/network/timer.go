@@ -9,9 +9,9 @@ import (
 var timerLog = log.New(os.Stdout, "[timer] ", 0)
 
 // TIMEPERTURN Temps pour jouer, en secondes
-const TIMEPERTURN = 15
+const TIMEPERTURN = 8
 
-// Timer TODO
+// Timer Objet pour gérer les timers
 type Timer struct {
 	curentID      int
 	autoIncrement int
@@ -22,7 +22,7 @@ func createTimer() *Timer {
 	return t
 }
 
-// LuanchNewTimer TODO
+// LuanchNewTimer Démarre un nouveau timer (et annule le précédent)
 func (t *Timer) LuanchNewTimer() {
 	t.autoIncrement++
 	t.curentID = t.autoIncrement
@@ -30,12 +30,13 @@ func (t *Timer) LuanchNewTimer() {
 	go t.endTimer(t.curentID)
 }
 
-// Cancel TODO
+// Cancel Annule le timer en cours
 func (t *Timer) Cancel() {
 	timerLog.Println("Canceled")
 	t.curentID = 0
 }
 
+// Fonction callback s'executant à la fin d'un timer
 func (t *Timer) endTimer(id int) {
 	timerLog.Println("wait end timer ", id)
 	time.Sleep(TIMEPERTURN * time.Second)

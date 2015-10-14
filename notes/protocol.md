@@ -19,6 +19,9 @@ Prévient le serveur que le client est prêt, connecté et a chargé son JS pour
 ### GOAGAIN
 Quand une partie est finie, prévient le serveur que le client veut s'inscrire à la nouvelle partie
 
+## ASKLADDER
+Envoyé quand le client veut le classement général (voir Serveur / LADDER pour la suite)
+
 ## Envoyés par le serveur
 
 ### CONNECT_ACCEPT(code, numPlayer)
@@ -103,3 +106,7 @@ Exemple:
     {"numPlayer":"3", "name": "Pancake", "score":"87", isActive: false, "classement": 3},
 ]
 ```
+
+## LADDER(json)
+
+Envoi le classement général quand le client le demande
