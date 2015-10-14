@@ -1,7 +1,6 @@
 package game
 
 import (
-	"fmt"
 	"go-bourbaki/server/accounts"
 	"go-bourbaki/server/globals"
 	"log"
@@ -106,16 +105,22 @@ func (g *Game) SaveScores() {
 }
 
 // GetLadder TODO commentaire
-func (g *Game) GetLadder() {
+func (g *Game) GetLadder() classement {
 	var classementtb classement
 	// 1e étape: récupération du classement
 	for _, player := range g.playersList {
-		classementtb = append(classementtb, globals.PlayerClassement{0, player.NumPlayer, player.Name, player.Score})
+		p := globals.PlayerClassement{0, player.NumPlayer, player.Name, player.Score}
+		classementtb = append(classementtb, p)
 	}
 
 	// 2e étape: tri par Score
 	sort.Sort(ByScore{classementtb})
 
-	fmt.Println(classementtb)
-	//3e étape: ajout de l'attribut Classement
+	// 3e étape: ajout de l'attribut Classement
+	for i := 1; i <= len(classementtb); i++ {
+		classementtb[i-1].Classement = i
+	}
+	gameLogger.Println("Classement: ", classementtb)
+
+	return classementtb
 }

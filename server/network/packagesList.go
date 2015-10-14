@@ -55,3 +55,8 @@ func SendPause() {
 func SendUnpause() {
 	sentToAll("UNPAUSE")
 }
+
+
+func SendEndGame(classement []globals.PlayerClassement){
+	sentToAll("ENDGAME", classement)
+}

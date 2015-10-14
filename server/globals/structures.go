@@ -25,6 +25,7 @@ type Player struct {
 	IDSocket  string
 }
 
+// PlayerClassement structure définissant un joueur dans le tableau du classement
 type PlayerClassement struct {
 	Classement int
 	NumPlayer int

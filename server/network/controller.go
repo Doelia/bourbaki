@@ -126,6 +126,7 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 	if isSquare {
 		for _, squareStruct := range squares {
 			onSquareDone(squareStruct)
+			onEndGame()
 		}
 	} else {
 		game.MyGame.ChangeCurrentPlayer()
@@ -136,7 +137,6 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 	} else {
 		onNewTurn()
 	}
-
 }
 
 // AI ...
@@ -150,10 +150,13 @@ func AI() {
 func onEndGame() {
 	controllerLogger.Println("Fin de la partie")
 
+	MyTimer.Cancel()
+
 	// Enregistrement des scores
 	game.MyGame.SaveScores()
 
 	// Structure Classement
-	game.MyGame.GetLadder()
+	classement := game.MyGame.GetLadder()
+	SendEndGame(classement)
 
 }
