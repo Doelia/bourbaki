@@ -46,7 +46,6 @@ function init_login() {
             var pass = $('.ui.form').form('get value', 'password');
             document.title = login;
             socket.emit("LOGIN", login, pass);
-            myName = login;
         }
     });
 

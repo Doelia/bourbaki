@@ -3,8 +3,6 @@
  * Notation "_" préfixée pour les attributs/méthodes privées
  */
 
-var myName = "undefined";
-
 var Players = function() {
 
     this.activePlayer = 0;

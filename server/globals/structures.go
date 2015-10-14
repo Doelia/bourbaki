@@ -28,7 +28,7 @@ type Player struct {
 // PlayerClassement structure définissant un joueur dans le tableau du classement
 type PlayerClassement struct {
 	Classement int
-	NumPlayer int
+	NumPlayer  int
 	Name       string
 	Score      int
 }

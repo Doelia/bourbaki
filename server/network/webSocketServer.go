@@ -11,6 +11,7 @@ import (
 
 var server *socketio.Server
 var err error
+var historyConnectedPlayers = make(map[string]string)
 
 func createWebSocketHandler() *socketio.Server {
 	if server, err = socketio.NewServer(nil); err == nil {
@@ -61,13 +62,15 @@ func createServerProtocle(*socketio.Server) {
 			if resultatIntLogin > 0 {
 				so.Join("all")
 				onPlayerJoin(so, user, resultatIntLogin)
+				historyConnectedPlayers[so.Id()] = user
 			} else {
 				SendConnectAccept(so, resultatIntLogin, 0)
 			}
 
 		})
 
-		so.On("GOAGAIN", func(user string) {
+		so.On("GOAGAIN", func(i string) {
+			user, _ := historyConnectedPlayers[so.Id()]
 			fmt.Println(user + " veut rejouer")
 			onPlayerJoin(so, user, 1)
 		})

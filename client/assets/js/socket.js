@@ -110,7 +110,7 @@ function init_socket() {
         }
 
         $('#replay').click(function(event) {
-            socket.emit('GOAGAIN', myName);
+            socket.emit('GOAGAIN', "");
         });
 
         $('#endGame')
