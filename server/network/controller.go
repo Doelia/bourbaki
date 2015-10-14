@@ -115,7 +115,6 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 	if isSquare {
 		for _, squareStruct := range squares {
 			onSquareDone(squareStruct)
-			onEndGame()
 		}
 	} else {
 		game.MyGame.ChangeCurrentPlayer()
@@ -142,8 +141,10 @@ func onEndGame() {
 	// Enregistrement des scores
 	game.MyGame.SaveScores()
 
-	// Structure Classement
+	// Envoi de la structure de Classement
 	classement := game.MyGame.GetLadder()
 	SendEndGame(classement)
 
+	//Nouvelle instance de game
+	game.StartNewGame()
 }
