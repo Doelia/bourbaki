@@ -17,6 +17,7 @@
 - Bug : Quand un joueur se déconnecte, le timer disparait
 - Visuel : Problème de bordures sur le tableau de fin de jeu
 - Visuel : Mettre en surbrillance soi même dans les classements (général et local)
+- Ajouter l'accés au classement sur la page du login
 
 ## Cas de triche
 Ces cas doivent être bloqués par le serveur :

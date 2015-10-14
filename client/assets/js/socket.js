@@ -106,6 +106,7 @@ function init_socket() {
             tr.append('<td>'+score+' points</td>');
 
             if (numPlayer == myNum) {
+                // TODO mettre en avant soi même
                 $('#myScore').html(score+' points');
                 $('#myClassement').html(classement + (classement == 1 ? 'er' : 'ème'));
             }
@@ -164,8 +165,7 @@ function init_socket() {
             }
         }
 
-        $('#ladder')
-            .modal('show');
+        $('#ladder').modal('show');
     });
 
 	socket.on('disconnect', function() {
