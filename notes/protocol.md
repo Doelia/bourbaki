@@ -87,3 +87,14 @@ Exemple :
     ],
 }
 ```
+
+## ENDGAME(json)
+
+Envoi le classement à la fin de la partie
+
+Exemple:
+```
+{
+  
+}
+```
