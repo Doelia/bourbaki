@@ -4,6 +4,7 @@ var players;
 
 // Globales
 var myNum; // Numéro du joueur client
+var myName = "undefined";
 
 function loadLogin() {
     $.ajax({url: "/content/login.html", success: function(result) {

@@ -13,9 +13,10 @@
 - Ajouter un logo
 - Rédiger le "Comment jouer ?"
 - Faire propre le "Mot de passe incorrect"
-- Visuel : Problème de bordures sur le tableau de fin de jeu
+- Ajouter des couleurs de joueurs (limité à 4 pour le moment)
 - Bug : Quand un joueur se déconnecte, le timer disparait
-- Ajouter des couleurs
+- Visuel : Problème de bordures sur le tableau de fin de jeu
+- Visuel : Mettre en surbrillance soi même dans les classements (général et local)
 
 ## Cas de triche
 Ces cas doivent être bloqués par le serveur :
