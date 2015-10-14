@@ -11,6 +11,14 @@ import (
 
 var controllerLogger = log.New(os.Stdout, "[event] ", 0)
 
+// Timer ..
+var MyTimer *Timer
+
+// OnCreateGame TODO commentaire
+func OnCreateGame() {
+	MyTimer = createTimer()
+}
+
 func onResume() {
 	controllerLogger.Println("onResume()")
 	SendUnpause()
@@ -92,9 +100,12 @@ func onSquareDone(squareStruct globals.Square) {
 func onNewTurn() {
 	controllerLogger.Println("onNewTurn: ", game.MyGame.CurrentPlayer)
 
+	MyTimer.Cancel()
+
 	if !game.MyGame.CurrentPlayer.IsActive {
 		AI()
 	} else {
+		MyTimer.LuanchNewTimer()
 		SendSetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
 	}
 }

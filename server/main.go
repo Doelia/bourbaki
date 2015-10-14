@@ -25,6 +25,7 @@ func goMain() {
 
 	// Création d'une partie
 	game.StartNewGame()
+	network.OnCreateGame()
 
 	// Création serveur HTTP
 	go network.StartWebServer(*port)

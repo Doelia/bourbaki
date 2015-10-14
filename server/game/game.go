@@ -95,6 +95,7 @@ func (g *Game) RandomLine() (int, int, int) {
 	}
 }
 
+// SaveScores TODO commentaire
 func (g *Game) SaveScores() {
 	for _, player := range g.playersList {
 		account := accounts.GetFromDB(player.Name)
@@ -104,6 +105,7 @@ func (g *Game) SaveScores() {
 	}
 }
 
+// GetLadder TODO commentaire
 func (g *Game) GetLadder() {
 	var classementtb classement
 	// 1e étape: récupération du classement
