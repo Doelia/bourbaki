@@ -1,8 +1,8 @@
 package game
 
 import (
-	"go-bourbaki/server/accounts"
 	"go-bourbaki/server/globals"
+	"go-bourbaki/server/accounts"
 	"log"
 	"math/rand"
 	"os"
@@ -95,18 +95,22 @@ func (g *Game) RandomLine() (int, int, int) {
 }
 
 // SaveScores TODO commentaire
-func (g *Game) SaveScores() {
+func (g *Game) UpdateLadder(nameGagnant string) {
 	for _, player := range g.playersList {
 		account := accounts.GetFromDB(player.Name)
 		account.Points += player.Score
+		account.NbrGames++
+		if (account.Name == nameGagnant){
+			account.NbrWins++
+		}
 		accounts.UpdateAccount(account)
 		gameLogger.Println(player.Name, " gagne ", account.Points, " points")
 	}
 }
 
 // GetLadder TODO commentaire
-func (g *Game) GetLadder() classement {
-	var classementtb classement
+func (g *Game) GetLadder() globals.Classement {
+	var classementtb globals.Classement
 	// 1e étape: récupération du classement
 	for _, player := range g.playersList {
 		p := globals.PlayerClassement{0, player.NumPlayer, player.Name, player.Score, 0, 0}
@@ -114,7 +118,7 @@ func (g *Game) GetLadder() classement {
 	}
 
 	// 2e étape: tri par Score
-	sort.Sort(ByScore{classementtb})
+	sort.Sort(globals.ByScore{classementtb})
 
 	// 3e étape: ajout de l'attribut Classement
 	for i := 1; i <= len(classementtb); i++ {

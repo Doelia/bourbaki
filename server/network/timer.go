@@ -23,7 +23,7 @@ func createTimer() *Timer {
 }
 
 // LuanchNewTimer TODO
-func (t *Timer) LuanchNewTimer() {
+func (t *Timer) LaunchNewTimer() {
 	t.autoIncrement++
 	t.curentID = t.autoIncrement
 	timerLog.Println("LuanchNewTimer, curentID = ", t.curentID)

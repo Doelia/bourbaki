@@ -75,6 +75,11 @@ func createServerProtocle(*socketio.Server) {
 			onPlayerJoin(so, user, 1)
 		})
 
+		so.On("ASKLADDER", func(i string){
+			generalLadder := accounts.GetGeneralLadder()
+			SendLadder(so, generalLadder)
+		})
+
 		// Le client est connecté et est prêt a recevoir les informations
 		so.On("READY", func(i string) {
 			_, err := game.MyGame.GetPlayerFromIDSocket(so.Id())

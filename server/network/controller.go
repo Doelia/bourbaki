@@ -105,7 +105,7 @@ func onNewTurn() {
 	if !game.MyGame.CurrentPlayer.IsActive {
 		AI()
 	} else {
-		MyTimer.LuanchNewTimer()
+		MyTimer.LaunchNewTimer()
 		SendSetActivePlayers(game.MyGame.CurrentPlayer.NumPlayer)
 	}
 }
@@ -151,12 +151,12 @@ func onEndGame() {
 
 	MyTimer.Cancel()
 
-	// Enregistrement des scores
-	game.MyGame.SaveScores()
-
 	// Envoi de la structure de Classement
 	classement := game.MyGame.GetLadder()
 	SendEndGame(classement)
+
+	// Enregistrement des scores
+	game.MyGame.UpdateLadder(classement[0].Name)
 
 	//Nouvelle instance de game
 	game.StartNewGame()

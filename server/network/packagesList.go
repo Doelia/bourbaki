@@ -59,3 +59,7 @@ func SendUnpause() {
 func SendEndGame(classement []globals.PlayerClassement) {
 	sentToAll("ENDGAME", classement)
 }
+
+func SendLadder(client socketio.Socket, classementG []globals.PlayerClassement){
+	sendToClient(client, "LADDER", classementG)
+}
