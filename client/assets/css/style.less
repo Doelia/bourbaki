@@ -1,18 +1,20 @@
 // out: style.css, compress: true
 
 /*** Couleurs ***/
-@red: #db2828;
-@olive: #B5CC18;
+@violet: #db2828;
+@vert: #7DD82A;
 @teal: #00B5AD;
 @violet: #6435c9;
 @yellow: #FBBD08;
 
 /*** Correspondances joueur -> couleur ***/
-@c1: @red;
-@c2: @olive;
-@c3: @teal;
-@c4: @violet;
-@c5: @yellow;
+@c1: #C560EF;
+@c2: #EAE40D;
+@c3: #7DD82A;
+@c4: #FBBD08;
+@c5: #FD1F71;
+@c6: white;
+@c7: black;
 
 // Couleur backgroud definer
 .cbg {
@@ -27,6 +29,15 @@
     }
     &[num="4"] {
         background-color: @c4 !important;
+    }
+    &[num="5"] {
+        background-color: @c5 !important;
+    }
+    &[num="6"] {
+        background-color: @c6 !important;
+    }
+    &[num="7"] {
+        background-color: @c7 !important;
     }
 }
 
@@ -89,7 +100,7 @@
                     transition-property: background;
                     transition-duration: .5s;
                     transition-timing-function: ease;
-                    background: #9CBDC7;
+                    background: #81BED0;
                     border-radius: 10px 0 0 10px;
                 }
 
@@ -110,6 +121,9 @@
                                 min-width: 0;
                                 transition-duration: 0ms;
                             }
+                        }
+                        .circular {
+                            border: 1px solid gray;
                         }
 
                     }
@@ -157,7 +171,7 @@
     }
 
     .line {
-        background-color: black; // Couleur par défaut, indéfinie
+        background-color: gray; // Couleur par défaut, indéfinie
         z-index: 2;
         transition-property: width, height, margin, background, margintop, marginleft;
 
@@ -205,8 +219,8 @@
         height: @spaceGrid;
         margin-left: @sizeDot/2;
         margin-top: @sizeDot/2;
-        background-color: black; // Couleur par défaut, indéfinie
-        opacity: .5;
+        background-color: gray; // Couleur par défaut, indéfinie
+        opacity: .8;
         z-index: 1;
         transition-property: background, opacity;
         &.inactive {

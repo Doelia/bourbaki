@@ -9,7 +9,7 @@ import (
 var timerLog = log.New(os.Stdout, "[timer] ", 0)
 
 // TIMEPERTURN Temps pour jouer, en secondes
-const TIMEPERTURN = 8
+const TIMEPERTURN = 9
 
 // Timer Objet pour gérer les timers
 type Timer struct {
@@ -21,7 +21,6 @@ func createTimer() *Timer {
 	t := &Timer{}
 	return t
 }
-
 
 // LaunchNewTimer Démarre un nouveau timer (et annule le précédent)
 func (t *Timer) LaunchNewTimer() {
