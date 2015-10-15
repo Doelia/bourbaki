@@ -112,7 +112,7 @@ func onNewTurn() {
 
 func onPlayerPlayLine(x int, y int, o int, n int, isIA bool) {
 
-	if game.MyGame.IsPauseNecessary() {
+	if game.MyGame.IsPauseNecessary() || n != game.MyGame.CurrentPlayer.NumPlayer {
 		return
 	}
 
