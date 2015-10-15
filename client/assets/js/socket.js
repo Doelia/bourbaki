@@ -68,6 +68,7 @@ function init_socket() {
         console.log("Recv UPDATEPLAYERS : ");
         console.log(json);
         players.updatePlayers(json);
+        players.updateActivePlayer();
     });
 
     socket.on('SETACTIVEPLAYER', function(data) {
