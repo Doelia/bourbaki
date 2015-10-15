@@ -40,12 +40,6 @@ function init_game() {
 
     players = new Players();
 
-    $('#btn-howto').click(function() {
-        $('#guide')
-            .modal('setting', 'transition', 'vertical flip')
-            .modal('show');
-    });
-
     $('.ttip').popup({
         inverted: true,
         position: 'top center',
@@ -61,10 +55,6 @@ function init_game() {
                 sendAddLine(x,y,o==('v')?1:0);
             }
         }
-    });
-
-    $('#ladderBtn').click(function() {
-        socket.emit("ASKLADDER", "");
     });
 
     console.log("send ready");

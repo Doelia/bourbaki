@@ -6,10 +6,23 @@ var players;
 var myNum; // Numéro du joueur client
 var myName = "undefined";
 
+function init_all() {
+    $('.btn-howto').click(function() {
+        $('#guide')
+            .modal('setting', 'transition', 'vertical flip')
+            .modal('show');
+    });
+
+    $('.btn-ladder').click(function() {
+        socket.emit("ASKLADDER", "");
+    });
+}
+
 function loadLogin() {
     $.ajax({url: "/content/login.html", success: function(result) {
         $("#interface").html(result);
         $("#interface").addClass('login');
+        init_all();
         init_login();
     }});
 }
@@ -19,6 +32,7 @@ function loadGame() {
         $("#interface").html(result);
         $("#interface").removeClass('login');
         $("#interface").addClass('game');
+        init_all();
         init_game();
     }});
 }

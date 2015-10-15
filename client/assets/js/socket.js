@@ -166,7 +166,8 @@ function init_socket() {
             }
         }
 
-        $('#ladder').modal('show');
+        $('#ladder')
+            .modal('show');
     });
 
 	socket.on('disconnect', function() {
