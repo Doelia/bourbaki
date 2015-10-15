@@ -92,7 +92,7 @@ func onSquareDone(squareStruct globals.Square) {
 	lastPlayer, _ := game.MyGame.GetPreviousPlayer()
 	lastPlayer.Score = lastPlayer.Score - 1
 	currentPlayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
-	currentPlayer.Score = currentPlayer.Score + 1
+	currentPlayer.Score = currentPlayer.Score + 5
 
 	SendUpdatePlayers(game.MyGame.GetAllPlayers())
 }
@@ -110,7 +110,7 @@ func onNewTurn() {
 	}
 }
 
-func onPlayerPlayLine(x int, y int, o int, n int) {
+func onPlayerPlayLine(x int, y int, o int, n int, isIA bool) {
 
 	if game.MyGame.IsPauseNecessary() {
 		return
@@ -122,6 +122,11 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 	game.MyGame.AddLine(l)
 	SendDisplayLine(x, y, o, n)
 
+	if (!isIA){
+		currentplayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
+		currentplayer.Score++
+	}
+
 	isSquare, squares := game.MyGame.TestSquare(l)
 	if isSquare {
 		for _, squareStruct := range squares {
@@ -130,7 +135,8 @@ func onPlayerPlayLine(x int, y int, o int, n int) {
 	} else {
 		game.MyGame.ChangeCurrentPlayer()
 	}
-	game.MyGame.GetLadder()
+	SendUpdatePlayers(game.MyGame.GetAllPlayers())
+
 	if game.MyGame.IsEndGame() {
 		onEndGame()
 	} else {
@@ -143,7 +149,7 @@ func AI() {
 	controllerLogger.Println("AI pour " + game.MyGame.CurrentPlayer.Name)
 
 	x, y, o := game.MyGame.RandomLine()
-	onPlayerPlayLine(x, y, o, game.MyGame.CurrentPlayer.NumPlayer)
+	onPlayerPlayLine(x, y, o, game.MyGame.CurrentPlayer.NumPlayer, true)
 }
 
 func onEndGame() {

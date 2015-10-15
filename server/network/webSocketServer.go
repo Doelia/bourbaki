@@ -37,7 +37,7 @@ func createServerProtocle(*socketio.Server) {
 		so.On("PUTLINE", func(x int, y int, o int) {
 			player, err := game.MyGame.GetPlayerFromIDSocket(so.Id())
 			if err == nil {
-				onPlayerPlayLine(x, y, o, player.NumPlayer)
+				onPlayerPlayLine(x, y, o, player.NumPlayer, false)
 			}
 		})
 
