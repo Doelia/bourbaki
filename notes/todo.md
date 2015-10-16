@@ -13,16 +13,10 @@
 - Ajouter un logo
 - Rédiger le "Comment jouer ?"
 - Faire propre le "Mot de passe incorrect"
-- Ajouter des couleurs de joueurs (limité à 4 pour le moment)
-- Bug : Quand un joueur se déconnecte, le timer disparait
 - Visuel : Problème de bordures sur le tableau de fin de jeu
 - Visuel : Mettre en surbrillance soi même dans les classements (général et local)
-- Ajouter l'accés au classement sur la page du login
 
 ## Cas de triche
-Ces cas doivent être bloqués par le serveur :
-- J'envoie une ligne alors que ce n'est pas mon tour
-- J'envoie une ligne qui n'existe pas sur la grille
 
 ## Avant MEP
 - Remettre la popup de première connexion (socket.js -> on CONNECTACCEPT)
