@@ -70,7 +70,7 @@ Ce qui ouvre un serveur web à l'adresse http://locahost:2000
     - Implémentation GO : https://github.com/googollee/go-socket.io
 
 ## Documentation technique
-- Documentation Go du projet générée : http://bourbaki-doc.doelia.fr/pkg/go-bourbaki/ 
+- Documentation Go du projet générée : http://bourbaki-doc.doelia.fr/pkg/go-bourbaki/
 - [Protocole](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/protocol.md) (liste des paquets)
 - [Ébauche diagramme UML](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/raw/master/notes/UMLBourbaki.pdf)
 
@@ -80,7 +80,7 @@ Pour modifier le css, installer le package [lessc](http://lesscss.org/) avec [np
 ```
 sudo npm install -g less
 ```
-Plugin de compilation automatique avec Atom : https://atom.io/packages/less-autocompile
+Plugin de compilation automatique avec Atom : https://atom.io/packages/less-autocompile  
 
 ## Difficultés rencontrées
 - Problèmes avec l'usage de socket.io avec GO
