@@ -72,6 +72,7 @@ Ce qui ouvre un serveur web à l'adresse http://locahost:2000
 ## Documentation technique
 - Documentation Go du projet générée : http://bourbaki-doc.doelia.fr/pkg/go-bourbaki/
 - [Protocole](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/protocol.md) (liste des paquets)
+- [Règles du jeu](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/FAQ.md)
 - [Ébauche diagramme UML](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/raw/master/notes/UMLBourbaki.pdf)
 
 ## Développement
