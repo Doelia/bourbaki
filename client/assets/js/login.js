@@ -34,6 +34,19 @@ function init_login() {
                         prompt : 'Votre mot de passe doit comporter au moins 6 caractères'
                     }
                 ]
+            },
+            verification: {
+                identifier  : 'verification',
+                rules: [
+                    {
+                        type   : 'doesntContain[incorrect]',
+                        prompt : 'Mot de passe incorrect'
+                    },
+                    {
+                        type   : 'doesntContain[invalid]',
+                        prompt : 'Pseudo invalide. Trop long ? Caractères spéciaux ?'
+                    }
+                ]
             }
         }
     });

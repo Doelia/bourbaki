@@ -25,10 +25,14 @@ function init_socket() {
         } else { // Erreur
             $('.ui.form').removeClass('loading');
             if (code == -1) {
-                alert("[Message provisoire] Nom de compte invalide. Trop long ? Caractères spéciaux ?");
+                $('#verification_manual').val('invalid');
             } else {
-                alert("[Message provisoire] Mot de passe incorrect");
+                $('#verification_manual').val('incorrect');
             }
+            setTimeout(function() {
+                $('.ui.form').form('validate form');
+                $('#verification_manual').val('');
+            }, 200);
         }
     });
 

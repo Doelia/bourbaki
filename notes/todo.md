@@ -12,7 +12,6 @@
 ## Client
 - Ajouter un logo
 - Rédiger le "Comment jouer ?"
-- Faire propre le "Mot de passe incorrect"
 - Visuel : Problème de bordures sur le tableau de fin de jeu
 - Visuel : Mettre en surbrillance soi même dans les classements (général et local)
 
