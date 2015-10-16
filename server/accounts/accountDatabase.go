@@ -1,14 +1,11 @@
 package accounts
 
 import (
-	"crypto/md5"
 	"encoding/json"
-	"fmt"
+	"github.com/boltdb/bolt"
 	"go-bourbaki/server/globals"
 	"log"
 	"os"
-
-	"github.com/boltdb/bolt"
 )
 
 var db *bolt.DB
@@ -30,7 +27,7 @@ func OpenDB() {
 	})
 }
 
-// Permet l'ajout de a dans la bd
+// addInDB Permet l'ajout de a dans la bd
 // @param cle string: Name de l'account à ajouter
 // @param a Account : La structure account à ajouter
 // @return bool : Vrai si l'ajout a bien été fait, faux sinon
@@ -42,13 +39,13 @@ func addInDB(cle string, account Account) bool {
 		return err
 	})
 	if err != nil {
-		globals.ErrLogger.Println("Erreur update")
+		globals.ErrLogger.Println("Erreur lors de l'ajout dans la DB")
 		return false
 	}
 	return true
 }
 
-// Récupère l'account ayant pour clé celle passée en paramètre
+// GetFromDB Récupère l'account ayant pour clé celle passée en paramètre
 // @param cle: Name de l'account à récupérer
 // @return Account: Le compte correspondant
 func GetFromDB(cle string) (account Account) {
@@ -61,28 +58,18 @@ func GetFromDB(cle string) (account Account) {
 	return
 }
 
-// Supprime l'account ayant pour cle celle passée en paramètre
-// @param cle: Name de l'account à supprimer
-func deleteFromDB(cle string) {
-	db.Update(func(tx *bolt.Tx) error {
-		bucket := tx.Bucket([]byte("Accounts"))
-		bucket.Delete([]byte(cle))
-		return nil
-	})
-}
-
-func GetAllAccounts() (list globals.Classement){
+// GetAllAccounts Permet de récupérer la liste de tous les comptes de la base de données
+func GetAllAccounts() (list globals.Classement) {
 	db.View(func(tx *bolt.Tx) error {
-	    bucket := tx.Bucket([]byte("Accounts"))
-	    bucket.ForEach(func(name, account []byte) error {
-				fmt.Println("loop")
-					var accountStruct Account
-					json.Unmarshal(account, &accountStruct)
-					newPlayer := globals.PlayerClassement{0, 0, accountStruct.Name, accountStruct.Points, accountStruct.NbrGames, accountStruct.NbrWins}
-					list = append(list, newPlayer)
-	        return nil
-	    })
-	    return nil
+		bucket := tx.Bucket([]byte("Accounts"))
+		bucket.ForEach(func(name, account []byte) error {
+			var accountStruct Account
+			json.Unmarshal(account, &accountStruct)
+			newPlayer := globals.PlayerClassement{0, 0, accountStruct.Name, accountStruct.Points, accountStruct.NbrGames, accountStruct.NbrWins}
+			list = append(list, newPlayer)
+			return nil
+		})
+		return nil
 	})
 	return
 }
@@ -98,7 +85,7 @@ func UpdateAccount(updatedAccount Account) bool {
 		return err
 	})
 	if err != nil {
-		globals.ErrLogger.Println("Erreur update")
+		globals.ErrLogger.Println("Erreur update de l'account dans la DB")
 		return false
 	}
 	return true
@@ -117,26 +104,4 @@ func Exists(cle string) (Account, bool) {
 		return nil
 	})
 	return account, account.Name != ""
-}
-
-// CreateAccount Permet de créer une structure Account
-// @param n: name de l'account
-// @param p: mot de passe de l'account
-func CreateAccount(name string, pass string) Account {
-	motdepassemd5 := md5.Sum([]byte(pass))
-	account := Account{name, motdepassemd5, 0, 0, 0}
-	return account
-}
-
-// Testdb ..
-func Testdb() {
-	test := CreateAccount("cheval", "blanc")
-	addInDB("cheval", test)
-	nveautest := Account{"cheval", md5.Sum([]byte("blanc")), 100, 0, 0}
-	UpdateAccount(nveautest)
-
-	result := GetFromDB("cheval")
-	fmt.Println(result.Name)
-	fmt.Println(result.Points)
-	GetAllAccounts()
 }

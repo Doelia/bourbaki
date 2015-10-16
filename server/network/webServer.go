@@ -10,7 +10,7 @@ import (
 
 var networkLogger = log.New(os.Stdout, "[network] ", 0)
 
-// StartWebServer démarre le serveur web (http + websockets)
+// StartWebServer Démarrage du serveur web (http + websockets)
 func StartWebServer(port int) {
 	networkLogger.Printf("Serveur web en écoute sur le port %d.\n", port)
 	http.Handle("/", http.FileServer(http.Dir("../client")))
