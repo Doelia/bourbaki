@@ -104,14 +104,14 @@ function init_socket() {
             var tr = $('#endGame tbody tr:last');
 
             tr.append('<td>'+classement+'.</td>');
-            tr.append('<h4 class="ui image header">'+
+            tr.append('<td><h4 class="ui image header">'+
                 '<div class="ui left floated cbg circular label" num="'+numPlayer+'"></div>'+
                 '<div class="content">'+name+'</div>'+
-                '</h4>');
+                '</h4></td>');
             tr.append('<td>'+score+' points</td>');
 
             if (numPlayer == myNum) {
-                // TODO mettre en avant soi même
+                tr.addClass('warning');
                 $('#myScore').html(score+' points');
                 $('#myClassement').html(classement + (classement == 1 ? 'er' : 'ème'));
             }
