@@ -11,10 +11,10 @@ import (
 
 var controllerLogger = log.New(os.Stdout, "[event] ", 0)
 
-// Timer ..
+// Timer Définition du timer décomptant le temps d'un tour
 var MyTimer *Timer
 
-// OnCreateGame Executé quand une nouvelle partie
+// OnCreateGame Executé quand on commence une nouvelle partie
 func OnCreateGame() {
 	MyTimer = createTimer()
 }
@@ -45,12 +45,10 @@ func onPlayerJoin(so socketio.Socket, user string, resultatIntLogin int) {
 		player.IDSocket = so.Id()
 	}
 	if game.MyGame.CurrentPlayer == nil {
-		game.MyGame.CurrentPlayer = player
+		game.MyGame.CurrentPlayer = player // Premier joueur rejoignant la partie
 	}
 	player.IsActive = true
 	SendConnectAccept(so, resultatIntLogin, numPlayer)
-
-	// Suivera d'un onReady()
 }
 
 func onReady(so socketio.Socket) {
@@ -67,6 +65,8 @@ func onReady(so socketio.Socket) {
 	}
 }
 
+// onLeft permet de mettre à jour la partie lors d'un départ d'un joueur
+// @param player: le joueur qui vient de se déconnecter
 func onLeft(player *globals.Player) {
 	controllerLogger.Println("onLeft: ", player.Name)
 
@@ -80,7 +80,6 @@ func onLeft(player *globals.Player) {
 			AI()
 		}
 	}
-
 }
 
 func onSquareDone(squareStruct globals.Square) {
@@ -94,11 +93,6 @@ func onSquareDone(squareStruct globals.Square) {
 	currentPlayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
 	currentPlayer.Score = currentPlayer.Score + 5
 
-
-//Test
-classement := game.MyGame.GetLadder()
-SendEndGame(classement)
-//Test
 	SendUpdatePlayers(game.MyGame.GetAllPlayers())
 }
 
@@ -116,8 +110,7 @@ func onNewTurn() {
 }
 
 func onPlayerPlayLine(x int, y int, o int, n int, isIA bool) {
-
-	if game.MyGame.IsPauseNecessary() || n != game.MyGame.CurrentPlayer.NumPlayer || !game.MyGame.IsPlayable(x,y,o){
+	if game.MyGame.IsPauseNecessary() || n != game.MyGame.CurrentPlayer.NumPlayer || !game.MyGame.IsPlayable(x, y, o) {
 		return
 	}
 
@@ -127,7 +120,7 @@ func onPlayerPlayLine(x int, y int, o int, n int, isIA bool) {
 	game.MyGame.AddLine(l)
 	SendDisplayLine(x, y, o, n)
 
-	if (!isIA){
+	if !isIA {
 		currentplayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
 		currentplayer.Score++
 	}

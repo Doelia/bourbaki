@@ -42,7 +42,6 @@ func createServerProtocle(*socketio.Server) {
 		})
 
 		so.On("LOGIN", func(user string, pass string) {
-
 			if !accounts.IsValidUsername(user) {
 				SendConnectAccept(so, -1, 0) // Refus de la connexion
 				return
@@ -75,7 +74,7 @@ func createServerProtocle(*socketio.Server) {
 			onPlayerJoin(so, user, 1)
 		})
 
-		so.On("ASKLADDER", func(i string){
+		so.On("ASKLADDER", func(i string) {
 			generalLadder := accounts.GetGeneralLadder()
 			SendLadder(so, generalLadder)
 		})
@@ -93,11 +92,13 @@ func createServerProtocle(*socketio.Server) {
 	})
 }
 
-func sentToAll(namePackage string, args ...interface{}) {
+// sendToAll permet l'envoi d'un paquet à tous les clients
+func sendToAll(namePackage string, args ...interface{}) {
 	server.BroadcastTo("all", namePackage, args)
 	networkLogger.Println("send@all: ", namePackage, args)
 }
 
+// sendToClient permet l'envoi d'un paquet à un client
 func sendToClient(client socketio.Socket, namePackage string, args ...interface{}) {
 	client.Emit(namePackage, args)
 	networkLogger.Println("send@client: ", namePackage, args)

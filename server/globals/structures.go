@@ -1,11 +1,11 @@
 package globals
 
-// Line Représente une ligne sur le plateau (active ou non)
+// Line Représente une ligne sur le plateau (active si n!=0)
 type Line struct {
 	X, Y, O, N int
 }
 
-// Square Représente un carré sur le plateu (actif ou non)
+// Square Représente un carré sur le plateu (actif si n!=0)
 type Square struct {
 	X, Y, N int
 }

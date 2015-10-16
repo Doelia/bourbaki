@@ -8,12 +8,12 @@ import (
 
 var timerLog = log.New(os.Stdout, "[timer] ", 0)
 
-// TIMEPERTURN Temps pour jouer, en secondes
+// TIMEPERTURN Définition de la durée d'un tour pour un joueur, en secondes
 const TIMEPERTURN = 9
 
 // Timer Objet pour gérer les timers
 type Timer struct {
-	curentID      int
+	currentID     int
 	autoIncrement int
 }
 
@@ -25,23 +25,23 @@ func createTimer() *Timer {
 // LaunchNewTimer Démarre un nouveau timer (et annule le précédent)
 func (t *Timer) LaunchNewTimer() {
 	t.autoIncrement++
-	t.curentID = t.autoIncrement
-	timerLog.Println("LuanchNewTimer, curentID = ", t.curentID)
-	go t.endTimer(t.curentID)
+	t.currentID = t.autoIncrement
+	timerLog.Println("LaunchNewTimer, currentID = ", t.currentID)
+	go t.endTimer(t.currentID)
 }
 
 // Cancel Annule le timer en cours
 func (t *Timer) Cancel() {
 	timerLog.Println("Canceled")
-	t.curentID = 0
+	t.currentID = 0
 }
 
 // Fonction callback s'executant à la fin d'un timer
 func (t *Timer) endTimer(id int) {
 	timerLog.Println("wait end timer ", id)
 	time.Sleep(TIMEPERTURN * time.Second)
-	timerLog.Println("endTimer ? ", id, " vs ", t.curentID)
-	if t.curentID == id {
+	timerLog.Println("endTimer ? ", id, " vs ", t.currentID)
+	if t.currentID == id {
 		AI()
 	}
 }

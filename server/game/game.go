@@ -1,8 +1,8 @@
 package game
 
 import (
-	"go-bourbaki/server/globals"
 	"go-bourbaki/server/accounts"
+	"go-bourbaki/server/globals"
 	"log"
 	"math/rand"
 	"os"
@@ -20,6 +20,7 @@ type Game struct {
 }
 
 // MyGame variable globable de l'instance unique d'une partie
+// redéfinie à chaque partie
 var MyGame *Game
 
 // ConstructGame Construit et initialise un nouveau jeu
@@ -29,7 +30,7 @@ func ConstructGame() *Game {
 	return game
 }
 
-// StartNewGame Démarre une nouvelle partie en initialisant tous les structures associées
+// StartNewGame Démarre une nouvelle partie en initialisant toutes les structures associées
 func StartNewGame() {
 	gameLogger.Println("Création d'une nouvelle partie...")
 	MyGame = ConstructGame()
@@ -49,20 +50,19 @@ func (g *Game) ChangeCurrentPlayer() {
 	g.CurrentPlayer = newCurrentPlayer
 }
 
-// IsPauseNecessary permet de savoir si une pause est nécessaire (nbJoueursActifs >= 2)
+// IsPauseNecessary retourne vrai si une pause est nécessaire (nbJoueursActifs < 2)
 func (g *Game) IsPauseNecessary() bool {
-	//on compte le nombre de joueurs actifs
 	compteur := 0
 	for _, playerStruct := range g.playersList {
 		if playerStruct.IsActive == true {
-			compteur++
+			compteur++ //on compte le nombre de joueurs actifs
 		}
 	}
 	return compteur < 2
 }
 
-// IsEndGame permet de savoir si la partie est finie
-// TODO EndGameManager
+// IsEndGame retourne vrai si la partie est finie
+// (i.e. toute les carrés sont remplis)
 func (g *Game) IsEndGame() bool {
 	for i := 0; i < len(g.squares)-1; i++ {
 		for j := 0; j < len(g.squares)-1; j++ {
@@ -74,15 +74,8 @@ func (g *Game) IsEndGame() bool {
 	return true
 }
 
-// GetPreviousPlayer permet de récupérer le joueur précédent
-func (g *Game) GetPreviousPlayer() (*globals.Player, error) {
-	if g.CurrentPlayer.NumPlayer == 1 {
-		return g.GetPlayerFromNumPlayer(len(g.playersList))
-	}
-	return g.GetPlayerFromNumPlayer(g.CurrentPlayer.NumPlayer - 1)
-}
-
-// RandomLine Retoune une ligne aléatoire du plateau pas encore jouée
+// RandomLine Retoune une ligne aléatoire du plateau pas encore active
+// (gestion IA)
 func (g *Game) RandomLine() (int, int, int) {
 	for {
 		i := rand.Intn(globals.GRIDSIZE)
@@ -94,21 +87,7 @@ func (g *Game) RandomLine() (int, int, int) {
 	}
 }
 
-// SaveScores TODO commentaire
-func (g *Game) UpdateLadder(nameGagnant string) {
-	for _, player := range g.playersList {
-		account := accounts.GetFromDB(player.Name)
-		account.Points += player.Score
-		account.NbrGames++
-		if (account.Name == nameGagnant){
-			account.NbrWins++
-		}
-		accounts.UpdateAccount(account)
-		gameLogger.Println(player.Name, " gagne ", account.Points, " points")
-	}
-}
-
-// GetLadder TODO commentaire
+// GetLadder Permet de récupérer le classement à la fin de la partie
 func (g *Game) GetLadder() globals.Classement {
 	var classementtb globals.Classement
 	// 1e étape: récupération du classement
@@ -127,4 +106,19 @@ func (g *Game) GetLadder() globals.Classement {
 	gameLogger.Println("Classement: ", classementtb)
 
 	return classementtb
+}
+
+// UpdateLadder Permet de mettre à jour le score de la partie dans la BD
+//@param nameGagnant: nom du joueur ayant terminé premier
+func (g *Game) UpdateLadder(nameGagnant string) {
+	for _, player := range g.playersList {
+		account := accounts.GetFromDB(player.Name)
+		account.Points += player.Score
+		account.NbrGames++
+		if account.Name == nameGagnant {
+			account.NbrWins++
+		}
+		accounts.UpdateAccount(account)
+		gameLogger.Println(player.Name, " gagne ", account.Points, " points")
+	}
 }
