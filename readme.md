@@ -80,7 +80,8 @@ Pour modifier le css, installer le package [lessc](http://lesscss.org/) avec [np
 ```
 sudo npm install -g less
 ```
-Plugin de compilation automatique avec Atom : https://atom.io/packages/less-autocompile  
+Plugin de compilation automatique avec Atom : https://atom.io/packages/less-autocompile
+
 
 ## Difficultés rencontrées
 - Problèmes avec l'usage de socket.io avec GO
