@@ -90,10 +90,10 @@ func (g *Game) GetActivesSquaresList() (list []globals.Square) {
 
 // IsPlayable Retourne vrai si la ligne est jouable, faux sinon (élimination cas de triche)
 func (g *Game) IsPlayable(x int, y int, o int) bool{
-	if x > 0 || x < globals.GRIDSIZE {
+	if x < 0 || x >= globals.GRIDSIZE {
 		return false
 	}
-	if y > 0 || y < globals.GRIDSIZE {
+	if y < 0 || y >= globals.GRIDSIZE {
 		return false
 	}
 	return g.lines[x][y][o] == 0
