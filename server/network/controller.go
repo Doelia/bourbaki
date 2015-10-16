@@ -94,6 +94,11 @@ func onSquareDone(squareStruct globals.Square) {
 	currentPlayer, _ := game.MyGame.GetPlayerFromNumPlayer(game.MyGame.CurrentPlayer.NumPlayer)
 	currentPlayer.Score = currentPlayer.Score + 5
 
+
+//Test
+classement := game.MyGame.GetLadder()
+SendEndGame(classement)
+//Test
 	SendUpdatePlayers(game.MyGame.GetAllPlayers())
 }
 
