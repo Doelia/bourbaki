@@ -84,7 +84,7 @@ sudo npm install -g less
 Plugin de compilation automatique avec Atom : https://atom.io/packages/less-autocompile.
 
 
-## Difficultés rencontrées
+## Difficultés rencontrées
 - Problèmes avec l'usage de socket.io avec GO
     - La déclaration de paquets sans paramètre entraine la désactivation d'autres paquets (la déconnexion par exemple)
 - Les nombreux évenements modifiant le déroulement du jeu (déconnexion d'un joueur, démarrage de pause, chronos...) génèrent souvent des conflits entre eux. Il est courant de tomber dans des appels récursifs ou dans un bloquage total de la partie sans une étude rigoureuse
