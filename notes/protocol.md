@@ -19,7 +19,7 @@ Prévient le serveur que le client est prêt, connecté et a chargé son JS pour
 ### GOAGAIN
 Quand une partie est finie, prévient le serveur que le client veut s'inscrire à la nouvelle partie
 
-## ASKLADDER
+### ASKLADDER
 Envoyé quand le client veut le classement général (voir Serveur / LADDER pour la suite)
 
 ## Envoyés par le serveur
@@ -94,7 +94,7 @@ Exemple :
 }
 ```
 
-## ENDGAME(json)
+### ENDGAME(json)
 
 Envoi le classement à la fin de la partie
 
@@ -107,6 +107,6 @@ Exemple:
 ]
 ```
 
-## LADDER(json)
+### LADDER(json)
 
-Envoi le classement général quand le client le demande
+Permet d'envoyer le classement général au client qui le demande (Paque ASKLADDER)
