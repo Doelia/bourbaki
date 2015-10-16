@@ -19,7 +19,7 @@ function init_socket() {
         if (code == 1 || code == 2) {
             myNum = numPlayer;
             if (code == 2) {
-                //$('#register_done').modal('show'); // Désactivé pour le dev
+                $('#register_done').modal('show'); // Désactivé pour le dev
             }
             loadGame();
         } else { // Erreur

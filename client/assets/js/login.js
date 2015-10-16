@@ -57,7 +57,7 @@ function init_login() {
             $('.ui.form').addClass('loading');
             var login = $('.ui.form').form('get value', 'user');
             var pass = $('.ui.form').form('get value', 'password');
-            document.title = login;
+            document.title = "Bourbaki - "+login;
             myName = login;
             socket.emit("LOGIN", login, pass);
         }

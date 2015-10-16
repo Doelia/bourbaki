@@ -14,8 +14,3 @@
 - Rédiger le "Comment jouer ?"
 
 ## Cas de triche
-
-## Avant MEP
-- Remettre la popup de première connexion (socket.js -> on CONNECTACCEPT)
-- Retirer les boutons de login colorés
-- Retirer le changement de title ?
