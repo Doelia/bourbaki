@@ -13,14 +13,47 @@ Le jeu se joue généralement avec papier et crayon sur du papier quadrillé. À
 ## Fonctionnalités
 
 - Connexion / Inscription rapide
-- Une partie unique à laquelle des joueurs peuvent se connecter à tout moment
-- Gestion des connexions / déconnexions
+- Partie unique à laquelle des joueurs peuvent se connecter à tout moment
+- Gestion des connexions / déconnexions en pleine partie
+- Temps limité pour jouer
+- IA en cas de déconnexion d'un joueur ou de temps écoulé
 - Calcul et affichage des scores en temps réél
-- Classement général avec cumul des points (ou parties gagnées ?)
+- Classement général avec cumul des points gagnés
 
-Détail complet :  https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/features.md
+*Le maximum du développement sera déporté sur le serveur, idéalement le client se tâchera de faire uniquement de l'affichage.*
 
-## Technologies
+Détail complet des fonctionnalités :  https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/features.md
+
+## Démonstration en ligne
+La dernière version du jeu est en ligne publiquement sur http://bourbaki.doelia.fr
+
+## Installation et utilisation
+
+Récupérer le projet dans le src/ du GOPATH :
+```
+cd $GOPATH/src
+git clone https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki.git
+```
+
+Dépendances :
+```
+go get github.com/boltdb/bolt/
+go get github.com/googollee/go-socket.io
+```
+
+Compilation et installation :
+```
+cd $GOPATH/src/go-bourbaki/server
+go install
+```
+
+Lancement du serveur :
+```
+server -port 2000
+```
+Ce qui ouvre un serveur web à l'adresse http://locahost:2000
+
+## Technologies utilisées
 
 - Serveur GO
     - Envoi des ressources via HTTP
@@ -33,8 +66,14 @@ Détail complet :  https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/bl
 - Communication via WebSockets avec la librairie [Socket.io](http://socket.io/)
     - Implémentation GO : https://github.com/googollee/go-socket.io
 
-*Le maximum du développement sera déporté sur le serveur, idéalement le client se tâchera de faire uniquement de l'affichage.*
-
 ## Documentation technique
 - [Protocole](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/protocol.md) (liste des paquets)
 - [Ébauche diagramme UML](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/raw/master/notes/UMLBourbaki.pdf)
+
+## Développement
+
+Pour modifier le css, installer le package [lessc](http://lesscss.org/) avec [npm](https://www.npmjs.com/) :
+```
+sudo npm install -g less
+```
+Plugin de compilation automatique avec Atom : https://atom.io/packages/less-autocompile
