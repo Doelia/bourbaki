@@ -109,4 +109,4 @@ Exemple:
 
 ### LADDER(json)
 
-Permet d'envoyer le classement général au client qui le demande (Paque ASKLADDER)
+Permet d'envoyer le classement général au client qui le demande (voir paquet ASKLADDER)

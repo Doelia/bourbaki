@@ -2,10 +2,11 @@ package accounts
 
 import (
 	"encoding/json"
-	"github.com/boltdb/bolt"
 	"go-bourbaki/server/globals"
 	"log"
 	"os"
+
+	"github.com/boltdb/bolt"
 )
 
 var db *bolt.DB

@@ -11,7 +11,7 @@ func (g *Game) GetNewNumPlayer() int {
 }
 
 // GetPreviousPlayer permet de récupérer le joueur précédent
-//@return un pointeur vers le joueur
+// @return un pointeur vers le joueur
 func (g *Game) GetPreviousPlayer() (*globals.Player, error) {
 	if g.CurrentPlayer.NumPlayer == 1 {
 		return g.GetPlayerFromNumPlayer(len(g.playersList))

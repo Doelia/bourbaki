@@ -8,7 +8,7 @@ import (
 
 /**
  *  Liste des fonctions pour envoyer des informations au client
- *  Voir fichier notes/protocol.md pour le détail des paquets et de leurs paramètres
+ *  Voir fichier doc/protocol.md pour le détail des paquets et de leurs paramètres
  */
 
 // SendConnectAccept Packet de retour acceptant ou non la demande de connexion du joueur

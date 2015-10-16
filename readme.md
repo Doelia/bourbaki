@@ -1,4 +1,4 @@
-# Jeu de la pipopipette
+# Projet Bourbaki
 
 ## Principe du jeu
 
@@ -22,7 +22,7 @@ Le jeu se joue généralement avec papier et crayon sur du papier quadrillé. À
 
 *Le maximum du développement sera déporté sur le serveur, idéalement le client se tâchera de faire uniquement de l'affichage.*
 
-Détail complet des fonctionnalités :  https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/features.md
+Détail complet des fonctionnalités :  https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/doc/features.md
 
 ## Démonstration en ligne
 
@@ -60,7 +60,7 @@ Ce qui ouvre un serveur web à l'adresse http://locahost:2000
 
 - Serveur GO
     - Envoi des ressources via HTTP
-    - Stockage en [Bolt](https://github.com/boltdb/bolt) (système clé/valeurs)
+    - Sauvegarde des données persitantes en [Bolt](https://github.com/boltdb/bolt) (système clé/valeur)
 - Client Web
     - Framework [Semantic-ui](http://semantic-ui.com/)
     - Librairie [jQuery](https://jquery.com/)
@@ -71,9 +71,9 @@ Ce qui ouvre un serveur web à l'adresse http://locahost:2000
 
 ## Documentation technique
 - Documentation Go du projet générée : http://bourbaki-doc.doelia.fr/pkg/go-bourbaki/
-- [Protocole](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/protocol.md) (liste des paquets)
-- [Règles du jeu](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/notes/FAQ.md)
-- [Ébauche diagramme UML](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/raw/master/notes/UMLBourbaki.pdf)
+- [Protocole](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/doc/protocol.md) (liste des paquets)
+- [Règles du jeu](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/blob/master/doc/FAQ.md)
+- [Ébauche diagramme UML](https://gitlab.info-ufr.univ-montp2.fr/HMIN302/go-bourbaki/raw/master/doc/UMLBourbaki.pdf)
 
 ## Développement
 
@@ -87,8 +87,8 @@ Plugin de compilation automatique avec Atom : https://atom.io/packages/less-auto
 ## Difficultés rencontrées
 - Problèmes avec l'usage de socket.io avec GO
     - La déclaration de paquets sans paramètre entraine la désactivation d'autres paquets (la déconnexion par exemple)
-- Les nombreux évenements modifiant le déroulement du jeu (déconnexion d'un joueur, démarrage de pause, chronos...) génèrent souvent des conflits entre eux. Il est courant de tomber dans des appels récursifs ou dans un bloquage total de la partie sans une étude rigoureuse
+- Les nombreux évenements modifiant le déroulement du jeu (déconnexion d'un joueur, déclanchement du mode pause, chronos...) génèrent souvent des conflits entre eux. Il est courant de tomber dans des appels récursifs ou dans un bloquage total de la partie sans une étude rigoureuse
 - Remarques sur GO :
   - L'usage des majuscles/minuscles pour le concept de public/privé est pénible en cas de refactoring
   - Les dépendances cycliques : pas de solution propre trouvée
-    [Recherches](https://groups.google.com/forum/#!topic/golang-nuts/Lj4RD3SLg6M)
+    - Recherches : https://groups.google.com/forum/#!topic/golang-nuts/Lj4RD3SLg6M
