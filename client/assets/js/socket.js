@@ -159,14 +159,14 @@ function init_socket() {
 
             var tr = $('#ladder tbody tr:last');
 
-            tr.append('<td># '+classement+'</td>');
+            tr.append('<td>#'+classement+'</td>');
             tr.append('<td><strong>'+name+'</strong></td>');
             tr.append('<td>'+nbrGames+' partie jouées</td>');
             tr.append('<td>'+nbrWins+' partie gagnées</td>');
             tr.append('<td><strong>'+score+' points</strong></td>');
 
             if (name == myName) {
-                // TODO mettre en avant soi même
+                tr.addClass('warning');
             }
         }
 
