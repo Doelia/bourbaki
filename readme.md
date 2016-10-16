@@ -26,7 +26,7 @@ Détail complet des fonctionnalités :  https://gitlab.info-ufr.univ-montp2.fr/H
 
 ## Démonstration en ligne
 
-[![](http://doelia.fr/gobk-screen.png)](http://bourbaki.doelia.fr:2000)
+[![](https://raw.githubusercontent.com/Doelia/go-bourbaki/master/doc/screenshot.png)](http://bourbaki.doelia.fr:2000)
 
 La dernière version du jeu est en ligne publiquement sur http://bourbaki.doelia.fr:2000
 
