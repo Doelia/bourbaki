@@ -2,7 +2,7 @@ package accounts
 
 import (
 	"crypto/md5"
-	"go-bourbaki/server/globals"
+	"github.com/doelia/go-bourbaki/src/globals"
 	"regexp"
 	"sort"
 )

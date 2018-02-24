@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"go-bourbaki/server/accounts"
-	"go-bourbaki/server/game"
-	"go-bourbaki/server/globals"
-	"go-bourbaki/server/network"
+	"github.com/doelia/go-bourbaki/src/accounts"
+	"github.com/doelia/go-bourbaki/src/game"
+	"github.com/doelia/go-bourbaki/src/globals"
+	"github.com/doelia/go-bourbaki/src/network"
 	"math/rand"
 	"time"
 )

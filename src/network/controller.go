@@ -1,8 +1,8 @@
 package network
 
 import (
-	"go-bourbaki/server/game"
-	"go-bourbaki/server/globals"
+	"github.com/doelia/go-bourbaki/src/game"
+	"github.com/doelia/go-bourbaki/src/globals"
 	"log"
 	"os"
 

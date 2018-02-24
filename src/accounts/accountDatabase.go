@@ -2,7 +2,7 @@ package accounts
 
 import (
 	"encoding/json"
-	"go-bourbaki/server/globals"
+	"github.com/doelia/go-bourbaki/src/globals"
 	"log"
 	"os"
 

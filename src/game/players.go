@@ -2,7 +2,7 @@ package game
 
 import (
 	"errors"
-	"go-bourbaki/server/globals"
+	"github.com/doelia/go-bourbaki/src/globals"
 )
 
 // GetNewNumPlayer Retourne un numéro de joueur pour le joueur suivant

@@ -1,6 +1,6 @@
 package game
 
-import "go-bourbaki/server/globals"
+import "github.com/doelia/go-bourbaki/src/globals"
 
 // isActive Retourne vrai si la ligne est active dans le game, faux sinon
 func (g *Game) isActive(x int, y int, o int) bool {

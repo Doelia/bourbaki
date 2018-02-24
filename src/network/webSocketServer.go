@@ -2,9 +2,9 @@ package network
 
 import (
 	"fmt"
-	"go-bourbaki/server/accounts"
-	"go-bourbaki/server/game"
-	"go-bourbaki/server/globals"
+	"github.com/doelia/go-bourbaki/src/accounts"
+	"github.com/doelia/go-bourbaki/src/game"
+	"github.com/doelia/go-bourbaki/src/globals"
 
 	"github.com/googollee/go-socket.io"
 )

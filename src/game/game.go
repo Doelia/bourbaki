@@ -1,8 +1,8 @@
 package game
 
 import (
-	"go-bourbaki/server/accounts"
-	"go-bourbaki/server/globals"
+	"github.com/doelia/go-bourbaki/src/accounts"
+	"github.com/doelia/go-bourbaki/src/globals"
 	"log"
 	"math/rand"
 	"os"

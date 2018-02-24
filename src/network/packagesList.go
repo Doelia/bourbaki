@@ -1,7 +1,7 @@
 package network
 
 import (
-	"go-bourbaki/server/globals"
+	"github.com/doelia/go-bourbaki/src/globals"
 
 	"github.com/googollee/go-socket.io"
 )
